@@ -13,6 +13,8 @@ pros::Motor rightWheel2(5);
 pros::Motor rightWheel3(6);
 pros::Motor_Group rightWheels({rightWheel1,rightWheel2,rightWheel3});
 
-static class DriveTrain{
+class DriveTrain{
+    static void move(){
 
-}
+    }
+};

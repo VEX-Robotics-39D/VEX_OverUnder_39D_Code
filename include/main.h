@@ -84,3 +84,4 @@ void opcontrol(void);
 #include "drive_train.h"
 #include "utilities.h"
 #include "globals.h"
+#include "catapult.h"

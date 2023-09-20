@@ -12,3 +12,5 @@ extern::pros::Motor rightWheel1;
 extern::pros::Motor rightWheel2;
 extern::pros::Motor rightWheel3;
 extern::pros::Motor_Group rightWheels;
+
+extern::pros::Motor catapultMotor;

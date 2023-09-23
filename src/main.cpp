@@ -77,9 +77,9 @@ void autonomous() {}
 void opcontrol() {
 
 	while (true) {
-		//leftWheels.move_velocity(300);
-		//rightWheels.move_velocity(300);
-		DriveTrain::move_velocity((double)controller.get_analog(ANALOG_LEFT_Y)/100.0,(double)controller.get_analog(ANALOG_RIGHT_X)/100.0);
+		leftWheels.move_velocity(300);
+		rightWheels.move_velocity(300);
+		//DriveTrain::move_velocity((double)controller.get_analog(ANALOG_LEFT_Y)/127.0,(double)controller.get_analog(ANALOG_RIGHT_X)/127.0);
 		
 		if(controller.get_digital(DIGITAL_L1)){
 			Catapult::run_velocity(1);
@@ -94,7 +94,7 @@ void opcontrol() {
 		else{
 			Intake::coast();
 		}
-		
+
 		pros::delay(20);
 
 	}

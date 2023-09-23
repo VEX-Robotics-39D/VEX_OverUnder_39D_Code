@@ -4,4 +4,6 @@
 class Catapult{
 public:
     void coast();
-}catapult;
+};
+
+extern Catapult catapult;

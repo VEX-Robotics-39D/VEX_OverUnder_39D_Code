@@ -5,3 +5,5 @@ double Utilities::bound_by(double l,double r,double value){
     value=fmin(r,value);
     return value;
 }
+
+Utilities utilities;

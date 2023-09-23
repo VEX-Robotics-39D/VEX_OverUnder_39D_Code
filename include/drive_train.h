@@ -5,3 +5,5 @@ class DriveTrain{
 public:
     void move(double forwardVelocity,double turnVelocity);
 };
+
+extern DriveTrain driveTrain;

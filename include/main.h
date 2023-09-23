@@ -41,6 +41,10 @@
  */
 //#include "okapi/api.hpp"
 //#include "pros/api_legacy.h"
+#include "catapult.h"
+#include "drive_train.h"
+#include "globals.h"
+#include "utilities.h"
 
 /**
  * If you find doing pros::Motor() to be tedious and you'd prefer just to do
@@ -62,6 +66,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+
 void autonomous(void);
 void initialize(void);
 void disabled(void);
@@ -79,9 +84,3 @@ void opcontrol(void);
 #endif
 
 #endif  // _PROS_MAIN_H_
-
-#include<math.h>
-#include "drive_train.h"
-#include "utilities.h"
-#include "globals.h"
-#include "catapult.h"

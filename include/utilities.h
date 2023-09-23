@@ -3,7 +3,5 @@
 
 class Utilities{
 public:
-    double bound_by(double l,double r,double value);
+    static double bound_by(double l,double r,double value);
 };
-
-extern Utilities utilities;

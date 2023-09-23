@@ -3,7 +3,6 @@
 
 class Catapult{
 public:
-    void coast();
+    static void run_velocity(double velocity);
+    static void brake();
 };
-
-extern Catapult catapult;

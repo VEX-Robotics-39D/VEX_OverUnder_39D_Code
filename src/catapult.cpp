@@ -1,7 +1,11 @@
 #include "main.h"
 
-void Catapult::coast(){
-    catapultMotor.move_voltage(0);
+void Catapult::run_velocity(double velocity){
+    catapultMotor.move_velocity(velocity*600);
+}
+
+void Catapult::brake(){
+    catapultMotor.move_velocity(0);
 }
 
 Catapult catapult;

@@ -45,6 +45,7 @@
 #include "drive_train.h"
 #include "globals.h"
 #include "utilities.h"
+#include "intake.h"
 
 /**
  * If you find doing pros::Motor() to be tedious and you'd prefer just to do

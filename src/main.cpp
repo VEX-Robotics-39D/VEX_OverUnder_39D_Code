@@ -78,9 +78,9 @@ void opcontrol() {
 	DriveTrain driveTrain;
 
 	while (true) {
-		leftWheels.move_velocity(300);
-		rightWheels.move_velocity(300);
-		//driveTrain.move((double)controller.get_analog(ANALOG_LEFT_Y)/100.0,(double)controller.get_analog(ANALOG_RIGHT_X)/100.0);
+		//leftWheels.move_velocity(300);
+		//rightWheels.move_velocity(300);
+		driveTrain.move((double)controller.get_analog(ANALOG_LEFT_Y)/100.0,(double)controller.get_analog(ANALOG_RIGHT_X)/100.0);
 		pros::delay(20);
 
 	}

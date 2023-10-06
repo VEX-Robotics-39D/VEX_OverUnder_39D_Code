@@ -20,6 +20,7 @@ void DriveTrain::pure_pursuit(double targetX,double targetY,double targetTheta){
 
 void DriveTrain::control(){
     
-    DriveTrain::move_velocity((double)controller.get_analog(ANALOG_LEFT_Y)/127.0,(double)controller.get_analog(ANALOG_RIGHT_X)/127.0);
+    rightWheels.move_velocity(controller.get_analog(ANALOG_RIGHT_Y)*600);
+    leftWheels.move_velocity(controller.get_analog(ANALOG_LEFT_Y)*600);
   
 }

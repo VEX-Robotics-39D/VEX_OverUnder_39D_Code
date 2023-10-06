@@ -2,6 +2,7 @@
 
 class Wings{
     static bool state;
+    static bool xLastState;
 public:
     static void toggle();
 

@@ -1,7 +1,7 @@
 #include "main.h"
 
 void Catapult::run_velocity(double velocity){
-    catapultMotor.move_velocity(velocity*600);
+    catapultMotor.move_velocity(velocity*(0-600));
 }
 
 void Catapult::brake(){

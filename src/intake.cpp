@@ -10,10 +10,10 @@ void Intake::coast(){
 
 void Intake::control(){
     if(controller.get_digital(DIGITAL_R1)){
-		Intake::run();
+		Intake::run(true);
 	}
 	else if(controller.get_digital(DIGITAL_R2)){
-		Intake::run(true);
+		Intake::run();
 	}
 	else{
 		Intake::coast();

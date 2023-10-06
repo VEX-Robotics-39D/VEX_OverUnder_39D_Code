@@ -29,6 +29,7 @@ void initialize() {
 	pros::lcd::register_btn1_cb(on_center_button);
 }
 
+
 /**
  * Runs while the robot is in the disabled state of Field Management System or
  * the VEX Competition Switch, following either autonomous or opcontrol. When
@@ -76,23 +77,30 @@ void autonomous() {}
 
 void opcontrol() {
 
+	bool xLastState = false;
 	while (true) {
-		leftWheels.move_velocity(300);
-		rightWheels.move_velocity(300);
-		//DriveTrain::move_velocity((double)controller.get_analog(ANALOG_LEFT_Y)/127.0,(double)controller.get_analog(ANALOG_RIGHT_X)/127.0);
+		//leftWheels.move_velocity(300);
+		//rightWheels.move_velocity(300);		
 		
-		if(controller.get_digital(DIGITAL_L1)){
-			Catapult::run_velocity(1);
-		}
-		else{
-			Catapult::brake();
-		}
 
 		if(controller.get_digital(DIGITAL_R1)){
-			Intake::run(1);
+			Intake::run();
+		}
+		else if(controller.get_digital(DIGITAL_R2)){
+			Intake::run(true);
 		}
 		else{
 			Intake::coast();
+		}
+
+		if(controller.get_digital(DIGITAL_X)){
+			if(!xLastState){
+				Wings::toggle();
+			}
+			xLastState = true;
+		}
+		else{
+			xLastState = false;
 		}
 
 		pros::delay(20);

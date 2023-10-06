@@ -3,9 +3,12 @@
 
 class DriveTrain{
 public:
-    //move the drive train at a given velocity maintained by pros built in PID
-    static void move_velocity(double forwardVelocity,double turnVelocity);
-    //move the drive train at a given voltage
-    static void move_voltage(double leftVoltage,double rightVoltage);
     
+    //pid function
+    static void pid(double target);
+    //pure pursute function
+    static void pure_pursuit(double targetX,double targetY,double targetTheta);
+
+    //control code
+    static void control();
 };

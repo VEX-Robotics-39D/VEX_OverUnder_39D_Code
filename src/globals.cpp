@@ -13,7 +13,7 @@ pros::Motor rightWheel3(18,true);
 pros::Motor_Group rightWheels{rightWheel1,rightWheel2,rightWheel3};
 
 //catapult
-pros::Motor catapultMotor(1, true);
+pros::Motor catapultMotor(1);
 
 //intake
 pros::Motor intakeMotor(6);

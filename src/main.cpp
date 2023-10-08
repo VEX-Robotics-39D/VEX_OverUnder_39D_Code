@@ -80,6 +80,7 @@ void opcontrol() {
 	PTO::extended=false;
 	intakePneumatic.set_value(true);
 	Catapult::L1_Pressed = true;
+	Catapult::flung = false;
 	while (true) {
 		//leftWheels.move_velocity(300);
 		//rightWheels.move_velocity(300);		

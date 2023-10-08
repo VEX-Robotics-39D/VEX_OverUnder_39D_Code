@@ -1,6 +1,6 @@
 #include "main.h"
 
-bool PTO::extended=false;
+bool PTO::extended;
 
 void PTO::control(){
     if(controller.get_digital(DIGITAL_UP)){

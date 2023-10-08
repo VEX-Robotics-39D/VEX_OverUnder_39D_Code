@@ -9,7 +9,7 @@ void Intake::coast(){
 }
 
 void Intake::control(){
-    if(controller.get_digital(DIGITAL_R1)){
+    if(controller.get_digital(DIGITAL_L2)){
 		Intake::run(true);
 	}
 	else if(controller.get_digital(DIGITAL_R2)){

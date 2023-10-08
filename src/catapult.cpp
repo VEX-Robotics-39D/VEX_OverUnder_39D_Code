@@ -8,23 +8,19 @@ void Catapult::brake(){
     catapultMotor.move_velocity(0);
 }
 
-void Catapult::control(){
+void Catapult::control(){	
     if(controller.get_digital(DIGITAL_L1)){
+		L1_Pressed = true;
+	}
+	if (catapultDistanceSensor.get() < 100){
+		L1_Pressed = false;
+	}
+
+	if(L1_Pressed){
 		Catapult::run_velocity(1);
 	}
 	else{
-	    Catapult::brake();
-	}
-	if(!PTO::extended){
-	    if(controller.get_digital(DIGITAL_L1)){
-		    leftWheel3.move_velocity(600);
-			rightWheel3.move_velocity(600);
-	    }
-	    else{
-	        Catapult::brake();
-			leftWheel3.move_velocity(0);
-			rightWheel3.move_velocity(0);
-	    }
+		Catapult::brake();
 	}
 }
 

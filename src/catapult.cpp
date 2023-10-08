@@ -15,6 +15,17 @@ void Catapult::control(){
 	else{
 	    Catapult::brake();
 	}
+	if(!PTO::extended){
+	    if(controller.get_digital(DIGITAL_L1)){
+		    leftWheel3.move_velocity(600);
+			rightWheel3.move_velocity(600);
+	    }
+	    else{
+	        Catapult::brake();
+			leftWheel3.move_velocity(0);
+			rightWheel3.move_velocity(0);
+	    }
+	}
 }
 
 Catapult catapult;

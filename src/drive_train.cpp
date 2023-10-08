@@ -19,8 +19,12 @@ void DriveTrain::pure_pursuit(double targetX,double targetY,double targetTheta){
 }
 
 void DriveTrain::control(){
-    
-    rightWheels.move_velocity((double)controller.get_analog(ANALOG_RIGHT_Y)/127*600);
-    leftWheels.move_velocity((double)controller.get_analog(ANALOG_LEFT_Y)/127*600);
+
+    leftWheels2.move_velocity(Utilities::drive_control_map(controller.get_analog(ANALOG_LEFT_Y))*600);
+    rightWheels2.move_velocity(Utilities::drive_control_map(controller.get_analog(ANALOG_RIGHT_Y))*600);
+    if(PTO::extended){
+        leftWheel3.move_velocity(Utilities::drive_control_map(controller.get_analog(ANALOG_LEFT_Y))*600);
+        rightWheel3.move_velocity(Utilities::drive_control_map(controller.get_analog(ANALOG_RIGHT_Y))*600);
+    }
   
 }

@@ -76,7 +76,9 @@ void autonomous() {}
  */
 
 void opcontrol() {
-
+	pto.set_value(false);
+	PTO::extended=false;
+	intakePneumatic.set_value(true);
 	
 	while (true) {
 		//leftWheels.move_velocity(300);
@@ -87,6 +89,7 @@ void opcontrol() {
 		Intake::control();
 		Catapult::control();
 		Wings::control();
+		PTO::control();
 
 
 		pros::delay(20);

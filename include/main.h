@@ -49,6 +49,7 @@
 #include "intake.h"
 #include "odometry.h"
 #include "wings.h"
+#include "pto.h"
 
 /**
  * If you find doing pros::Motor() to be tedious and you'd prefer just to do

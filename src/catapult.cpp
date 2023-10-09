@@ -12,6 +12,7 @@ void Catapult::brake(){
 }
 
 void Catapult::control(){	
+	pros::screen::print(pros::E_TEXT_MEDIUM,0, "Catapult: %f", catapultDistanceSensor.get());
     if(controller.get_digital(DIGITAL_L1)){
 		flung=false;
 		L1_Pressed = true;

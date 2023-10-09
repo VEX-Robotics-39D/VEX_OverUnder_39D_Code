@@ -81,6 +81,7 @@ void opcontrol() {
 	intakePneumatic.set_value(true);
 	Catapult::L1_Pressed = true;
 	Catapult::flung = false;
+	pros::screen::set_pen(COLOR_BLUE);
 	while (true) {
 		//leftWheels.move_velocity(300);
 		//rightWheels.move_velocity(300);		

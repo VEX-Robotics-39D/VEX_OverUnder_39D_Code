@@ -25,7 +25,7 @@ extern::pros::Motor intakeMotor;
 extern::pros::Rotation odometryWheel;
 
 //wings
-extern::pros::ADIDigitalOut wings;
+extern::pros::ADIDigitalOut wingsPneumatic;
 
 //pto
 extern::pros::ADIDigitalOut pto;
@@ -33,5 +33,11 @@ extern::pros::ADIDigitalOut pto;
 //intake pneumatic
 extern::pros::ADIDigitalOut intakePneumatic;
 
-//inertial sensor
+enum class State{
+    Off,
+    On,
+    Toggle
+};
+
 extern::pros::Imu inertial;
+

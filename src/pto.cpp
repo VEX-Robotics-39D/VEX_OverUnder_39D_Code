@@ -2,17 +2,26 @@
 
 bool PTO::extended;
 
+void PTO::set(State s=State::Toggle){
+    switch(s){
+        case State::Toggle:
+            extended=!extended;
+            break;
+        case State::On:
+            extended=true;
+            break;
+        case State::Off:
+            extended=false;
+            break;
+    }
+    pto.set_value(extended);
+}
+
 void PTO::control(){
     if(controller.get_digital(DIGITAL_UP)){
-        if(extended){
-            pto.set_value(false);
-            extended=false;
-        }
+        set(State::On);
     }
     else if (controller.get_digital(DIGITAL_DOWN)){
-        if(!extended){
-            pto.set_value(true);
-            extended=true;
-        }
+        set(State::Off);
     }
 }

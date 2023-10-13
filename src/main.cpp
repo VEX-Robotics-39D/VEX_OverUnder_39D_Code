@@ -59,7 +59,15 @@ void competition_initialize() {}
  * will be stopped. Re-enabling the robot will restart the task, not re-start it
  * from where it left off.
  */
-void autonomous() {}
+void autonomous(){
+	leftWheel2.move_velocity(600);
+	rightWheel2.move_velocity(600);
+	pros::delay(500);
+	Intake::run();
+	pros::delay(1500);
+	leftWheels2.move_velocity(0);
+	rightWheels2.move_velocity(0);
+}
 
 /**
  * Runs the operator control code. This function will be started in its own task
@@ -81,6 +89,7 @@ void opcontrol() {
 	intakePneumatic.set_value(true);
 	Catapult::L1_Pressed = true;
 	Catapult::flung = false;
+	pros::screen::set_pen(COLOR_BLUE);
 	while (true) {
 		//leftWheels.move_velocity(300);
 		//rightWheels.move_velocity(300);		

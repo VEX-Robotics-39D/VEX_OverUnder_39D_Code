@@ -59,8 +59,15 @@ void competition_initialize() {}
  * will be stopped. Re-enabling the robot will restart the task, not re-start it
  * from where it left off.
  */
-void autonomous() {}
+void autonomous(){
+	leftWheel2.move_velocity(600);
+	rightWheel2.move_velocity(600);
+	pros::delay(500);
 	Intake::run();
+	pros::delay(1500);
+	leftWheels2.move_velocity(0);
+	rightWheels2.move_velocity(0);
+}
 
 /**
  * Runs the operator control code. This function will be started in its own task

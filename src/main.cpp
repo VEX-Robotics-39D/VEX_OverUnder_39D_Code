@@ -60,6 +60,7 @@ void competition_initialize() {}
  * from where it left off.
  */
 void autonomous() {}
+	Intake::run();
 
 /**
  * Runs the operator control code. This function will be started in its own task

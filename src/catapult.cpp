@@ -17,7 +17,7 @@ void Catapult::control(){
 		flung=false;
 		L1_Pressed = true;
 	}
-	if (flung&&catapultDistanceSensor.get() < 100){
+	if ((flung&&catapultDistanceSensor.get() < 100)||controller.get_digital(DIGITAL_B)){
 		L1_Pressed = false;
 	}
 	if(catapultDistanceSensor.get() > 100){

@@ -22,7 +22,7 @@ pros::Motor intakeMotor(6);
 pros::Rotation odometryWheel(7);
 
 //wings
-pros::ADIDigitalOut wings('A');
+pros::ADIDigitalOut wingsPneumatic('A');
 
 //pto
 pros::ADIDigitalOut pto('B');

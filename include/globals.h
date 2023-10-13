@@ -25,10 +25,16 @@ extern::pros::Motor intakeMotor;
 extern::pros::Rotation odometryWheel;
 
 //wings
-extern::pros::ADIDigitalOut wings;
+extern::pros::ADIDigitalOut wingsPneumatic;
 
 //pto
 extern::pros::ADIDigitalOut pto;
 
 //intake pneumatic
 extern::pros::ADIDigitalOut intakePneumatic;
+
+enum class State{
+    Off,
+    On,
+    Toggle
+};

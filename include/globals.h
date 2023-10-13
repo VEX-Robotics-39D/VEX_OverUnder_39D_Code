@@ -38,3 +38,6 @@ enum class State{
     On,
     Toggle
 };
+
+extern::pros::Imu inertial;
+

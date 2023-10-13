@@ -6,7 +6,8 @@ class Odometry{
     static const double leftRightWheelDistance;
     static const double odometryWheelDistance;
 public:
-    static void update();
+    static void updateOdom();
+    static void updateInertial();
     static void reset();
     static double getX();
     static double getY();

@@ -1,6 +1,6 @@
 #include "main.h"
 #include <cmath>
-void Odometry::update(){
+void Odometry::updateOdom(){
     double deltaOdometryWheelPosition = odometryWheel.get_position() - odometryWheelPosition;
     double deltaLeftWheelPosition = (leftWheel1.get_position()+leftWheel2.get_position()+leftWheel3.get_position())/3.0 - leftWheelPosition;
     double deltaRightWheelPosition = (rightWheel1.get_position()+rightWheel2.get_position()+rightWheel3.get_position())/3.0 - rightWheelPosition;
@@ -22,4 +22,8 @@ void Odometry::update(){
     leftWheelPosition += deltaLeftWheelPosition;
     rightWheelPosition += deltaRightWheelPosition;
     odometryWheelPosition += deltaOdometryWheelPosition;
+}
+
+void Odometry::updateInertial(){
+    theta = inertial.get_rotation();
 }

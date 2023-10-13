@@ -32,3 +32,6 @@ extern::pros::ADIDigitalOut pto;
 
 //intake pneumatic
 extern::pros::ADIDigitalOut intakePneumatic;
+
+//inertial sensor
+extern::pros::Imu inertial;

@@ -29,3 +29,6 @@ pros::ADIDigitalOut pto('B');
 
 //intake pneumatic
 pros::ADIDigitalOut intakePneumatic('C');
+
+//inertial sensor
+pros::Imu inertial(3);

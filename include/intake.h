@@ -6,7 +6,8 @@ public:
     static void run(bool reverse=false);
     static void coast();
     static bool lifted;
+    static bool R1pressed;
     //control code
-    static void setPneumatic(State s=State::Toggle);
+    static void togglePneumatic(State s);
     static void control();
 };

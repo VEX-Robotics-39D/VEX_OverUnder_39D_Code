@@ -11,9 +11,9 @@ public:
     class Control{
     public:
         class AnglePID{
-            static const double kP=0.5;
-            static const double kI=0;
-            static const double kD=0;
+            static const double kP;
+            static const double kI;
+            static const double kD;
             static double p,i,d;
             static double error,lastError;
             static double target;

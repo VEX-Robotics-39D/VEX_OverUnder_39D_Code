@@ -3,7 +3,7 @@
 bool Wings::state=false;
 bool Wings::xLastState=false;
 
-void Wings::set(State s=State::Toggle){
+void Wings::toggle(State s=State::Toggle){
 	switch(s){
 		case State::Toggle:
 			state=!state;
@@ -21,7 +21,7 @@ void Wings::set(State s=State::Toggle){
 void Wings::control(){
     if(controller.get_digital(DIGITAL_X)){
 		if(!xLastState){
-			Wings::set(State::Toggle);
+			Wings::toggle(State::Toggle);
 		}
 		xLastState = true;
 	}

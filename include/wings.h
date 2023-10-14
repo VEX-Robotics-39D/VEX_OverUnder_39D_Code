@@ -4,7 +4,7 @@ class Wings{
     static bool state;
     static bool xLastState;
 public:
-    static void set(State s=State::Toggle);
+    static void toggle(State s);
 
     //control code
     static void control();

@@ -2,7 +2,7 @@
 
 bool PTO::extended;
 
-void PTO::set(State s=State::Toggle){
+void PTO::toggle(State s=State::Toggle){
     switch(s){
         case State::Toggle:
             extended=!extended;
@@ -19,9 +19,9 @@ void PTO::set(State s=State::Toggle){
 
 void PTO::control(){
     if(controller.get_digital(DIGITAL_UP)){
-        set(State::On);
+        toggle(State::On);
     }
     else if (controller.get_digital(DIGITAL_DOWN)){
-        set(State::Off);
+        toggle(State::Off);
     }
 }

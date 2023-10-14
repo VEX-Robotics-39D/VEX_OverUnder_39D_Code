@@ -27,6 +27,13 @@ void initialize() {
 	pros::lcd::set_text(1, "Hello PROS User!");
 
 	pros::lcd::register_btn1_cb(on_center_button);
+
+	PTO::toggle(State::On);
+	Intake::togglePneumatic(State::On);
+	Catapult::L1_Pressed = true;
+	Catapult::flung = false;
+	pros::screen::set_pen(COLOR_BLUE);
+	Intake::R1pressed=false;
 }
 
 
@@ -60,13 +67,7 @@ void competition_initialize() {}
  * from where it left off.
  */
 void autonomous(){
-	leftWheel2.move_velocity(600);
-	rightWheel2.move_velocity(600);
-	pros::delay(500);
-	Intake::run();
-	pros::delay(1500);
-	leftWheels2.move_velocity(0);
-	rightWheels2.move_velocity(0);
+	
 }
 
 /**
@@ -84,12 +85,10 @@ void autonomous(){
  */
 
 void opcontrol() {
-	pto.set_value(false);
-	PTO::extended=false;
-	intakePneumatic.set_value(true);
-	Catapult::L1_Pressed = true;
-	Catapult::flung = false;
-	pros::screen::set_pen(COLOR_BLUE);
+
+	//initlize	
+	Autonomous::Routines::test_PID_theta();
+
 	while (true) {
 		//leftWheels.move_velocity(300);
 		//rightWheels.move_velocity(300);		
@@ -102,7 +101,7 @@ void opcontrol() {
 		PTO::control();
 
 
-		pros::delay(20);
+		pros::delay(10);
 
 	}
 }

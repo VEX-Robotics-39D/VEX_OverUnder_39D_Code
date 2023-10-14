@@ -8,7 +8,11 @@ void Intake::coast(){
     intakeMotor.move_voltage(0);
 }
 
-void Intake::setPneumatic(State s=State::Toggle){
+bool Intake::lifted=true;
+
+bool Intake::R1pressed=false;
+
+void Intake::togglePneumatic(State s=State::Toggle){
 	switch(s){
 		case State::Toggle:
 			lifted=!lifted;
@@ -35,6 +39,12 @@ void Intake::control(){
 	}
 
 	if(controller.get_digital(DIGITAL_R1)){
-		Intake::setPneumatic(State::Toggle);
+		if(!R1pressed){
+			Intake::togglePneumatic(State::Toggle);
+			R1pressed=true;
+		}
+	}
+	else{
+		R1pressed=false;
 	}
 }

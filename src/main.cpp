@@ -88,7 +88,7 @@ void autonomous(){
 void opcontrol() {
 
 	//initlize	
-	//Autonomous::Routines::test_PID_theta();
+	Autonomous::Routines::test_PID_theta();
 
 	while (true) {
 		//leftWheels.move_velocity(300);

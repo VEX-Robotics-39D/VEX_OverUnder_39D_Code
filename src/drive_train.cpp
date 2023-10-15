@@ -32,13 +32,13 @@ void DriveTrain::Control::AnglePID::update(){
     error=target-Odometry::getTheta();
     pros::screen::print(pros::E_TEXT_MEDIUM,4,"Error: %f",error);
     p=error*kP;
-    //ii*=0.95;
-    //ii+=(error*kI);
+    ii*=0.95;
+    ii+=(error*kI);
     d=(error-lastError)*kD;
     lastError=error;
     pros::screen::print(pros::E_TEXT_MEDIUM,1,"P: %f",p);
     pros::screen::print(pros::E_TEXT_MEDIUM,2,"I: %f",ii);
     pros::screen::print(pros::E_TEXT_MEDIUM,3,"D: %f",d);
-    DriveTrain::move_velocity(p+d,0-p-d);
+    //DriveTrain::move_velocity(p+d,0-p-d);
 
 }

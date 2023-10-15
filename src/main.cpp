@@ -34,6 +34,7 @@ void initialize() {
 	Catapult::flung = false;
 	pros::screen::set_pen(COLOR_BLUE);
 	Intake::R1pressed=false;
+	inertial.reset();
 }
 
 
@@ -87,7 +88,7 @@ void autonomous(){
 void opcontrol() {
 
 	//initlize	
-	Autonomous::Routines::test_PID_theta();
+	//Autonomous::Routines::test_PID_theta();
 
 	while (true) {
 		//leftWheels.move_velocity(300);

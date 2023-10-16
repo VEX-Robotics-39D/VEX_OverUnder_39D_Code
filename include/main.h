@@ -41,11 +41,16 @@
  */
 //#include "okapi/api.hpp"
 //#include "pros/api_legacy.h"
+#include <cmath>
 #include "catapult.h"
 #include "drive_train.h"
 #include "globals.h"
 #include "utilities.h"
 #include "intake.h"
+#include "odometry.h"
+#include "wings.h"
+#include "pto.h"
+#include "autonomous.h"
 
 /**
  * If you find doing pros::Motor() to be tedious and you'd prefer just to do

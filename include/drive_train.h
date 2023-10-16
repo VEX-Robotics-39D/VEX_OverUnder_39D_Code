@@ -3,9 +3,27 @@
 
 class DriveTrain{
 public:
-    //move the drive train at a given velocity maintained by pros built in PID
-    static void move_velocity(double forwardVelocity,double turnVelocity);
-    //move the drive train at a given voltage
-    static void move_voltage(double leftVoltage,double rightVoltage);
-    
+    static void move_velocity(double left, double right);
+
+    //control code
+    static void control();
+
+    class Control{
+    public:
+        class AnglePID{
+            static const double kP;
+            static const double kI;
+            static const double kD;
+            static const double toMultiply;
+            static double p;
+            static double Andrew;
+            static double i;
+            static double d;
+            static double lastError;
+            static double target;
+        public:
+            static void set_target(double target);
+            static void update();
+        };
+    };    
 };

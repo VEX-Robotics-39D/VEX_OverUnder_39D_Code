@@ -27,7 +27,17 @@ void initialize() {
 	pros::lcd::set_text(1, "Hello PROS User!");
 
 	pros::lcd::register_btn1_cb(on_center_button);
+
+	PTO::toggle(State::On);
+	Intake::togglePneumatic(State::On);
+	Catapult::L1_Pressed = true;
+	Catapult::flung = false;
+	pros::screen::set_pen(COLOR_BLUE);
+	Intake::R1pressed=false;
+	inertial.reset();
+	//pros::delay(2000);
 }
+
 
 /**
  * Runs while the robot is in the disabled state of Field Management System or
@@ -58,7 +68,9 @@ void competition_initialize() {}
  * will be stopped. Re-enabling the robot will restart the task, not re-start it
  * from where it left off.
  */
-void autonomous() {}
+void autonomous(){
+	
+}
 
 /**
  * Runs the operator control code. This function will be started in its own task
@@ -76,26 +88,22 @@ void autonomous() {}
 
 void opcontrol() {
 
+	//initlize	
+	Autonomous::Routines::test_PID_theta();
+
 	while (true) {
-		leftWheels.move_velocity(300);
-		rightWheels.move_velocity(300);
-		//DriveTrain::move_velocity((double)controller.get_analog(ANALOG_LEFT_Y)/127.0,(double)controller.get_analog(ANALOG_RIGHT_X)/127.0);
+		//leftWheels.move_velocity(300);
+		//rightWheels.move_velocity(300);		
 		
-		if(controller.get_digital(DIGITAL_L1)){
-			Catapult::run_velocity(1);
-		}
-		else{
-			Catapult::brake();
-		}
 
-		if(controller.get_digital(DIGITAL_R1)){
-			Intake::run(1);
-		}
-		else{
-			Intake::coast();
-		}
+		DriveTrain::control();
+		Intake::control();
+		Catapult::control();
+		Wings::control();
+		PTO::control();
 
-		pros::delay(20);
+
+		pros::delay(10);
 
 	}
 }

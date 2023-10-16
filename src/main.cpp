@@ -35,6 +35,7 @@ void initialize() {
 	pros::screen::set_pen(COLOR_BLUE);
 	Intake::R1pressed=false;
 	inertial.reset();
+	//pros::delay(2000);
 }
 
 

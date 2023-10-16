@@ -14,10 +14,12 @@ public:
             static const double kP;
             static const double kI;
             static const double kD;
+            static const double toMultiply;
             static double p;
-            static double ii;
+            static double Andrew;
+            static double i;
             static double d;
-            static double error,lastError;
+            static double lastError;
             static double target;
         public:
             static void set_target(double target);

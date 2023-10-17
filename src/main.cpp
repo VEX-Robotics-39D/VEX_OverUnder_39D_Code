@@ -23,17 +23,17 @@ void on_center_button() {
  * to keep execution time for this mode under a few seconds.
  */
 void initialize() {
+
 	pros::lcd::initialize();
 	pros::lcd::set_text(1, "Hello PROS User!");
-
 	pros::lcd::register_btn1_cb(on_center_button);
 
 	PTO::toggle(State::On);
+
 	Intake::togglePneumatic(State::On);
-	Catapult::L1_Pressed = true;
-	Catapult::flung = false;
+
 	pros::screen::set_pen(COLOR_BLUE);
-	Intake::R1pressed=false;
+
 	inertial.reset();
 	//pros::delay(2000);
 }
@@ -88,22 +88,10 @@ void autonomous(){
 
 void opcontrol() {
 
-	//initlize	
-	Autonomous::Routines::test_PID_theta();
+	//Autonomous::Routines::test_PID_theta();
 
 	while (true) {
-		//leftWheels.move_velocity(300);
-		//rightWheels.move_velocity(300);		
-		
-
-		DriveTrain::control();
-		Intake::control();
-		Catapult::control();
-		Wings::control();
-		PTO::control();
-
-
+		DriveControl::update();
 		pros::delay(10);
-
 	}
 }

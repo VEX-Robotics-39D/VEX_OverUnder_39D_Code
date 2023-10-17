@@ -1,7 +1,6 @@
 #include "main.h"
 
 bool Wings::state=false;
-bool Wings::xLastState=false;
 
 void Wings::toggle(State s=State::Toggle){
 	switch(s){
@@ -16,16 +15,4 @@ void Wings::toggle(State s=State::Toggle){
 			break;
 	}
 	wingsPneumatic.set_value(state);
-}
-
-void Wings::control(){
-    if(controller.get_digital(DIGITAL_X)){
-		if(!xLastState){
-			Wings::toggle(State::Toggle);
-		}
-		xLastState = true;
-	}
-	else{
-		xLastState = false;
-	}
 }

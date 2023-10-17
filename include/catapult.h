@@ -7,7 +7,4 @@ public:
     static void brake();
     static bool L1_Pressed;
     static bool flung;
-    //control code
-    static void control();
-    static void setCataputReady();
 };

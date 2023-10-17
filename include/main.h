@@ -51,6 +51,7 @@
 #include "wings.h"
 #include "pto.h"
 #include "autonomous.h"
+#include "drive_control.h"
 
 /**
  * If you find doing pros::Motor() to be tedious and you'd prefer just to do

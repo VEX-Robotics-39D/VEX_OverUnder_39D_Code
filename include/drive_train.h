@@ -5,9 +5,6 @@ class DriveTrain{
 public:
     static void move_velocity(double left, double right);
 
-    //control code
-    static void control();
-
     class Control{
     public:
         class AnglePID{

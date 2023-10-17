@@ -9,10 +9,6 @@ void DriveTrain::move_velocity(double left, double right){
     }
 }
 
-void DriveTrain::control(){
-    move_velocity(Utilities::drive_control_map(controller.get_analog(ANALOG_LEFT_Y))*600.0,Utilities::drive_control_map(controller.get_analog(ANALOG_RIGHT_Y))*600.0);
-}
-
 
 const double DriveTrain::Control::AnglePID::kP=1.25;
 const double DriveTrain::Control::AnglePID::kI=0.0012;

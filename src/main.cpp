@@ -28,7 +28,7 @@ void initialize() {
 	pros::lcd::set_text(1, "Hello PROS User!");
 	pros::lcd::register_btn1_cb(on_center_button);
 
-	PTO::toggle(State::On);
+	PTO::toggle(State::Off);
 
 	Intake::togglePneumatic(State::On);
 
@@ -88,10 +88,10 @@ void autonomous(){
 
 void opcontrol() {
 
-	//Autonomous::Routines::test_PID_theta();
+	//Autonomous::Routines::test_distance_PID();
 
 	while (true) {
 		DriveControl::update();
-		pros::delay(10);
+		pros::delay(UPDATE_INTERVAL);
 	}
 }

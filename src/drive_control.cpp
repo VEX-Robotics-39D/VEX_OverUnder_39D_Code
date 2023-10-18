@@ -159,12 +159,12 @@ void DriveControl::update_intake(){
 }
 
 void DriveControl::update_catapult(){
-    pros::screen::print(pros::E_TEXT_MEDIUM,0, "Catapult: %f", catapultDistanceSensor.get());
-    if(ControllerStates::is_activated(DIGITAL_L1)){
+    //pros::screen::print(pros::E_TEXT_MEDIUM,0, "Catapult: %f", catapultDistanceSensor.get());
+    if(ControllerStates::is_pressed(DIGITAL_L1)){
 		catapultFlung=false;
 		catapultMoving = true;
 	}
-	if ((catapultFlung&&catapultDistanceSensor.get() < 100)||ControllerStates::is_activated(DIGITAL_B)){
+	if ((catapultFlung&&catapultDistanceSensor.get() < 100)||ControllerStates::is_pressed(DIGITAL_B)){
 		catapultMoving = false;
 	}
 	if(catapultDistanceSensor.get() > 100){

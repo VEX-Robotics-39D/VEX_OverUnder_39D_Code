@@ -41,3 +41,4 @@ enum class State{
 
 extern::pros::Imu inertial;
 
+const int UPDATE_INTERVAL=10;

@@ -85,7 +85,7 @@ void Autonomous::Routines::match_op(){
     DriveTrain::Control::AnglePID::set_state(State::Off);
     DriveTrain::Control::DistancePID::set_state(State::On);
     DriveTrain::Control::DistancePID::new_route();
-    DriveTrain::Control::DistancePID::set_target(500);
+    DriveTrain::Control::DistancePID::set_target(800);
     run(900);
     Intake::run(400);
     pros::delay(300);

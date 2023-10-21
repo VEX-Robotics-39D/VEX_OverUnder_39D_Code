@@ -39,6 +39,9 @@ void Autonomous::Routines::match_op(){
     inertial.set_rotation(45);
     PTO::toggle(State::Off);
     Catapult::run_velocity(30);
+    DriveTrain::Control::AnglePID::set_state(State::Off);
+    DriveTrain::Control::DistancePID::set_state(State::Off);
+    run(1500);
     DriveTrain::Control::DistancePID::set_state(State::On);
     DriveTrain::Control::DistancePID::new_route();
     DriveTrain::Control::DistancePID::set_target(750);
@@ -101,5 +104,9 @@ void Autonomous::Routines::match_op(){
     DriveTrain::Control::DistancePID::new_route();
     DriveTrain::Control::DistancePID::set_target(-2000);
     run(2000);
+}
+
+void Autonomous::Routines::match_af(){
+
 }
 

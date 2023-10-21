@@ -144,13 +144,13 @@ void DriveControl::update_drive_train(){
 
 void DriveControl::update_intake(){
     if(controller.get_digital(DIGITAL_L2)){
-		Intake::run(true);
+		Intake::run(600);
 	}
 	else if(controller.get_digital(DIGITAL_R2)){
-		Intake::run();
+		Intake::run(-600);
 	}
 	else{
-		Intake::coast();
+		Intake::coast(); 
 	}
 
 	if(ControllerStates::is_activated(DIGITAL_R1)){

@@ -1,4 +1,5 @@
 #pragma once
+#include "globals.h"
 #include "main.h"
 
 class DriveTrain{
@@ -8,6 +9,7 @@ public:
     class Control{
     public:
         class AnglePID{
+            static bool state;
             static const double kP;
             static const double kI;
             static const double kD;
@@ -21,8 +23,10 @@ public:
         public:
             static void set_target(double target);
             static void update();
+            static void set_state(State s);
         };
         class DistancePID{
+            static bool state;
             static const double kP;
             static const double kI;
             static const double kD;
@@ -40,6 +44,7 @@ public:
             static void new_route();
             static void set_target(double target);
             static void update();
+            static void set_state(State s);
         };
     };    
 };

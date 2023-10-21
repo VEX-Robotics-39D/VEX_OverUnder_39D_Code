@@ -24,6 +24,8 @@ void on_center_button() {
  */
 void initialize() {
 
+ 
+
 	pros::lcd::initialize();
 	pros::lcd::set_text(1, "Hello PROS User!");
 	pros::lcd::register_btn1_cb(on_center_button);
@@ -34,7 +36,7 @@ void initialize() {
 
 	pros::screen::set_pen(COLOR_BLUE);
 
-	inertial.reset();
+	//inertial.reset();
 	//pros::delay(2000);
 }
 
@@ -69,7 +71,7 @@ void competition_initialize() {}
  * from where it left off.
  */
 void autonomous(){
-	
+	Autonomous::Routines::match_op();
 }
 
 /**
@@ -87,8 +89,8 @@ void autonomous(){
  */
 
 void opcontrol() {
-
-	//Autonomous::Routines::test_distance_PID();
+	pros::delay(2000);
+	Autonomous::Routines::match_op();
 
 	while (true) {
 		DriveControl::update();

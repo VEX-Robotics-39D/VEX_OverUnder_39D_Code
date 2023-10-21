@@ -3,7 +3,7 @@
 
 class Intake{
 public:
-    static void run(bool reverse=false);
+    static void run(int velocity);
     static void coast();
     static bool lifted;
     //control code

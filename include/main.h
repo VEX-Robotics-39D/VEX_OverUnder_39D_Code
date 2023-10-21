@@ -42,9 +42,11 @@
 //#include "okapi/api.hpp"
 //#include "pros/api_legacy.h"
 #include <cmath>
-#include "catapult.h"
-#include "drive_train.h"
+
+
 #include "globals.h"
+#include "drive_train.h"
+#include "catapult.h"
 #include "utilities.h"
 #include "intake.h"
 #include "odometry.h"

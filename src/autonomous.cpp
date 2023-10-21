@@ -6,6 +6,7 @@ void Autonomous::run(int time){
         Odometry::updateInertial();
         DriveTrain::Control::AnglePID::update();
         DriveTrain::Control::DistancePID::update();
+        DriveControl::update_catapult();
         pros::delay(UPDATE_INTERVAL);
     }
 }
@@ -38,12 +39,10 @@ void Autonomous::Routines::test_distance_PID(){
 void Autonomous::Routines::match_op(){
     inertial.set_rotation(45);
     PTO::toggle(State::Off);
-    Catapult::run_velocity(30);
     DriveTrain::Control::DistancePID::set_state(State::On);
     DriveTrain::Control::DistancePID::new_route();
     DriveTrain::Control::DistancePID::set_target(750);
     run(750);
-    Catapult::run_velocity(0);
     DriveTrain::Control::DistancePID::set_state(State::Off);
     DriveTrain::Control::AnglePID::set_state(State::On);
     DriveTrain::Control::AnglePID::set_target(0);
@@ -93,7 +92,7 @@ void Autonomous::Routines::match_op(){
     run(1000);
     Intake::run(-600);
     pros::delay(300);
-    DriveTrain::Control::AnglePID::set_target(-105);
+    DriveTrain::Control::AnglePID::set_target(-75);
     run(1250);
     Wings::toggle(State::On);
     DriveTrain::Control::AnglePID::set_state(State::Off);

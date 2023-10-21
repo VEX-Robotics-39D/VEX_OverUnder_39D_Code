@@ -32,8 +32,7 @@ void initialize() {
 
 	PTO::toggle(State::Off);
 
-	Intake::togglePneumatic(State::On);
-
+	
 	pros::screen::set_pen(COLOR_BLUE);
 
 	//inertial.reset();
@@ -71,6 +70,8 @@ void competition_initialize() {}
  * from where it left off.
  */
 void autonomous(){
+	Intake::togglePneumatic(State::On);
+
 	Autonomous::Routines::match_op();
 }
 
@@ -91,9 +92,9 @@ void autonomous(){
 void opcontrol() {
 	//pros::delay(2000);
 	//Autonomous::Routines::match_op();
-
+	Intake::togglePneumatic(State::On);
 	while (true) {
-		DriveControl::update();+
+		DriveControl::update();
 		
 		pros::delay(UPDATE_INTERVAL);
 	}

@@ -89,8 +89,8 @@ void autonomous(){
  */
 
 void opcontrol() {
-	pros::delay(2000);
-	Autonomous::Routines::match_op();
+	//pros::delay(2000);
+	//Autonomous::Routines::match_op();
 
 	while (true) {
 		DriveControl::update();

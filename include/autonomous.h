@@ -11,5 +11,6 @@ public:
         static void test_distance_PID();
 
         static void match_op();
+        static void match_af();
     };
 };

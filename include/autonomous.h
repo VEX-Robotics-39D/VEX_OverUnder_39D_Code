@@ -12,5 +12,7 @@ public:
 
         static void match_op();
         static void match_af();
+
+        static void skills_auton();
     };
 };

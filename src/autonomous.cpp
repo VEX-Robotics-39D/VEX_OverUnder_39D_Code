@@ -110,3 +110,37 @@ void Autonomous::Routines::match_af(){
 
 }
 
+void Autonomous::Routines::skills_auton(){
+    inertial.set_rotation(0);
+    Intake::run(600);
+    for(int i=1;i<=1200;i++){
+        DriveControl::update_catapult();
+        pros::delay(10);
+    }
+    Intake::run(-600);
+    DriveTrain::Control::DistancePID::set_state(State::On);
+    DriveTrain::Control::DistancePID::new_route();
+    DriveTrain::Control::DistancePID::set_target(2000);
+    run(3000);
+    DriveTrain::Control::DistancePID::set_target(100);
+    run(1500);
+    DriveTrain::Control::AnglePID::set_state(State::On);
+    DriveTrain::Control::DistancePID::set_state(State::Off);
+    DriveTrain::Control::AnglePID::set_target(0);
+    run(500);
+    DriveTrain::Control::DistancePID::set_state(State::On);
+    DriveTrain::Control::AnglePID::set_state(State::Off);
+    Intake::run(600);
+    DriveTrain::move_velocity(0,0);
+    pros::delay(15000);
+    DriveTrain::Control::DistancePID::set_state(State::Off);
+    Intake::run(-600);
+    DriveTrain::Control::DistancePID::set_state(State::On);
+    DriveTrain::Control::DistancePID::new_route();
+    DriveTrain::Control::DistancePID::set_target(2000);
+    run(3000);
+    DriveTrain::Control::DistancePID::set_target(100);
+    run(1500);
+    DriveTrain::Control::DistancePID::set_target(0);
+}
+

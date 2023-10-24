@@ -1,22 +1,22 @@
 #include "main.h"
 
-bool DriveControl::ControllerStates::L1_last_state = false;
-bool DriveControl::ControllerStates::R1_last_state = false;
-bool DriveControl::ControllerStates::L2_last_state = false;
-bool DriveControl::ControllerStates::R2_last_state = false;
-bool DriveControl::ControllerStates::up_last_state = false;
-bool DriveControl::ControllerStates::down_last_state = false;
-bool DriveControl::ControllerStates::left_last_state = false;
-bool DriveControl::ControllerStates::right_last_state = false;
-bool DriveControl::ControllerStates::X_last_state = false;
-bool DriveControl::ControllerStates::Y_last_state = false;
-bool DriveControl::ControllerStates::A_last_state = false;
-bool DriveControl::ControllerStates::B_last_state = false;
+bool Control::ControllerStates::L1_last_state = false;
+bool Control::ControllerStates::R1_last_state = false;
+bool Control::ControllerStates::L2_last_state = false;
+bool Control::ControllerStates::R2_last_state = false;
+bool Control::ControllerStates::up_last_state = false;
+bool Control::ControllerStates::down_last_state = false;
+bool Control::ControllerStates::left_last_state = false;
+bool Control::ControllerStates::right_last_state = false;
+bool Control::ControllerStates::X_last_state = false;
+bool Control::ControllerStates::Y_last_state = false;
+bool Control::ControllerStates::A_last_state = false;
+bool Control::ControllerStates::B_last_state = false;
 
-bool DriveControl::catapultFlung=false;
-bool DriveControl::catapultMoving=true;
+bool Control::catapultFlung=false;
+bool Control::catapultMoving=true;
 
-bool DriveControl::ControllerStates::is_activated(pros::controller_digital_e_t button){
+bool Control::ControllerStates::is_activated(pros::controller_digital_e_t button){
     switch(button){
         case DIGITAL_L1:{
             bool temp = L1_last_state;
@@ -83,7 +83,7 @@ bool DriveControl::ControllerStates::is_activated(pros::controller_digital_e_t b
     }
 }
 
-bool DriveControl::ControllerStates::is_pressed(pros::controller_digital_e_t button){
+bool Control::ControllerStates::is_pressed(pros::controller_digital_e_t button){
     switch(button){
         case DIGITAL_L1:{
             L1_last_state = controller.get_digital(DIGITAL_L1);
@@ -138,11 +138,11 @@ bool DriveControl::ControllerStates::is_pressed(pros::controller_digital_e_t but
     }
 }
 
-void DriveControl::update_drive_train(){
+void Control::update_drive_train(){
     DriveTrain::move_velocity(Utilities::drive_control_map(controller.get_analog(ANALOG_LEFT_Y))*600.0,Utilities::drive_control_map(controller.get_analog(ANALOG_RIGHT_Y))*600.0);
 }
 
-void DriveControl::update_intake(){
+void Control::update_intake(){
     if(controller.get_digital(DIGITAL_L2)){
 		Intake::run(600);
 	}
@@ -158,7 +158,7 @@ void DriveControl::update_intake(){
 	}
 }
 
-void DriveControl::update_catapult(){
+void Control::update_catapult(){
     //pros::screen::print(pros::E_TEXT_MEDIUM,0, "Catapult: %f", catapultDistanceSensor.get());
     if(ControllerStates::is_pressed(DIGITAL_L1)){
 		catapultFlung=false;
@@ -179,13 +179,13 @@ void DriveControl::update_catapult(){
 	}
 }
 
-void DriveControl::update_wings(){
+void Control::update_wings(){
     if(ControllerStates::is_activated(DIGITAL_X)){
         Wings::toggle(State::Toggle);
     }
 }
 
-void DriveControl::update_pto(){
+void Control::update_pto(){
     if(ControllerStates::is_activated(DIGITAL_UP)){
         PTO::toggle(State::On);
     }
@@ -194,7 +194,7 @@ void DriveControl::update_pto(){
     }
 }
 
-void DriveControl::update(){
+void Control::update(){
     update_drive_train();
     update_intake();
     update_catapult();

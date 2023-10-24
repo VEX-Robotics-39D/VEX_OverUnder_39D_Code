@@ -1,6 +1,6 @@
 #include "main.h"
 
-class DriveControl{
+class Control{
     static bool catapultFlung;
     static bool catapultMoving;
 public:

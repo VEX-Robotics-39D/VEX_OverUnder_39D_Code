@@ -72,7 +72,6 @@ void competition_initialize() {}
 void autonomous(){
 	Intake::togglePneumatic(State::On);
 
-	Autonomous::Routines::skills_auton();
 }
 
 /**
@@ -90,12 +89,8 @@ void autonomous(){
  */
 
 void opcontrol() {
-	//pros::delay(2000);
-	
-	//Intake::togglePneumatic(State::On);
-	Autonomous::Routines::skills_auton();
 	while (true) {
-		DriveControl::update();
+		Control::update();
 		
 		pros::delay(UPDATE_INTERVAL);
 	}

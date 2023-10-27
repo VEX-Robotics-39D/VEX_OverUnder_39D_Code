@@ -185,15 +185,6 @@ void Control::update_wings(){
     }
 }
 
-void Control::update_pto(){
-    if(ControllerStates::is_activated(DIGITAL_UP)){
-        PTO::toggle(State::On);
-    }
-    else if (ControllerStates::is_activated(DIGITAL_DOWN)){
-        PTO::toggle(State::Off);
-    }
-}
-
 void Control::update(){
     update_drive_train();
     update_intake();

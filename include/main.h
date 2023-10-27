@@ -50,9 +50,9 @@
 #include "utilities.h"
 #include "intake.h"
 #include "wings.h"
-#include "pto.h"
 #include "autonomous.h"
 #include "control.h"
+#include "lemlib/api.hpp"
 
 /**
  * If you find doing pros::Motor() to be tedious and you'd prefer just to do

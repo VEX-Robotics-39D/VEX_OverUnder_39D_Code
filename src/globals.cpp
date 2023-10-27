@@ -4,13 +4,11 @@ pros::Controller controller(CONTROLLER_MASTER);
 //wheels
 pros::Motor leftWheel1(10,true);
 pros::Motor leftWheel2(9,true);
-pros::Motor leftWheel3(8);
-pros::Motor_Group leftWheels2{leftWheel1,leftWheel2};
+pros::Motor_Group leftWheels{leftWheel1,leftWheel2};
 
 pros::Motor rightWheel1(20);
 pros::Motor rightWheel2(19);
-pros::Motor rightWheel3(18,true);
-pros::Motor_Group rightWheels2{rightWheel1,rightWheel2};
+pros::Motor_Group rightWheels{rightWheel1,rightWheel2};
 
 //catapult
 pros::Motor catapultMotor(1);
@@ -32,3 +30,13 @@ pros::ADIDigitalOut intakePneumatic('C');
 
 //inertial sensor
 pros::Imu inertial(3);
+
+lemlib::Drivetrain_t drivetrain{
+    &leftWheels,
+    &rightWheels,
+    12.0,
+    3.25,
+    1000.0/3.0,
+};
+
+

@@ -190,5 +190,4 @@ void Control::update(){
     update_intake();
     update_catapult();
     update_wings();
-    update_pto();
 }

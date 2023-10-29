@@ -28,6 +28,5 @@ public:
     static void update_intake();
     static void update_catapult();
     static void update_wings();
-    static void update_pto();
     static void update();
 };

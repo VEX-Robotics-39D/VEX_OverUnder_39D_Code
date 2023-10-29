@@ -11,13 +11,16 @@ pros::Motor rightWheel2(19);
 pros::Motor_Group rightWheels{rightWheel1,rightWheel2};
 
 //catapult
-pros::Motor catapultMotor(1);
+pros::Motor catapultMotor1(1);
+pros::Motor catapultMotor2(2,true);
 pros::Distance catapultDistanceSensor(2);
 //intake
 pros::Motor intakeMotor(6,true);
 
 //odometry wheel
-pros::Rotation odometryWheel(7);
+pros::Rotation leftOdometryWheel(4);
+pros::Rotation rightOdometryWheel(5,true);
+pros::Rotation backOdometryWheel(3);
 
 //wings
 pros::ADIDigitalOut wingsPneumatic('A');
@@ -37,6 +40,18 @@ lemlib::Drivetrain_t drivetrain{
     12.0,
     3.25,
     1000.0/3.0,
+};
+
+lemlib::TrackingWheel leftTrackingWheel(&leftOdometryWheel, 4.0, 3.25);
+lemlib::TrackingWheel rightTrackingWheel(&rightOdometryWheel, 4.0, -3.25);
+lemlib::TrackingWheel backTrackingWheel(&backOdometryWheel, 4.0, 0.0);
+
+lemlib::OdomSensors_t odomSensors{
+    &leftTrackingWheel,
+    &rightTrackingWheel,
+    &backTrackingWheel,
+    nullptr,
+    &inertial
 };
 
 

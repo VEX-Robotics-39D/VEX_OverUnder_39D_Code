@@ -161,22 +161,10 @@ void Control::update_intake(){
 void Control::update_catapult(){
     //pros::screen::print(pros::E_TEXT_MEDIUM,0, "Catapult: %f", catapultDistanceSensor.get());
     if(ControllerStates::is_pressed(DIGITAL_L1)){
-		catapultFlung=false;
-		catapultMoving = true;
-	}
-	if ((catapultFlung&&catapultDistanceSensor.get() < 100)||ControllerStates::is_pressed(DIGITAL_B)){
-		catapultMoving = false;
-	}
-	if(catapultDistanceSensor.get() > 100){
-		catapultFlung = true;
+		Catapult::run_velocity(600);
 	}
 
-	if(catapultMoving){
-		Catapult::run_velocity(1);
-	}
-	else{
-		Catapult::brake();
-	}
+
 }
 
 void Control::update_wings(){
@@ -190,5 +178,4 @@ void Control::update(){
     update_intake();
     update_catapult();
     update_wings();
-    update_pto();
 }

@@ -43,7 +43,7 @@
 //#include "pros/api_legacy.h"
 #include <cmath>
 
-
+#include "lemlib/api.hpp"
 #include "globals.h"
 #include "drive_train.h"
 #include "catapult.h"
@@ -52,7 +52,7 @@
 #include "wings.h"
 #include "autonomous.h"
 #include "control.h"
-#include "lemlib/api.hpp"
+
 
 /**
  * If you find doing pros::Motor() to be tedious and you'd prefer just to do

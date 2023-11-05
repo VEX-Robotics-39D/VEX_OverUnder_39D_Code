@@ -11,9 +11,9 @@ pros::Motor rightWheel2(19);
 pros::Motor_Group rightWheels{rightWheel1,rightWheel2};
 
 //catapult
-pros::Motor catapultMotor1(1);
-pros::Motor catapultMotor2(2,true);
-pros::Distance catapultDistanceSensor(2);
+pros::Motor catapultMotor1(1,true);
+pros::Motor catapultMotor2(2);
+
 //intake
 pros::Motor intakeMotor(6,true);
 

@@ -163,8 +163,9 @@ void Control::update_catapult(){
     if(ControllerStates::is_pressed(DIGITAL_L1)){
 		Catapult::run_velocity(600);
 	}
-
-
+    else{
+        Catapult::brake();
+    }
 }
 
 void Control::update_wings(){

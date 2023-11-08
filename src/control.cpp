@@ -13,9 +13,6 @@ bool Control::ControllerStates::Y_last_state = false;
 bool Control::ControllerStates::A_last_state = false;
 bool Control::ControllerStates::B_last_state = false;
 
-bool Control::catapultFlung=false;
-bool Control::catapultMoving=true;
-
 bool Control::ControllerStates::is_activated(pros::controller_digital_e_t button){
     switch(button){
         case DIGITAL_L1:{
@@ -143,28 +140,34 @@ void Control::update_drive_train(){
 }
 
 void Control::update_intake(){
-    if(controller.get_digital(DIGITAL_L2)){
+    if(controller.get_digital(DIGITAL_R2)){
 		Intake::run(600);
 	}
-	else if(controller.get_digital(DIGITAL_R2)){
+	else if(controller.get_digital(DIGITAL_L2)){
 		Intake::run(-600);
 	}
 	else{
 		Intake::coast(); 
 	}
-
-	if(ControllerStates::is_activated(DIGITAL_R1)){
-		Intake::togglePneumatic(State::Toggle);
-	}
 }
 
+int Control::catapultState=0;
 void Control::update_catapult(){
     //pros::screen::print(pros::E_TEXT_MEDIUM,0, "Catapult: %f", catapultDistanceSensor.get());
-    if(ControllerStates::is_pressed(DIGITAL_L1)){
-		Catapult::run_velocity(600);
-	}
+    if(ControllerStates::is_pressed(DIGITAL_L1)&&catapultState==0){
+        catapultState++;
+    }
+    if(catapultState==1&&catapultRotation.get_angle()%180>10){
+        catapultState++;
+    }
+    if(catapultState==2&&(catapultRotation.get_angle()>170||catapultRotation.get_angle()<10)){
+        catapultState=0;
+    }
+    if(catapultState!=0){
+        Catapult::run_velocity(60);
+    }
     else{
-        Catapult::brake();
+        Catapult::run_velocity(0);
     }
 }
 

@@ -15,7 +15,7 @@ extern::pros::Motor_Group rightWheels;
 //catapult
 extern::pros::Motor catapultMotor1;
 extern::pros::Motor catapultMotor2;
-extern::pros::Distance catapultDistanceSensor;
+extern::pros::Rotation catapultRotation;
 
 //intake
 extern::pros::Motor intakeMotor;

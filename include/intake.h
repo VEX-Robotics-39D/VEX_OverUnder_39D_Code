@@ -7,5 +7,4 @@ public:
     static void coast();
     static bool lifted;
     //control code
-    static void togglePneumatic(State s);
 };

@@ -2,20 +2,22 @@
 pros::Controller controller(CONTROLLER_MASTER);
 
 //wheels
-pros::Motor leftWheel1(10,true);
-pros::Motor leftWheel2(9,true);
+pros::Motor leftWheel1(20);
+pros::Motor leftWheel2(19);
 pros::Motor_Group leftWheels{leftWheel1,leftWheel2};
 
-pros::Motor rightWheel1(20);
-pros::Motor rightWheel2(19);
+pros::Motor rightWheel1(10,true);
+pros::Motor rightWheel2(9,true);
 pros::Motor_Group rightWheels{rightWheel1,rightWheel2};
 
 //catapult
-pros::Motor catapultMotor1(1);
-pros::Motor catapultMotor2(2,true);
-pros::Distance catapultDistanceSensor(2);
+pros::Motor catapultMotor1(1,true);
+pros::Motor catapultMotor2(2);
+
+pros::Rotation catapultRotation(3);
+
 //intake
-pros::Motor intakeMotor(6,true);
+pros::Motor intakeMotor(18,true);
 
 //odometry wheel
 pros::Rotation leftOdometryWheel(4);

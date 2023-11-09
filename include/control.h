@@ -1,8 +1,7 @@
 #include "main.h"
 
 class Control{
-    static bool catapultFlung;
-    static bool catapultMoving;
+    static int catapultState;
 public:
     class ControllerStates{
     private:

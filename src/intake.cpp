@@ -9,18 +9,3 @@ void Intake::coast(){
 }
 
 bool Intake::lifted=true;
-
-void Intake::togglePneumatic(State s=State::Toggle){
-	switch(s){
-		case State::Toggle:
-			lifted=!lifted;
-			break;
-		case State::On:
-			lifted=true;
-			break;
-		case State::Off:
-			lifted=false;
-			break;
-	}
-	intakePneumatic.set_value(lifted);
-}

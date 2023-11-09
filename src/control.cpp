@@ -153,14 +153,15 @@ void Control::update_intake(){
 
 int Control::catapultState=0;
 void Control::update_catapult(){
-    //pros::screen::print(pros::E_TEXT_MEDIUM,0, "Catapult: %f", catapultDistanceSensor.get());
+    //pros::screen::print(pros::E_TEXT_MEDIUM,0, "Catapult: %d", catapultState);
+    //pros::screen::print(pros::E_TEXT_MEDIUM,1, "Catapult Rotation: %d", (catapultRotation.get_angle()%180));
     if(ControllerStates::is_pressed(DIGITAL_L1)&&catapultState==0){
-        catapultState++;
+        catapultState=1;
     }
-    if(catapultState==1&&catapultRotation.get_angle()%180>10){
-        catapultState++;
+    if(catapultState==1&&(catapultRotation.get_angle()%180>10)){
+        catapultState=2;
     }
-    if(catapultState==2&&(catapultRotation.get_angle()>170||catapultRotation.get_angle()<10)){
+    if(catapultState==2&&((catapultRotation.get_angle()%180>170)||(catapultRotation.get_angle()%180<10))){
         catapultState=0;
     }
     if(catapultState!=0){

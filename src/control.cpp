@@ -135,8 +135,13 @@ bool Control::ControllerStates::is_pressed(pros::controller_digital_e_t button){
     }
 }
 
-void Control::update_drive_train(){
+void Control::update_drive_train_tank(){
     DriveTrain::move_velocity(Utilities::drive_control_map(controller.get_analog(ANALOG_LEFT_Y))*600.0,Utilities::drive_control_map(controller.get_analog(ANALOG_RIGHT_Y))*600.0);
+}
+
+void Control::update_drive_train_arcade(){
+    DriveTrain::move_velocity(Utilities::drive_control_map(controller.get_analog(ANALOG_LEFT_Y)+controller.get_analog(ANALOG_LEFT_X))*600.0,
+                            Utilities::drive_control_map(controller.get_analog(ANALOG_LEFT_Y)-controller.get_analog(ANALOG_LEFT_X))*600.0);
 }
 
 void Control::update_intake(){
@@ -152,20 +157,21 @@ void Control::update_intake(){
 }
 
 int Control::catapultState=0;
+int Control::CatapultRestLevel=0;
 void Control::update_catapult(){
-    //pros::screen::print(pros::E_TEXT_MEDIUM,0, "Catapult: %d", catapultState);
-    //pros::screen::print(pros::E_TEXT_MEDIUM,1, "Catapult Rotation: %d", (catapultRotation.get_angle()%180));
+    pros::screen::print(pros::E_TEXT_MEDIUM,0, "Catapult: %d", catapultState);
+    pros::screen::print(pros::E_TEXT_MEDIUM,1, "Catapult Rotation: %f", (catapultRotation.get_angle()%18000)/100.0);
     if(ControllerStates::is_pressed(DIGITAL_L1)&&catapultState==0){
         catapultState=1;
     }
-    if(catapultState==1&&(catapultRotation.get_angle()%180>10)){
+    if(catapultState==1&&(catapultRotation.get_angle()%18000>500)&&(catapultRotation.get_angle()%18000<17500)){
         catapultState=2;
     }
-    if(catapultState==2&&((catapultRotation.get_angle()%180>170)||(catapultRotation.get_angle()%180<10))){
+    if(catapultState==2&&((catapultRotation.get_angle()%18000<500)||(catapultRotation.get_angle()%18000>17500))){
         catapultState=0;
     }
     if(catapultState!=0){
-        Catapult::run_velocity(60);
+        Catapult::run_velocity(30);
     }
     else{
         Catapult::run_velocity(0);
@@ -179,7 +185,7 @@ void Control::update_wings(){
 }
 
 void Control::update(){
-    update_drive_train();
+    update_drive_train_arcade();
     update_intake();
     update_catapult();
     update_wings();

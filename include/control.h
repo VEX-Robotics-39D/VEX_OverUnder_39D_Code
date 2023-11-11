@@ -2,6 +2,7 @@
 
 class Control{
     static int catapultState;
+    static int CatapultRestLevel;
 public:
     class ControllerStates{
     private:
@@ -23,9 +24,11 @@ public:
         //Returns if the button is currently pressed down
         static bool is_pressed(pros::controller_digital_e_t button);
     };
-    static void update_drive_train();
+    static void update_drive_train_tank();
+    static void update_drive_train_arcade();
     static void update_intake();
     static void update_catapult();
     static void update_wings();
     static void update();
+
 };

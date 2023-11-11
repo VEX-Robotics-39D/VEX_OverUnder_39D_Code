@@ -24,9 +24,9 @@ void on_center_button() {
  */
 void initialize() {
 
-	catapultRotation.reset_position();
+	
 	//print position
-	pros::lcd::print(0, "Catapult Position: %d", catapultRotation.get_position());
+	
 
 	pros::lcd::initialize();
 	pros::lcd::set_text(1, "Hello PROS User!");
@@ -34,6 +34,10 @@ void initialize() {
 
 	
 	pros::screen::set_pen(COLOR_BLUE);
+
+	pros::lcd::print(0, "Catapult Position: %d", catapultRotation.get_angle());
+
+	catapultRotation.reset_position();
 
 	//inertial.reset();
 	pros::delay(200);
@@ -88,6 +92,7 @@ void autonomous(){
  */
 
 void opcontrol() {
+	catapultRotation.set_position(0);
 	while (true) {
 		Control::update();
 		

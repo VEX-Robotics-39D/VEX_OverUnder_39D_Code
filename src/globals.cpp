@@ -11,10 +11,9 @@ pros::Motor rightWheel2(9,true);
 pros::Motor_Group rightWheels{rightWheel1,rightWheel2};
 
 //catapult
-pros::Motor catapultMotor1(1,true);
-pros::Motor catapultMotor2(2);
-
-pros::Rotation catapultRotation(3);
+pros::Motor flystickSpin(1, true);
+pros::Motor flystickMovement(2);
+pros::Rotation flystickRotation(3);
 
 //intake
 pros::Motor intakeMotor(18,true);

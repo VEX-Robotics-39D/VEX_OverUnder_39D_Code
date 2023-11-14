@@ -156,25 +156,41 @@ void Control::update_intake(){
 	}
 }
 
-int Control::catapultState=0;
-int Control::CatapultRestLevel=0;
-void Control::update_catapult(){
-    pros::screen::print(pros::E_TEXT_MEDIUM,0, "Catapult: %d", catapultState);
-    pros::screen::print(pros::E_TEXT_MEDIUM,1, "Catapult Rotation: %f", (catapultRotation.get_angle()%18000)/100.0);
-    if(ControllerStates::is_pressed(DIGITAL_L1)&&catapultState==0){
-        catapultState=1;
+static bool flystickSpinMode = false;
+void Control::update_flystick(){
+    // pros::screen::print(pros::E_TEXT_MEDIUM,0, "Catapult: %d", catapultState);
+    // pros::screen::print(pros::E_TEXT_MEDIUM,1, "Catapult Rotation: %f", (catapultRotation.get_angle()%18000)/100.0);
+    // if(ControllerStates::is_pressed(DIGITAL_L1)&&catapultState==0){
+    //     catapultState=1;
+    // }
+    // if(catapultState==1&&(catapultRotation.get_angle()%18000>500)&&(catapultRotation.get_angle()%18000<17500)){
+    //     catapultState=2;
+    // }
+    // if(catapultState==2&&((catapultRotation.get_angle()%18000<500)||(catapultRotation.get_angle()%18000>17500))){
+    //     catapultState=0;
+    // }
+    if (controller.get_digital(DIGITAL_L1)){
+        Flystick::run_velocity_movement(600);
     }
-    if(catapultState==1&&(catapultRotation.get_angle()%18000>500)&&(catapultRotation.get_angle()%18000<17500)){
-        catapultState=2;
-    }
-    if(catapultState==2&&((catapultRotation.get_angle()%18000<500)||(catapultRotation.get_angle()%18000>17500))){
-        catapultState=0;
-    }
-    if(catapultState!=0){
-        Catapult::run_velocity(30);
+    else if (controller.get_digital(DIGITAL_R1)){
+        Flystick::run_velocity_movement(-600);
     }
     else{
-        Catapult::run_velocity(0);
+        Flystick::brake_movement();
+    }
+
+    if (controller.get_digital(DIGITAL_UP)){
+        flystickSpinMode = true;
+    }
+    else if (controller.get_digital(DIGITAL_DOWN)){
+        flystickSpinMode = false;
+    }
+
+    if (flystickSpinMode){
+        Flystick::run_velocity_spin(600);
+    }
+    else {
+        Flystick::brake_spin();
     }
 }
 
@@ -185,8 +201,8 @@ void Control::update_wings(){
 }
 
 void Control::update(){
-    update_drive_train_arcade();
+    update_drive_train_tank();
     update_intake();
-    update_catapult();
+    update_flystick();
     update_wings();
 }

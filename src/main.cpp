@@ -35,9 +35,8 @@ void initialize() {
 	
 	pros::screen::set_pen(COLOR_BLUE);
 
-	pros::lcd::print(0, "Catapult Position: %d", catapultRotation.get_angle());
 
-	catapultRotation.reset_position();
+	flystickRotation.reset_position();
 
 	//inertial.reset();
 	pros::delay(200);
@@ -92,7 +91,7 @@ void autonomous(){
  */
 
 void opcontrol() {
-	catapultRotation.set_position(0);
+	flystickRotation.set_position(0);
 	while (true) {
 		Control::update();
 		

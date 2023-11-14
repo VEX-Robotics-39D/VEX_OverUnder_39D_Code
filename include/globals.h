@@ -12,10 +12,10 @@ extern::pros::Motor rightWheel1;
 extern::pros::Motor rightWheel2;
 extern::pros::Motor_Group rightWheels;
 
-//catapult
-extern::pros::Motor catapultMotor1;
-extern::pros::Motor catapultMotor2;
-extern::pros::Rotation catapultRotation;
+//flystick
+extern::pros::Motor flystickSpin;
+extern::pros::Motor flystickMovement;
+extern::pros::Rotation flystickRotation;
 
 //intake
 extern::pros::Motor intakeMotor;

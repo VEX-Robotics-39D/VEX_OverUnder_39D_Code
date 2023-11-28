@@ -174,6 +174,7 @@ void Control::update_flystick(){
     }
     else if (controller.get_digital(DIGITAL_R1)){
         Flystick::run_velocity_movement(-600);
+        Flystick::run_velocity_spin(600);
     }
     else{
         Flystick::brake_movement();

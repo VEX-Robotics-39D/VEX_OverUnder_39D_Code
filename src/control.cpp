@@ -145,10 +145,10 @@ void Control::update_drive_train_arcade(){
 }
 
 void Control::update_intake(){
-    if(controller.get_digital(DIGITAL_R2)){
+    if(ControllerStates::is_pressed(DIGITAL_L1)){
 		Intake::run(600);
 	}
-	else if(controller.get_digital(DIGITAL_L2)){
+	else if(ControllerStates::is_pressed(DIGITAL_L2)){
 		Intake::run(-600);
 	}
 	else{
@@ -158,41 +158,19 @@ void Control::update_intake(){
 
 static bool flystickSpinMode = false;
 void Control::update_flystick(){
-    // pros::screen::print(pros::E_TEXT_MEDIUM,0, "Catapult: %d", catapultState);
-    // pros::screen::print(pros::E_TEXT_MEDIUM,1, "Catapult Rotation: %f", (catapultRotation.get_angle()%18000)/100.0);
-    // if(ControllerStates::is_pressed(DIGITAL_L1)&&catapultState==0){
-    //     catapultState=1;
-    // }
-    // if(catapultState==1&&(catapultRotation.get_angle()%18000>500)&&(catapultRotation.get_angle()%18000<17500)){
-    //     catapultState=2;
-    // }
-    // if(catapultState==2&&((catapultRotation.get_angle()%18000<500)||(catapultRotation.get_angle()%18000>17500))){
-    //     catapultState=0;
-    // }
-    if (controller.get_digital(DIGITAL_L1)){
-        Flystick::run_velocity_movement(600);
+    
+    
+    if(ControllerStates::is_pressed(DIGITAL_LEFT)){
+        Flystick::level = -5;
     }
-    else if (controller.get_digital(DIGITAL_R1)){
-        Flystick::run_velocity_movement(-600);
-        Flystick::run_velocity_spin(600);
+    if(ControllerStates::is_pressed(DIGITAL_X)){
+        Flystick::level = 180;
     }
-    else{
-        Flystick::brake_movement();
+    if(ControllerStates::is_pressed(DIGITAL_A)){
+        Flystick::level = 520;
     }
+    
 
-    if (controller.get_digital(DIGITAL_UP)){
-        flystickSpinMode = true;
-    }
-    else if (controller.get_digital(DIGITAL_DOWN)){
-        flystickSpinMode = false;
-    }
-
-    if (flystickSpinMode){
-        Flystick::run_velocity_spin(600);
-    }
-    else {
-        Flystick::brake_spin();
-    }
 }
 
 void Control::update_wings(){

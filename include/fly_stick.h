@@ -3,8 +3,9 @@
 
 class Flystick{
 public:
+static int level;
     static void run_velocity_spin(double velocity);
-    static void run_velocity_movement(double velocity);
     static void brake_spin();
-    static void brake_movement();
+    static void toggle_state();
+    static void update_state();
 };

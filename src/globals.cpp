@@ -2,13 +2,16 @@
 pros::Controller controller(CONTROLLER_MASTER);
 
 //wheels
-pros::Motor leftWheel1(20);
-pros::Motor leftWheel2(19);
-pros::Motor_Group leftWheels{leftWheel1,leftWheel2};
+pros::Motor leftWheel1(4);
+pros::Motor leftWheel2(5);
+pros::Motor leftWheel3(6);
+pros::Motor_Group leftWheels{leftWheel1,leftWheel2,leftWheel3};
 
-pros::Motor rightWheel1(10,true);
-pros::Motor rightWheel2(9,true);
-pros::Motor_Group rightWheels{rightWheel1,rightWheel2};
+pros::Motor rightWheel1(1,true);
+pros::Motor rightWheel2(2,true);
+pros::Motor rightWheel3(3,true);
+
+pros::Motor_Group rightWheels{rightWheel1,rightWheel2,rightWheel3};
 
 //catapult
 pros::Motor flystickSpin(1, true);

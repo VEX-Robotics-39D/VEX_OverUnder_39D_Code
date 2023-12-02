@@ -32,11 +32,10 @@ void initialize() {
 	pros::lcd::set_text(1, "Hello PROS User!");
 	pros::lcd::register_btn1_cb(on_center_button);
 
+
 	
 	pros::screen::set_pen(COLOR_BLUE);
-
-
-	flystickRotation.reset_position();
+	chassis.calibrate();
 
 	//inertial.reset();
 	pros::delay(200);
@@ -91,10 +90,9 @@ void autonomous(){
  */
 
 void opcontrol() {
-	flystickRotation.set_position(0);
 	while (true) {
 		Control::update();
-		
+		std::cout << flystickMovement.get_position() << std::endl;
 		pros::delay(UPDATE_INTERVAL);
 	}
 }

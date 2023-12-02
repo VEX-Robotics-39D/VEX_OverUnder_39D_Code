@@ -156,27 +156,41 @@ void Control::update_intake(){
 	}
 }
 
-static bool flystickSpinMode = false;
 void Control::update_flystick(){
-    
+    if (ControllerStates::is_activated(DIGITAL_UP)){
+        Flystick::run_velocity_spin(600);
+    }
+    else if(ControllerStates::is_activated(DIGITAL_DOWN)){
+        Flystick::brake_spin();
+    }
     
     if(ControllerStates::is_pressed(DIGITAL_LEFT)){
-        Flystick::level = -5;
+        Flystick::level = -500;
     }
     if(ControllerStates::is_pressed(DIGITAL_X)){
-        Flystick::level = 180;
+        Flystick::level = 300;
     }
     if(ControllerStates::is_pressed(DIGITAL_A)){
-        Flystick::level = 520;
+        Flystick::level = 1500;
     }
     
-
+    Flystick::update_state();
 }
 
 void Control::update_wings(){
-    if(ControllerStates::is_activated(DIGITAL_X)){
-        Wings::toggle(State::Toggle);
+    if(ControllerStates::is_activated(DIGITAL_R1)){
+        Wings::toggle1(State::Toggle);
     }
+    if(ControllerStates::is_activated(DIGITAL_R2)){
+        Wings::toggle2(State::Toggle);
+    }
+}
+
+void Control::debug(){
+    lemlib::Pose pose = chassis.getPose();
+    pros::screen::print(pros::E_TEXT_MEDIUM, 1, "X: %f", pose.x);
+    pros::screen::print(pros::E_TEXT_MEDIUM, 2, "Y: %f", pose.y);
+    pros::screen::print(pros::E_TEXT_MEDIUM, 3, "Theta: %f", pose.theta);
 }
 
 void Control::update(){
@@ -184,4 +198,5 @@ void Control::update(){
     update_intake();
     update_flystick();
     update_wings();
+    debug();
 }

@@ -29,6 +29,7 @@ public:
     static void update_intake();
     static void update_flystick();
     static void update_wings();
+    static void debug();
     static void update();
 
 };

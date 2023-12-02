@@ -17,7 +17,6 @@ extern::pros::Motor_Group rightWheels;
 //flystick
 extern::pros::Motor flystickSpin;
 extern::pros::Motor flystickMovement;
-extern::pros::Rotation flystickRotation;
 
 //intake
 extern::pros::Motor intakeMotor;
@@ -28,7 +27,8 @@ extern::pros::Rotation rightOdometryWheel;
 extern::pros::Rotation backOdometryWheel;
 
 //wings
-extern::pros::ADIDigitalOut wingsPneumatic;
+extern::pros::ADIDigitalOut wingsPneumatic1;
+extern::pros::ADIDigitalOut wingsPneumatic2;
 
 //pto
 extern::pros::ADIDigitalOut pto;
@@ -54,3 +54,9 @@ extern::lemlib::TrackingWheel backTrackingWheel;
 
 extern::lemlib::Drivetrain_t drivetrain;
 extern::lemlib::OdomSensors_t odomSensors;
+
+extern::lemlib::ChassisController_t lateralController;
+extern::lemlib::ChassisController_t angularController;
+extern::lemlib::Chassis chassis;
+
+

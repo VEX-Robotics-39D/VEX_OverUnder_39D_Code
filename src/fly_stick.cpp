@@ -11,9 +11,9 @@ void Flystick::brake_spin(){
 int Flystick::level=0;
 
 void Flystick::update_state(){
-    int error = flystickSpin.get_position()-level;
-    flystickSpin.move_velocity(-error*0.1);
-    
+    double error = flystickMovement.get_position()-level;
+    flystickMovement.move_velocity(-error*0.1);
+    pros::screen::print(pros::E_TEXT_MEDIUM, 0, "Flystick: %lf", flystickMovement.get_position());
 }
 
 Flystick catapult;

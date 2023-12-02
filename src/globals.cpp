@@ -2,41 +2,34 @@
 pros::Controller controller(CONTROLLER_MASTER);
 
 //wheels
-pros::Motor leftWheel1(4);
-pros::Motor leftWheel2(5);
-pros::Motor leftWheel3(6);
+pros::Motor leftWheel1(4,true);
+pros::Motor leftWheel2(5,true);
+pros::Motor leftWheel3(6,true);
 pros::Motor_Group leftWheels{leftWheel1,leftWheel2,leftWheel3};
 
-pros::Motor rightWheel1(1,true);
-pros::Motor rightWheel2(2,true);
-pros::Motor rightWheel3(3,true);
+pros::Motor rightWheel1(1);
+pros::Motor rightWheel2(2);
+pros::Motor rightWheel3(3);
 
 pros::Motor_Group rightWheels{rightWheel1,rightWheel2,rightWheel3};
 
 //catapult
-pros::Motor flystickSpin(1, true);
-pros::Motor flystickMovement(2);
-pros::Rotation flystickRotation(3);
+pros::Motor flystickSpin(11, true);
+pros::Motor flystickMovement(10, true);
 
 //intake
-pros::Motor intakeMotor(18,true);
+pros::Motor intakeMotor(7,true);
 
-//odometry wheel
-pros::Rotation leftOdometryWheel(4);
-pros::Rotation rightOdometryWheel(5,true);
-pros::Rotation backOdometryWheel(3);
 
 //wings
-pros::ADIDigitalOut wingsPneumatic('A');
+pros::ADIDigitalOut wingsPneumatic1('A');
+pros::ADIDigitalOut wingsPneumatic2('C');
 
 //pto
 pros::ADIDigitalOut pto('B');
 
-//intake pneumatic
-pros::ADIDigitalOut intakePneumatic('C');
-
 //inertial sensor
-pros::Imu inertial(3);
+pros::Imu inertial(12);
 
 lemlib::Drivetrain_t drivetrain{
     &leftWheels,
@@ -46,16 +39,38 @@ lemlib::Drivetrain_t drivetrain{
     1000.0/3.0,
 };
 
-lemlib::TrackingWheel leftTrackingWheel(&leftOdometryWheel, 4.0, 3.25);
-lemlib::TrackingWheel rightTrackingWheel(&rightOdometryWheel, 4.0, -3.25);
-lemlib::TrackingWheel backTrackingWheel(&backOdometryWheel, 4.0, 0.0);
-
 lemlib::OdomSensors_t odomSensors{
-    &leftTrackingWheel,
-    &rightTrackingWheel,
-    &backTrackingWheel,
+    nullptr,
+    nullptr,
+    nullptr,
     nullptr,
     &inertial
 };
+
+lemlib::ChassisController_t lateralController {
+    8, // kP
+    30, // kD
+    1, // smallErrorRange
+    100, // smallErrorTimeout
+    3, // largeErrorRange
+    500, // largeErrorTimeout
+    5 // slew rate
+};
+ 
+// turning PID
+lemlib::ChassisController_t angularController {
+    4, // kP
+    40, // kD
+    1, // smallErrorRange
+    100, // smallErrorTimeout
+    3, // largeErrorRange
+    500, // largeErrorTimeout
+    40 // slew rate
+};
+ 
+ 
+// create the chassis
+lemlib::Chassis chassis(drivetrain, lateralController, angularController, odomSensors);
+
 
 

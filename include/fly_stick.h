@@ -4,6 +4,7 @@
 class Flystick{
 public:
     static int level;
+    static int timeSinceLastChange;
     static void run_velocity_spin(double velocity);
     static void brake_spin();
     static void toggle_state();

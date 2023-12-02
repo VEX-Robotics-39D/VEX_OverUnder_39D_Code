@@ -1,8 +1,7 @@
 #include "main.h"
 
 class Control{
-    static int catapultState;
-    static int CatapultRestLevel;
+
 public:
     class ControllerStates{
     private:

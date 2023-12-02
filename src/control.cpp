@@ -165,14 +165,19 @@ void Control::update_flystick(){
     }
     
     if(ControllerStates::is_pressed(DIGITAL_LEFT)){
-        Flystick::level = -500;
+        Flystick::timeSinceLastChange=0;
+        Flystick::level = -50;
     }
     if(ControllerStates::is_pressed(DIGITAL_X)){
+        Flystick::timeSinceLastChange=0;
         Flystick::level = 300;
     }
     if(ControllerStates::is_pressed(DIGITAL_A)){
-        Flystick::level = 1500;
+        Flystick::timeSinceLastChange=0;
+        Flystick::level = 1340;
     }
+ 
+
     
     Flystick::update_state();
 }

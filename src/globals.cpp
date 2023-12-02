@@ -5,7 +5,8 @@ pros::Controller controller(CONTROLLER_MASTER);
 pros::Motor leftWheel1(4,true);
 pros::Motor leftWheel2(5,true);
 pros::Motor leftWheel3(6,true);
-pros::Motor_Group leftWheels{leftWheel1,leftWheel2,leftWheel3};
+pros::Motor_Group leftWheels{leftWheel1,leftWheel2};
+//pros::Motor_Group leftWheels{leftWheel1,leftWheel2,leftWheel3};
 
 pros::Motor rightWheel1(1);
 pros::Motor rightWheel2(2);

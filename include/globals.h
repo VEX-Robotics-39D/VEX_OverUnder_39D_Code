@@ -46,6 +46,10 @@ extern::pros::Imu inertial;
 
 const int UPDATE_INTERVAL=10;
 
+extern::pros::Rotation backRotation;
+
+extern::lemlib::TrackingWheel backTrackingWheel;
+
 extern::lemlib::Drivetrain_t drivetrain;
 
 extern::lemlib::TrackingWheel leftTrackingWheel;

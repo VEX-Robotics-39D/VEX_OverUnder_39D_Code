@@ -5,4 +5,5 @@
 class DriveTrain{
 public:
     static void move_velocity(double left, double right);  
+    static void stop();
 };

@@ -5,8 +5,8 @@ pros::Controller controller(CONTROLLER_MASTER);
 pros::Motor leftWheel1(4,true);
 pros::Motor leftWheel2(5,true);
 pros::Motor leftWheel3(6,true);
-pros::Motor_Group leftWheels{leftWheel1,leftWheel2};
-//pros::Motor_Group leftWheels{leftWheel1,leftWheel2,leftWheel3};
+// pros::Motor_Group leftWheels{leftWheel1,leftWheel2};
+pros::Motor_Group leftWheels{leftWheel1,leftWheel2,leftWheel3};
 
 pros::Motor rightWheel1(1);
 pros::Motor rightWheel2(2);
@@ -19,12 +19,12 @@ pros::Motor flystickSpin(11, true);
 pros::Motor flystickMovement(10, true);
 
 //intake
-pros::Motor intakeMotor(7,true);
+pros::Motor intakeMotor(7);
 
 
 //wings
-pros::ADIDigitalOut wingsPneumatic1('A');
-pros::ADIDigitalOut wingsPneumatic2('C');
+pros::ADIDigitalOut wingsPneumatic1('C');
+pros::ADIDigitalOut wingsPneumatic2('A');
 
 //pto
 pros::ADIDigitalOut pto('B');
@@ -35,15 +35,20 @@ pros::Imu inertial(12);
 lemlib::Drivetrain_t drivetrain{
     &leftWheels,
     &rightWheels,
-    12.0,
+    11.5,
     3.25,
-    1000.0/3.0,
+    360,
 };
+
+pros::Rotation backRotation(13);
+
+lemlib::TrackingWheel backTrackingWheel(&backRotation, 2.75, -3.75);
 
 lemlib::OdomSensors_t odomSensors{
     nullptr,
     nullptr,
-    nullptr,
+    //nullptr,
+    &backTrackingWheel,
     nullptr,
     &inertial
 };

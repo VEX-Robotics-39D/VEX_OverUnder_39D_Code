@@ -136,7 +136,12 @@ bool Control::ControllerStates::is_pressed(pros::controller_digital_e_t button){
 }
 
 void Control::update_drive_train_tank(){
-    DriveTrain::move_velocity(Utilities::drive_control_map(controller.get_analog(ANALOG_LEFT_Y))*600.0,Utilities::drive_control_map(controller.get_analog(ANALOG_RIGHT_Y))*600.0);
+    if(Utilities::drive_control_map(controller.get_analog(ANALOG_LEFT_X)) < -0.8 && Utilities::drive_control_map(controller.get_analog(ANALOG_RIGHT_X)) > 0.8){
+        DriveTrain::stop();
+    }
+    else{
+        DriveTrain::move_velocity(Utilities::drive_control_map(controller.get_analog(ANALOG_LEFT_Y))*600.0,Utilities::drive_control_map(controller.get_analog(ANALOG_RIGHT_Y))*600.0);
+    }
 }
 
 void Control::update_drive_train_arcade(){
@@ -163,31 +168,43 @@ void Control::update_flystick(){
     else if(ControllerStates::is_activated(DIGITAL_DOWN)){
         Flystick::brake_spin();
     }
-    
-    if(ControllerStates::is_pressed(DIGITAL_LEFT)){
-        Flystick::timeSinceLastChange=0;
-        Flystick::level = -50;
-    }
     if(ControllerStates::is_pressed(DIGITAL_X)){
         Flystick::timeSinceLastChange=0;
         Flystick::level = 300;
     }
-    if(ControllerStates::is_pressed(DIGITAL_A)){
+    if(ControllerStates::is_pressed(DIGITAL_Y)){
         Flystick::timeSinceLastChange=0;
+        Flystick::run_velocity_spin(600);
         Flystick::level = 1340;
+    }
+    if(ControllerStates::is_pressed(DIGITAL_B)){
+        Flystick::timeSinceLastChange=0;
+        Flystick::level = -20;
     }
  
 
     
     Flystick::update_state();
 }
-
+static bool lastPressed1 = false, lastPressed2 = false;
 void Control::update_wings(){
-    if(ControllerStates::is_activated(DIGITAL_R1)){
-        Wings::toggle1(State::Toggle);
+    if(ControllerStates::is_pressed(DIGITAL_R1)){
+        if (!lastPressed1){
+            Wings::toggle1(State::Toggle);
+            lastPressed1 = true;
+        }
     }
-    if(ControllerStates::is_activated(DIGITAL_R2)){
-        Wings::toggle2(State::Toggle);
+    else{
+        lastPressed1 = false;
+    }
+    if(ControllerStates::is_pressed(DIGITAL_R2)){
+        if (!lastPressed2){
+            Wings::toggle2(State::Toggle);
+            lastPressed2 = true;
+        }
+    }
+    else{
+        lastPressed2 = false;
     }
 }
 
@@ -196,6 +213,8 @@ void Control::debug(){
     pros::screen::print(pros::E_TEXT_MEDIUM, 1, "X: %f", pose.x);
     pros::screen::print(pros::E_TEXT_MEDIUM, 2, "Y: %f", pose.y);
     pros::screen::print(pros::E_TEXT_MEDIUM, 3, "Theta: %f", pose.theta);
+    pros::screen::print(pros::E_TEXT_MEDIUM, 4, "left: %f", Utilities::drive_control_map(controller.get_analog(ANALOG_LEFT_X)));
+    pros::screen::print(pros::E_TEXT_MEDIUM, 5, "right: %f", Utilities::drive_control_map(controller.get_analog(ANALOG_RIGHT_X)));
 }
 
 void Control::update(){

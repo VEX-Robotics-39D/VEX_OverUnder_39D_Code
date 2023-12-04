@@ -1,7 +1,7 @@
 #include "main.h"
 
-void Flystick::run_velocity_spin(double velocity){
-    flystickSpin.move_velocity(velocity);
+void Flystick::spin_volts(double volts){
+    flystickSpin.move_voltage(volts);
 }
 
 void Flystick::brake_spin(){

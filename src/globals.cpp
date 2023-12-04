@@ -46,8 +46,8 @@ lemlib::TrackingWheel backTrackingWheel(&backRotation, 2.75, -3.75);
 lemlib::OdomSensors_t odomSensors{
     nullptr,
     nullptr,
-    //nullptr,
-    &backTrackingWheel,
+    nullptr,
+    //&backTrackingWheel,
     nullptr,
     &inertial
 };

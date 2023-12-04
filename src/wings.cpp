@@ -1,6 +1,6 @@
 #include "main.h"
 
-bool Wings::state=false;
+bool Wings::state=false, Wings::state2=false;
 
 void Wings::toggle1(State s=State::Toggle){
 	switch(s){
@@ -19,14 +19,14 @@ void Wings::toggle1(State s=State::Toggle){
 void Wings::toggle2(State s=State::Toggle){
 	switch(s){
 		case State::Toggle:
-			state=!state;
+			state2=!state;
 			break;
 		case State::On:
-			state=true;
+			state2=true;
 			break;
 		case State::Off:
-			state=false;
+			state2=false;
 			break;
 	}
-	wingsPneumatic2.set_value(state);
+	wingsPneumatic2.set_value(state2);
 }

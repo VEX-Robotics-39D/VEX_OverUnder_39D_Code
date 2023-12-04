@@ -134,17 +134,20 @@ bool Control::ControllerStates::is_pressed(pros::controller_digital_e_t button){
             return false;
     }
 }
-
+static bool activated = false;
 void Control::update_drive_train_tank(){
     leftWheels.set_brake_modes(pros::E_MOTOR_BRAKE_COAST);
     rightWheels.set_brake_modes(pros::E_MOTOR_BRAKE_COAST);
+    DriveTrain::move_velocity(Utilities::drive_control_map(controller.get_analog(ANALOG_LEFT_Y))*600.0,Utilities::drive_control_map(controller.get_analog(ANALOG_RIGHT_Y))*600.0);
     if(Utilities::drive_control_map(controller.get_analog(ANALOG_LEFT_X)) < -0.8){
-        DriveTrain::stopLeft();
+        leftWheels.set_brake_modes(pros::E_MOTOR_BRAKE_HOLD);
+        leftWheels.brake();
     }
     if(Utilities::drive_control_map(controller.get_analog(ANALOG_RIGHT_X)) > 0.8){
-        DriveTrain::stopRight();
+        rightWheels.set_brake_modes(pros::E_MOTOR_BRAKE_HOLD);
+        rightWheels.brake();
     }
-    DriveTrain::move_velocity(Utilities::drive_control_map(controller.get_analog(ANALOG_LEFT_Y))*600.0,Utilities::drive_control_map(controller.get_analog(ANALOG_RIGHT_Y))*600.0);
+
 }
 
 void Control::update_drive_train_arcade(){
@@ -165,7 +168,7 @@ void Control::update_intake(){
 
 void Control::update_flystick(){
     if (ControllerStates::is_activated(DIGITAL_UP)){
-        Flystick::run_velocity_spin(600);
+        Flystick::spin_volts(12000);
     }
     else if(ControllerStates::is_activated(DIGITAL_DOWN)){
         Flystick::brake_spin();
@@ -173,12 +176,12 @@ void Control::update_flystick(){
     if(ControllerStates::is_pressed(DIGITAL_X)){
         Flystick::timeSinceLastChange=0;
         Flystick::level = 300;
-        Flystick::run_velocity_spin(0);
+        Flystick::spin_volts(0);
         Intake::pneumatic_toggle(State::Off);
     }
     if(ControllerStates::is_pressed(DIGITAL_Y)){
         Flystick::timeSinceLastChange=0;
-        Flystick::run_velocity_spin(600);
+        Flystick::spin_volts(12000);
         Flystick::level = 1340;
         Intake::pneumatic_toggle(State::Off);
     }
@@ -202,6 +205,7 @@ void Control::update_wings(){
     else{
         lastPressed1 = false;
     }
+
     if(ControllerStates::is_pressed(DIGITAL_R2)){
         if (!lastPressed2){
             Wings::toggle2(State::Toggle);

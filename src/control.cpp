@@ -188,7 +188,7 @@ void Control::update_flystick(){
     if(ControllerStates::is_pressed(DIGITAL_B)){
         Flystick::timeSinceLastChange=0;
         Flystick::level = -20;
-        Flystick::run_velocity_spin(0);
+        Flystick::spin_volts(0);
         Intake::pneumatic_toggle(State::On);
     }
  

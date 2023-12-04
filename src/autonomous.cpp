@@ -11,6 +11,7 @@ ASSET(aff1_txt);
 
 void Autonomous::Routes::oppauton(){
     Intake::run(600);
+    chassis.setPose(12,-60,-90);
     chassis.follow(aff1_txt,4000,15,false,false);
     Intake::run(0);
     chassis.moveTo(60,-40,0,2000);

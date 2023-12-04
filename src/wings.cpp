@@ -1,6 +1,7 @@
 #include "main.h"
 
-bool Wings::state=false, Wings::state2=false;
+bool Wings::state=false;
+bool Wings::state2=false;
 
 void Wings::toggle1(State s=State::Toggle){
 	switch(s){

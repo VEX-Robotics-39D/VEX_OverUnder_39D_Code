@@ -136,19 +136,21 @@ bool Control::ControllerStates::is_pressed(pros::controller_digital_e_t button){
 }
 
 void Control::update_drive_train_tank(){
-    if(Utilities::drive_control_map(controller.get_analog(ANALOG_LEFT_X)) < -0.8 && Utilities::drive_control_map(controller.get_analog(ANALOG_RIGHT_X)) > 0.8){
-        DriveTrain::stop();
+    leftWheels.set_brake_modes(pros::E_MOTOR_BRAKE_COAST);
+    rightWheels.set_brake_modes(pros::E_MOTOR_BRAKE_COAST);
+    if(Utilities::drive_control_map(controller.get_analog(ANALOG_LEFT_X)) < -0.8){
+        DriveTrain::stopLeft();
     }
-    else{
-        DriveTrain::move_velocity(Utilities::drive_control_map(controller.get_analog(ANALOG_LEFT_Y))*600.0,Utilities::drive_control_map(controller.get_analog(ANALOG_RIGHT_Y))*600.0);
+    if(Utilities::drive_control_map(controller.get_analog(ANALOG_RIGHT_X)) > 0.8){
+        DriveTrain::stopRight();
     }
+    DriveTrain::move_velocity(Utilities::drive_control_map(controller.get_analog(ANALOG_LEFT_Y))*600.0,Utilities::drive_control_map(controller.get_analog(ANALOG_RIGHT_Y))*600.0);
 }
 
 void Control::update_drive_train_arcade(){
     DriveTrain::move_velocity(Utilities::drive_control_map(controller.get_analog(ANALOG_LEFT_Y)+controller.get_analog(ANALOG_LEFT_X))*600.0,
                             Utilities::drive_control_map(controller.get_analog(ANALOG_LEFT_Y)-controller.get_analog(ANALOG_LEFT_X))*600.0);
 }
-
 void Control::update_intake(){
     if(ControllerStates::is_pressed(DIGITAL_L1)){
 		Intake::run(600);
@@ -171,19 +173,22 @@ void Control::update_flystick(){
     if(ControllerStates::is_pressed(DIGITAL_X)){
         Flystick::timeSinceLastChange=0;
         Flystick::level = 300;
+        Flystick::run_velocity_spin(0);
+        Intake::pneumatic_toggle(State::Off);
     }
     if(ControllerStates::is_pressed(DIGITAL_Y)){
         Flystick::timeSinceLastChange=0;
         Flystick::run_velocity_spin(600);
         Flystick::level = 1340;
+        Intake::pneumatic_toggle(State::Off);
     }
     if(ControllerStates::is_pressed(DIGITAL_B)){
         Flystick::timeSinceLastChange=0;
         Flystick::level = -20;
+        Flystick::run_velocity_spin(0);
+        Intake::pneumatic_toggle(State::On);
     }
  
-
-    
     Flystick::update_state();
 }
 static bool lastPressed1 = false, lastPressed2 = false;

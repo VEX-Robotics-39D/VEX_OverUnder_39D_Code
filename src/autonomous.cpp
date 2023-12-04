@@ -1,6 +1,9 @@
 #include "main.h"
 
+ASSET(path_txt);
+
 void Autonomous::Routes::testpid(){
-    chassis.turnTo(10,0,5);
+    chassis.setPose(-36,58,90);
+    chassis.follow(path_txt,60000,15);
 }
 

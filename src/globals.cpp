@@ -20,14 +20,13 @@ pros::Motor flystickMovement(10, true);
 
 //intake
 pros::Motor intakeMotor(7);
+pros::ADIDigitalOut intakePneumatic('B');
 
 
 //wings
 pros::ADIDigitalOut wingsPneumatic1('C');
 pros::ADIDigitalOut wingsPneumatic2('A');
 
-//pto
-pros::ADIDigitalOut pto('B');
 
 //inertial sensor
 pros::Imu inertial(12);

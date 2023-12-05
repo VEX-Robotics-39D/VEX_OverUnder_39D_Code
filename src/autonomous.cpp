@@ -22,3 +22,18 @@ void Autonomous::Routes::oppauton(){
     chassis.moveTo(15,-28,0,2000);
 }
 
+ASSET(skill1_txt);
+ASSET(skill2_txt);
+ASSET(skill3_txt);
+ASSET(skill4_txt);
+ASSET(skill5_txt);
+
+void Autonomous::Routes::skillauton(){
+    chassis.setPose(0,0,0);
+    chassis.follow(skill1_txt,10000,15);
+    chassis.follow(skill2_txt,4000,15);
+    chassis.follow(skill3_txt,6000,15);
+    chassis.follow(skill4_txt,6000,15);
+    chassis.follow(skill5_txt,6000,15);
+}
+

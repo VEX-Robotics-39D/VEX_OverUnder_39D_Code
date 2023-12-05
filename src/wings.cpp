@@ -20,7 +20,7 @@ void Wings::toggle1(State s=State::Toggle){
 void Wings::toggle2(State s=State::Toggle){
 	switch(s){
 		case State::Toggle:
-			state2=!state;
+			state2=!state2;
 			break;
 		case State::On:
 			state2=true;

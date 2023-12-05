@@ -141,11 +141,11 @@ void Control::update_drive_train_tank(){
     DriveTrain::move_velocity(Utilities::drive_control_map(controller.get_analog(ANALOG_LEFT_Y))*600.0,Utilities::drive_control_map(controller.get_analog(ANALOG_RIGHT_Y))*600.0);
     if(Utilities::drive_control_map(controller.get_analog(ANALOG_LEFT_X)) < -0.8){
         leftWheels.set_brake_modes(pros::E_MOTOR_BRAKE_HOLD);
-        leftWheels.brake();
+        leftWheels.move_velocity(0);
     }
     if(Utilities::drive_control_map(controller.get_analog(ANALOG_RIGHT_X)) > 0.8){
         rightWheels.set_brake_modes(pros::E_MOTOR_BRAKE_HOLD);
-        rightWheels.brake();
+        rightWheels.move_velocity(0);
     }
 
 }

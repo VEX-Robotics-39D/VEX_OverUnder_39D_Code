@@ -30,10 +30,10 @@ ASSET(skill5_txt);
 
 void Autonomous::Routes::skillauton(){
     chassis.setPose(53,-46,-90);
-    chassis.follow(skill1_txt,10000,15);
-    chassis.follow(skill2_txt,4000,15);
-    chassis.follow(skill3_txt,6000,15);
-    chassis.follow(skill4_txt,6000,15);
-    chassis.follow(skill5_txt,6000,15);
+    chassis.follow(skill1_txt,15000,15);
+    chassis.follow(skill2_txt,10000,15,false,false);
+    chassis.follow(skill3_txt,10000,15);
+    chassis.follow(skill4_txt,10000,15,false,false);
+    chassis.follow(skill5_txt,15000,15);
 }
 

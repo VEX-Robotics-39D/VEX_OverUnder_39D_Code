@@ -72,7 +72,7 @@ void competition_initialize() {}
  * from where it left off.
  */
 void autonomous(){
-	Autonomous::Routes::oppauton();
+	Autonomous::Routes::skillauton();
 }
 
 /**

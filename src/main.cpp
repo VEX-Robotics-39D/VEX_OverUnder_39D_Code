@@ -38,7 +38,6 @@ void initialize() {
 	chassis.calibrate();
 
 	//inertial.reset();
-	pros::delay(200);
 }
 
 
@@ -73,6 +72,9 @@ void competition_initialize() {}
  */
 void autonomous(){
 	Autonomous::Routes::skillauton();
+	chassis.setPose(10,10,-45);
+	//Autonomous::PID::turnThenMoveTo(-10,10);
+	Autonomous::PID::turnThenMoveTo(10,10);
 }
 
 /**

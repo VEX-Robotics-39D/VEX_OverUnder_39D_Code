@@ -3,8 +3,8 @@
 ASSET(path_txt);
 
 void Autonomous::Routes::testpid(){
-    chassis.setPose(-36,58,90);
-    chassis.follow(path_txt,60000,15);
+    chassis.setPose(0,0,0);
+    PID::turnTo(20);
 }
 
 ASSET(aff1_txt);
@@ -20,6 +20,7 @@ void Autonomous::Routes::oppauton(){
     chassis.moveTo(60,-40,0,1000);
     chassis.turnTo(15,-28,1000);
     chassis.moveTo(15,-28,0,2000);
+
 }
 
 ASSET(skill1_txt);
@@ -27,13 +28,123 @@ ASSET(skill2_txt);
 ASSET(skill3_txt);
 ASSET(skill4_txt);
 ASSET(skill5_txt);
+ASSET(matchAutonpt1_txt);
+ASSET(matchAutonpt2_txt);
 
 void Autonomous::Routes::skillauton(){
     chassis.setPose(53,-46,-90);
     chassis.follow(skill1_txt,10000,15);
-    chassis.follow(skill2_txt,4000,15);
+    DriveTrain::move_velocity(600,600);
+    pros::delay(500);
+    DriveTrain::move_velocity(0,0);
+    chassis.follow(skill2_txt,10000,15,false,false);
+    DriveTrain::move_velocity(-600,-600);
+    pros::delay(500);
+    DriveTrain::move_velocity(0,0);
     chassis.follow(skill3_txt,6000,15);
     chassis.follow(skill4_txt,6000,15);
-    chassis.follow(skill5_txt,6000,15);
+    DriveTrain::move_velocity(600,600);
+    pros::delay(500);
+    DriveTrain::move_velocity(0,0);
+    chassis.follow(skill5_txt,10000,15,false,false);
+    DriveTrain::move_velocity(600,600);
+    pros::delay(500);
+    DriveTrain::move_velocity(0,0);
 }
 
+void Autonomous::Routes::moveForward(){
+    chassis.moveTo(1000,0,0,10000);
+    pros::delay(5000);
+    chassis.moveTo(0,0,0,10000);
+}
+
+void Autonomous::Routes::matchWinPointAuton(){
+    chassis.setPose(-60,30,208);
+    Wings::toggle2(State::On);
+    chassis.follow(matchAutonpt1_txt,6000,15);
+    Wings::toggle2(State::Off);
+    flystickMovement.move_absolute(1300,200);
+    chassis.follow(matchAutonpt2_txt,6000,15);
+}
+
+double Autonomous::PID::turnKP = 1.1;
+double Autonomous::PID::turnKI = 0.002;
+double Autonomous::PID::turnKD = 1.1;
+double Autonomous::PID::driveKP = 15;
+double Autonomous::PID::driveKI = 0.005;
+double Autonomous::PID::driveKD = 1;
+double Autonomous::PID::turnError = 0.0;
+double Autonomous::PID::driveError = 0.0;
+double Autonomous::PID::turnIntegral = 0.0;
+double Autonomous::PID::driveIntegral = 0.0;
+double Autonomous::PID::turnDerivative = 0.0;
+double Autonomous::PID::driveDerivative = 0.0;
+double Autonomous::PID::turnLastError = 0.0;
+double Autonomous::PID::driveLastError = 0.0;
+
+
+void Autonomous::PID::turnTo(double angle){
+    while (true)
+    {
+        //pros::screen::print(pros::E_TEXT_MEDIUM, 1, "theta: %f", chassis.getPose().theta);
+        turnError = angle - 90+chassis.getPose().theta;
+        turnIntegral*=0.985;
+        turnIntegral += turnError;
+        if(turnError*turnLastError < 0) turnIntegral = 0;
+        turnDerivative = turnError - turnLastError;
+        double turn = turnKP*turnError + turnKI*turnIntegral + turnKD*turnDerivative;
+        DriveTrain::move_velocity(-turn,turn);
+        if(fabs(turnError)<1.2&&fabs(turnError-turnLastError)<0.01){
+            rightWheels.set_brake_modes(pros::E_MOTOR_BRAKE_HOLD);
+            leftWheels.set_brake_modes(pros::E_MOTOR_BRAKE_HOLD);
+            DriveTrain::move_velocity(0,0);
+            break;
+        }
+        turnLastError = turnError;
+        pros::delay(5);
+    }
+    
+}
+
+void Autonomous::PID::driveTo(double x,double y){
+    chassis.setPose(0,0,0);
+    while (true)
+    {
+        driveError = sqrt((x-chassis.getPose().x)*(x-chassis.getPose().x)+(y-chassis.getPose().y)*(y-chassis.getPose().y))*cos(atan2(y-chassis.getPose().y,x-chassis.getPose().x)-90+chassis.getPose().theta);
+        driveIntegral*=0.985;
+        driveIntegral += driveError;
+        if(driveError*driveLastError < 0) driveIntegral = 0;
+        driveDerivative = driveError - driveLastError;
+        double drive = driveKP*driveError + driveKI*driveIntegral - driveKD*driveDerivative;
+        DriveTrain::move_velocity(drive,drive);
+        if(fabs(driveError)<0.8&&fabs(driveError-driveLastError)<0.002){
+            rightWheels.set_brake_modes(pros::E_MOTOR_BRAKE_HOLD);
+            leftWheels.set_brake_modes(pros::E_MOTOR_BRAKE_HOLD);
+            DriveTrain::move_velocity(0,0);
+            break;
+        }
+        driveLastError = driveError;
+        pros::delay(5);
+    }
+
+
+}
+
+void Autonomous::PID::turnThenMoveTo(double x,double y){
+    //turn first
+    double PI=3.141592653589793238462643383279502884197169399375105820974944592307816406286;
+    double angle = atan2(y-chassis.getPose().y,x-chassis.getPose().x)*180/PI;
+    double ctheta=90-chassis.getPose().theta;
+    pros::screen::print(pros::E_TEXT_MEDIUM, 1, "X: %f", angle);
+    pros::screen::print(pros::E_TEXT_MEDIUM, 2, "Y: %f", ctheta);
+    //return;
+    double difference=angle-ctheta;
+    if(difference>180) difference-=360;
+    else if(difference<-180) difference+=360;
+    pros::screen::print(pros::E_TEXT_MEDIUM, 3, "Y: %f", ctheta+difference);
+    return;
+    turnTo(ctheta+difference);
+    //then move
+    driveTo(x,y);
+
+}

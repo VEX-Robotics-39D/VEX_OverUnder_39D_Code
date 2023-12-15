@@ -22,6 +22,7 @@ public:
         static void turnTo(double angle);
         static void driveTo(double x,double y);
         static void turnThenMoveTo(double x,double y);
+        static void fastMoveTo(double x,double y);
     };
     class Routes{
         public:

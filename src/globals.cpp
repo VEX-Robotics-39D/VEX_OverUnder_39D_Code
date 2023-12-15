@@ -15,8 +15,8 @@ pros::Motor rightWheel3(3);
 pros::Motor_Group rightWheels{rightWheel1,rightWheel2,rightWheel3};
 
 //catapult
-pros::Motor flystickSpin(11, true);
-pros::Motor flystickMovement(10, true);
+pros::Motor flyWheel(11, true);
+pros::Motor flystickRotate(10, true);
 
 //intake
 pros::Motor intakeMotor(7);

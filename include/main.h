@@ -52,6 +52,7 @@
 #include "wings.h"
 #include "autonomous.h"
 #include "control.h"
+#include "odometry.h"
 
 
 /**

@@ -63,7 +63,7 @@ void Autonomous::Routes::matchWinPointAuton(){
     Wings::toggle2(State::On);
     chassis.follow(matchAutonpt1_txt,6000,15);
     Wings::toggle2(State::Off);
-    flystickMovement.move_absolute(1300,200);
+    flystickRotate.move_absolute(1300,200);
     chassis.follow(matchAutonpt2_txt,6000,15);
 }
 
@@ -87,7 +87,7 @@ void Autonomous::PID::turnTo(double angle){
     while (true)
     {
         //pros::screen::print(pros::E_TEXT_MEDIUM, 1, "theta: %f", chassis.getPose().theta);
-        turnError = angle - 90+chassis.getPose().theta;
+        turnError = angle - Odometry::get_theta();
         turnIntegral*=0.985;
         turnIntegral += turnError;
         if(turnError*turnLastError < 0) turnIntegral = 0;
@@ -110,18 +110,25 @@ void Autonomous::PID::driveTo(double x,double y){
     chassis.setPose(0,0,0);
     while (true)
     {
-        driveError = sqrt((x-chassis.getPose().x)*(x-chassis.getPose().x)+(y-chassis.getPose().y)*(y-chassis.getPose().y))*cos(atan2(y-chassis.getPose().y,x-chassis.getPose().x)-90+chassis.getPose().theta);
+        double xDiffernece = x-Odometry::get_x();
+        double yDifference = y-Odometry::get_y();
+        driveError = sqrt(xDiffernece*xDiffernece+yDifference*yDifference)*cos(atan2(yDifference,xDiffernece)-Odometry::get_theta()/180*3.1415926535897932);
+        pros::screen::print(pros::E_TEXT_MEDIUM, 1, "driveError: %f", driveError);
+        pros::screen::print(pros::E_TEXT_MEDIUM, 2, "x: %f", Odometry::get_x());
+        pros::screen::print(pros::E_TEXT_MEDIUM, 3, "y: %f", Odometry::get_y());
+        pros::screen::print(pros::E_TEXT_MEDIUM, 4, "length: %f", atan2(yDifference,xDiffernece));
+        pros::screen::print(pros::E_TEXT_MEDIUM, 5, "length: %f", Odometry::get_theta()/180*3.1415926535897932);
         driveIntegral*=0.985;
         driveIntegral += driveError;
         if(driveError*driveLastError < 0) driveIntegral = 0;
         driveDerivative = driveError - driveLastError;
         double drive = driveKP*driveError + driveKI*driveIntegral - driveKD*driveDerivative;
-        DriveTrain::move_velocity(drive,drive);
+        //DriveTrain::move_velocity(drive,drive);
         if(fabs(driveError)<0.8&&fabs(driveError-driveLastError)<0.002){
             rightWheels.set_brake_modes(pros::E_MOTOR_BRAKE_HOLD);
             leftWheels.set_brake_modes(pros::E_MOTOR_BRAKE_HOLD);
             DriveTrain::move_velocity(0,0);
-            break;
+            //break;
         }
         driveLastError = driveError;
         pros::delay(5);
@@ -133,17 +140,16 @@ void Autonomous::PID::driveTo(double x,double y){
 void Autonomous::PID::turnThenMoveTo(double x,double y){
     //turn first
     double PI=3.141592653589793238462643383279502884197169399375105820974944592307816406286;
-    double angle = atan2(y-chassis.getPose().y,x-chassis.getPose().x)*180/PI;
-    double ctheta=90-chassis.getPose().theta;
-    pros::screen::print(pros::E_TEXT_MEDIUM, 1, "X: %f", angle);
-    pros::screen::print(pros::E_TEXT_MEDIUM, 2, "Y: %f", ctheta);
+    double angle = atan2(y-Odometry::get_y(),x-Odometry::get_x())*180/PI;
+    pros::screen::print(pros::E_TEXT_MEDIUM, 1, "X: %f", x-Odometry::get_x());
+    pros::screen::print(pros::E_TEXT_MEDIUM, 2, "Y: %f", y-Odometry::get_y());
     //return;
-    double difference=angle-ctheta;
-    if(difference>180) difference-=360;
-    else if(difference<-180) difference+=360;
-    pros::screen::print(pros::E_TEXT_MEDIUM, 3, "Y: %f", ctheta+difference);
-    return;
-    turnTo(ctheta+difference);
+    double difference=angle-Odometry::get_theta();
+    while(difference>180) difference-=360;
+    while(difference<-180) difference+=360;
+    pros::screen::print(pros::E_TEXT_MEDIUM, 3, "Y: %f", Odometry::get_theta()+difference);
+    //return;
+    turnTo(Odometry::get_theta()+difference);
     //then move
     driveTo(x,y);
 

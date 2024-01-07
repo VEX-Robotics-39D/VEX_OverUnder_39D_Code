@@ -94,7 +94,7 @@ void autonomous(){
 void opcontrol() {
 	while (true) {
 		Control::update();
-		std::cout << flystickRotate.get_position() << std::endl;
+		std::cout << flystick.get_position() << std::endl;
 		pros::delay(UPDATE_INTERVAL);
 	}
 }

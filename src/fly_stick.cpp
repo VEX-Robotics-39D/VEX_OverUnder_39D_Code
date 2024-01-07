@@ -14,15 +14,15 @@ int Flystick::level=0;
 int Flystick::timeSinceLastChange=0;
 
 void Flystick::update_state(){
-    pros::screen::print(pros::E_TEXT_MEDIUM, 0, "Flystick: %lf", flystickRotate.get_position());
+    pros::screen::print(pros::E_TEXT_MEDIUM, 0, "Flystick: %lf", flystick.get_position());
     timeSinceLastChange++;
     if(timeSinceLastChange>150){
-        flystickRotate.set_brake_mode(pros::motor_brake_mode_e::E_MOTOR_BRAKE_HOLD);
-        flystickRotate.move_velocity(0);
+        flystick.set_brake_mode(pros::motor_brake_mode_e::E_MOTOR_BRAKE_HOLD);
+        flystick.move_velocity(0);
         return;
     }
-    double error = flystickRotate.get_position()-level;
-    flystickRotate.move_velocity(-error*0.2);
+    double error = flystick.get_position()-level;
+    flystick.move_velocity(-error*0.2);
     
 }
 

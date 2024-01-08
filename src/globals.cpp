@@ -5,17 +5,17 @@ pros::Controller controller(CONTROLLER_MASTER);
 //wheels
 pros::Motor leftWheel1(4,true);
 pros::Motor leftWheel2(5,true);
-pros::Motor leftWheel3(6,true);
+pros::Motor leftWheel3(6);
 pros::Motor_Group leftWheels{leftWheel1,leftWheel2,leftWheel3};
 
 pros::Motor rightWheel1(1);
 pros::Motor rightWheel2(2);
-pros::Motor rightWheel3(3);
+pros::Motor rightWheel3(3,true);
 pros::Motor_Group rightWheels{rightWheel1,rightWheel2,rightWheel3};
 
 //flystick
-pros::Motor flyWheel(13, true);
-pros::Motor flystick(10, true);
+pros::Motor flyWheel(13);
+pros::Motor flystick(10);
 
 //intake
 pros::Motor intakeMotor(7);

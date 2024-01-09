@@ -59,7 +59,7 @@ void Autonomous::Routes::matchWinPointAuton(){
     Wings::toggle2(State::On);
     chassis.follow(matchAutonpt1_txt,6000,15);
     Wings::toggle2(State::Off);
-    flystickRotate.move_absolute(1300,200);
+    flystick.move_absolute(1300,200);
     chassis.follow(matchAutonpt2_txt,6000,15);
 }
 

@@ -1,6 +1,15 @@
 #pragma once
 #include "main.h"
 
+enum class State{
+    Off,
+    On,
+    Toggle
+};
+
+//constants
+const int UPDATE_INTERVAL=10;
+
 extern::pros::Controller controller;
 
 //wheels
@@ -16,7 +25,7 @@ extern::pros::Motor_Group rightWheels;
 
 //flystick
 extern::pros::Motor flyWheel;
-extern::pros::Motor flystickRotate;
+extern::pros::Motor flystick;
 
 //intake
 extern::pros::Motor intakeMotor;
@@ -31,25 +40,16 @@ extern::pros::ADIDigitalOut wingsPneumatic2;
 //intake pneumatic
 extern::pros::ADIDigitalOut intakePneumatic;
 
-enum class State{
-    Off,
-    On,
-    Toggle
-};
-
+//sensors
 extern::pros::Imu inertial;
-
-const int UPDATE_INTERVAL=10;
 
 extern::pros::Rotation backRotation;
 
+//lemlib
 extern::lemlib::TrackingWheel backTrackingWheel;
 
 extern::lemlib::Drivetrain_t drivetrain;
 
-extern::lemlib::TrackingWheel backTrackingWheel;
-
-extern::lemlib::Drivetrain_t drivetrain;
 extern::lemlib::OdomSensors_t odomSensors;
 
 extern::lemlib::ChassisController_t lateralController;

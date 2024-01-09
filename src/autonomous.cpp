@@ -52,11 +52,7 @@ void Autonomous::Routes::skillauton(){
     DriveTrain::move_velocity(0,0);
 }
 
-void Autonomous::Routes::moveForward(){
-    chassis.moveTo(1000,0,0,10000);
-    pros::delay(5000);
-    chassis.moveTo(0,0,0,10000);
-}
+
 
 void Autonomous::Routes::matchWinPointAuton(){
     chassis.setPose(-60,30,208);
@@ -152,5 +148,44 @@ void Autonomous::PID::turnThenMoveTo(double x,double y){
     turnTo(Odometry::get_theta()+difference);
     //then move
     driveTo(x,y);
+}
 
+void Autonomous::Routes::matchWinPointAuton(){
+    chassis.setPose(-45,-6,6);
+    Wings::toggle2(State::On); // wings on
+    Autonomous::PID::turnThenMoveTo(-7,-7); // get triball from alliance zone
+    Wings::toggle2(State::Off); // wings off
+    Autonomous::PID::turnThenMoveTo(-50,-6); // score pre-match load
+    // idk how to do this without interrupting code but here is where I rasie flystick
+    Autonomous::PID::turnThenMoveTo(0,24); // get ball from pre-match load
+    Autonomous::PID::turnThenMoveTo(0,36); // get flystick to touch bar.
+
+}
+
+void Autonomous::Routes::matchFarSide(){
+    chassis.setPose(-180,0,0);
+    Intake::run(600);
+    Autonomous::PID::turnThenMoveTo(0,-2);
+    Intake::run(0);
+    Autonomous::PID::turnThenMoveTo(0,24);
+    Autonomous::PID::turnTo(45);
+    Intake::run(-600);
+    pros::delay(1.5);
+    Intake::run(0);
+    Autonomous::PID::turnThenMoveTo(-48,72);
+    Autonomous::PID::turnThenMoveTo(-60,72);
+    Autonomous::PID::turnThenMoveTo(-36,60);
+    Intake::run(600);
+    pros::delay(1.5);
+    Intake::run(0);
+    Autonomous::PID::turnThenMoveTo(-48,22);
+    Intake::run(-600);
+    pros::delay(1.5);
+    Intake::run(0);
+    Autonomous::PID::turnThenMoveTo(-72,0);
+    Intake:: run(600);
+    pros::delay(1.5);
+    Intake::run(0);
+    Autonomous::PID::turnTo(0);
+    
 }

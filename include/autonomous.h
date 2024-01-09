@@ -30,6 +30,7 @@ public:
         static void oppauton();
         static void skillauton();
         static void matchWinPointAuton();
-        static void moveForward();
+        static void sixTriball();
+        static void matchFarSide();
     };
 };

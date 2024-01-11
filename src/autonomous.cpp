@@ -54,14 +54,14 @@ void Autonomous::Routes::skillauton(){
 
 
 
-void Autonomous::Routes::matchWinPointAuton(){
-    chassis.setPose(-60,30,208);
-    Wings::toggle2(State::On);
-    chassis.follow(matchAutonpt1_txt,6000,15);
-    Wings::toggle2(State::Off);
-    flystick.move_absolute(1300,200);
-    chassis.follow(matchAutonpt2_txt,6000,15);
-}
+// void Autonomous::Routes::matchWinPointAuton(){
+//     chassis.setPose(-60,30,208);
+//     Wings::toggle2(State::On);
+//     chassis.follow(matchAutonpt1_txt,6000,15);
+//     Wings::toggle2(State::Off);
+//     flystick.move_absolute(1300,200);
+//     chassis.follow(matchAutonpt2_txt,6000,15);
+// }
 
 double Autonomous::PID::turnKP = 1.1;
 double Autonomous::PID::turnKI = 0.002;
@@ -114,12 +114,14 @@ void Autonomous::PID::driveTo(double x,double y){
         pros::screen::print(pros::E_TEXT_MEDIUM, 3, "y: %f", Odometry::get_y());
         pros::screen::print(pros::E_TEXT_MEDIUM, 4, "length: %f", atan2(yDifference,xDiffernece));
         pros::screen::print(pros::E_TEXT_MEDIUM, 5, "length: %f", Odometry::get_theta()/180*3.1415926535897932);
+        pros::screen::print(pros::E_TEXT_MEDIUM, 6, "theta: %f", Odometry::get_theta());
+        pros::screen::print(pros::E_TEXT_MEDIUM, 7, "driveError: %f", driveError);
         driveIntegral*=0.985;
         driveIntegral += driveError;
         if(driveError*driveLastError < 0) driveIntegral = 0;
         driveDerivative = driveError - driveLastError;
         double drive = driveKP*driveError + driveKI*driveIntegral - driveKD*driveDerivative;
-        //DriveTrain::move_velocity(drive,drive);
+        DriveTrain::move_velocity(drive,drive);
         if(fabs(driveError)<0.8&&fabs(driveError-driveLastError)<0.002){
             rightWheels.set_brake_modes(pros::E_MOTOR_BRAKE_HOLD);
             leftWheels.set_brake_modes(pros::E_MOTOR_BRAKE_HOLD);
@@ -143,7 +145,7 @@ void Autonomous::PID::turnThenMoveTo(double x,double y){
     double difference=angle-Odometry::get_theta();
     while(difference>180) difference-=360;
     while(difference<-180) difference+=360;
-    pros::screen::print(pros::E_TEXT_MEDIUM, 3, "Y: %f", Odometry::get_theta()+difference);
+    pros::screen::print(pros::E_TEXT_MEDIUM, 3, "theta: %f", Odometry::get_theta()+difference);
     //return;
     turnTo(Odometry::get_theta()+difference);
     //then move
@@ -151,15 +153,19 @@ void Autonomous::PID::turnThenMoveTo(double x,double y){
 }
 
 void Autonomous::Routes::matchWinPointAuton(){
-    chassis.setPose(-45,-6,6);
+    // chassis.setPose(-45,-6,6);
     Wings::toggle2(State::On); // wings on
-    Autonomous::PID::turnThenMoveTo(-7,-7); // get triball from alliance zone
-    Wings::toggle2(State::Off); // wings off
-    Autonomous::PID::turnThenMoveTo(-50,-6); // score pre-match load
+    Autonomous::PID::driveTo(0,-6); // get triball from alliance zone
+    Wings::toggle2(State::Off);// wings off
+    Autonomous::PID::turnTo(-45);
     // idk how to do this without interrupting code but here is where I rasie flystick
-    Autonomous::PID::turnThenMoveTo(0,24); // get ball from pre-match load
-    Autonomous::PID::turnThenMoveTo(0,36); // get flystick to touch bar.
-
+    // flystick.move_absolute(1340,600);
+    Autonomous::PID::turnTo(-135);
+    Autonomous::PID::driveTo(0,-24); 
+    Autonomous::PID::turnTo(45); // get flystick to touch bar.d
+    Autonomous::PID::driveTo(0,24);
+    Autonomous::PID::turnTo(45); // get flystick to touch bar.
+    Autonomous::PID::driveTo(0,36); // get ball from pre-match load
 }
 
 void Autonomous::Routes::matchFarSide(){

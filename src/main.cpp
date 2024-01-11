@@ -72,9 +72,13 @@ void competition_initialize() {}
  */
 void autonomous(){
 	//Autonomous::Routes::skillauton();
-	chassis.setPose(0,0,0);
-	Autonomous::PID::turnThenMoveTo(-10,10);
-	//Autonomous::PID::turnThenMoveTo(10,10);
+	// chassis.setPose(0,0,0);
+	Autonomous::PID::turnTo(-45);
+	
+	// Autonomous::Routes::matchWinPointAuton();
+	// Autonomous::PID::driveTo(0,5);
+	// Autonomous::PID::driveTo(10,10);
+	// Autonomous::PID::turnThenMoveTo(10,10);
 }
 
 /**

@@ -28,7 +28,7 @@ pros::ADIDigitalOut wingsPneumatic2('A');
 //sensors
 pros::Imu inertial(12);
 
-pros::Rotation backRotation(13);
+pros::Rotation backRotation(14);
 
 //lemlib
 lemlib::Drivetrain_t drivetrain{
@@ -39,13 +39,13 @@ lemlib::Drivetrain_t drivetrain{
     360,
 };
 
-lemlib::TrackingWheel backTrackingWheel(&backRotation, 2.75,  3.75);
+lemlib::TrackingWheel backTrackingWheel(&backRotation, 2.75,  3, 1.66666666666666666666);
 
 lemlib::OdomSensors_t odomSensors{
     nullptr,
     nullptr,
-    //nullptr,
-    &backTrackingWheel,
+    nullptr,
+    // &backTrackingWheel,
     nullptr,
     &inertial
 };

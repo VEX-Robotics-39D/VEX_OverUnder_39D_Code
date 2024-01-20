@@ -34,7 +34,7 @@ pros::Rotation backRotation(14);
 lemlib::Drivetrain_t drivetrain{
     &leftWheels,
     &rightWheels,
-    10.75,
+    10.375,
     3.25,
     360,
 };

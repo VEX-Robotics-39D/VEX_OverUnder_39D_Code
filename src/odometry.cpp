@@ -9,7 +9,7 @@ double Odometry::get_y(){
 }
 
 double Odometry::get_theta(){
-    return 90-chassis.getPose().theta;
+    return (-chassis.getPose().theta);
 }
 
 

@@ -61,13 +61,13 @@ void Autonomous::Routes::skillauton(){
 //     Wings::toggle2(State::Off);
 //     flystick.move_absolute(1300,200);
 //     chassis.follow(matchAutonpt2_txt,6000,15);
-// }
+// 
 
 double Autonomous::PID::turnKP = 1.1;
-double Autonomous::PID::turnKI = 0.002;
-double Autonomous::PID::turnKD = 1.1;
+double Autonomous::PID::turnKI = 0.0006;
+double Autonomous::PID::turnKD = 1.6;
 double Autonomous::PID::driveKP = 15;
-double Autonomous::PID::driveKI = 0.005;
+double Autonomous::PID::driveKI = 0.002;
 double Autonomous::PID::driveKD = 1;
 double Autonomous::PID::turnError = 0.0;
 double Autonomous::PID::driveError = 0.0;
@@ -75,8 +75,9 @@ double Autonomous::PID::turnIntegral = 0.0;
 double Autonomous::PID::driveIntegral = 0.0;
 double Autonomous::PID::turnDerivative = 0.0;
 double Autonomous::PID::driveDerivative = 0.0;
-double Autonomous::PID::turnLastError = 0.0;
+double Autonomous::PID::turnLastError = 10000;
 double Autonomous::PID::driveLastError = 0.0;
+bool lastSatisfy = false;
 
 
 void Autonomous::PID::turnTo(double angle){
@@ -86,6 +87,9 @@ void Autonomous::PID::turnTo(double angle){
     {
         //pros::screen::print(pros::E_TEXT_MEDIUM, 1, "theta: %f", chassis.getPose().theta);
         turnError = angle - Odometry::get_theta();
+        pros::screen::print(pros::E_TEXT_MEDIUM, 4, "x: %f", Odometry::get_x());
+        pros::screen::print(pros::E_TEXT_MEDIUM, 5, "y: %f", Odometry::get_y());
+        pros::screen::print(pros::E_TEXT_MEDIUM, 6, "theta: %f", Odometry::get_theta());
         turnIntegral*=0.985;
         turnIntegral += turnError;
         if(turnError*turnLastError < 0) turnIntegral = 0;
@@ -93,10 +97,14 @@ void Autonomous::PID::turnTo(double angle){
         double turn = turnKP*turnError + turnKI*turnIntegral + turnKD*turnDerivative;
         DriveTrain::move_velocity(-turn,turn);
         if(fabs(turnError)<1.2&&fabs(turnError-turnLastError)<0.01){
+            if (!lastSatisfy) lastSatisfy = true;
             rightWheels.set_brake_modes(pros::E_MOTOR_BRAKE_HOLD);
             leftWheels.set_brake_modes(pros::E_MOTOR_BRAKE_HOLD);
             DriveTrain::move_velocity(0,0);
             break;
+        }
+        else{
+            lastSatisfy = false;
         }
         turnLastError = turnError;
         pros::delay(5);

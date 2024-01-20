@@ -74,7 +74,14 @@ void competition_initialize() {}
 void autonomous(){
 	//Autonomous::Routes::skillauton();
 	// chassis.setPose(0,0,0);
-	Autonomous::PID::turnTo(-90);
+	Autonomous::PID::turnTo(90);
+	pros::delay(2000);
+	Autonomous::PID::turnTo(90);
+	pros::delay(2000);
+	Autonomous::PID::turnTo(90);
+	pros::delay(2000);
+	Autonomous::PID::turnTo(90);
+	pros::delay(2000);
 	
 	// Autonomous::Routes::matchWinPointAuton();
 	// Autonomous::PID::driveTo(0,5);
@@ -100,7 +107,6 @@ void opcontrol() {
 
 	while (true) {
 		Control::update();
-		std::cout << flystick.get_position() << std::endl;
 		pros::delay(UPDATE_INTERVAL);
 	}
 }

@@ -29,7 +29,8 @@ void initialize() {
 	
 
 	pros::lcd::initialize();
-	pros::lcd::set_text(1, "Hello PROS User!");
+	pros::lcd::set_text(1, "Hello World!");
+	pros::lcd::set_text(2, "I definitely do not control my human builders.");
 	pros::lcd::register_btn1_cb(on_center_button);
 
 
@@ -73,7 +74,7 @@ void competition_initialize() {}
 void autonomous(){
 	//Autonomous::Routes::skillauton();
 	// chassis.setPose(0,0,0);
-	Autonomous::PID::turnTo(-45);
+	Autonomous::PID::turnTo(-90);
 	
 	// Autonomous::Routes::matchWinPointAuton();
 	// Autonomous::PID::driveTo(0,5);
@@ -96,6 +97,7 @@ void autonomous(){
  */
 
 void opcontrol() {
+
 	while (true) {
 		Control::update();
 		std::cout << flystick.get_position() << std::endl;

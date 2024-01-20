@@ -34,18 +34,18 @@ pros::Rotation backRotation(14);
 lemlib::Drivetrain_t drivetrain{
     &leftWheels,
     &rightWheels,
-    11.5,
+    10.75,
     3.25,
     360,
 };
 
-lemlib::TrackingWheel backTrackingWheel(&backRotation, 2.75,  3, 1.66666666666666666666);
+lemlib::TrackingWheel backTrackingWheel(&backRotation, 2.75,  1.5625, 1.66666666666666666666);
 
 lemlib::OdomSensors_t odomSensors{
     nullptr,
     nullptr,
-    nullptr,
-    // &backTrackingWheel,
+    // nullptr,
+    &backTrackingWheel,
     nullptr,
     &inertial
 };

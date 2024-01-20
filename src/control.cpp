@@ -182,13 +182,14 @@ void Control::update_flystick(){
     if(ControllerStates::is_pressed(DIGITAL_Y)){
         Flystick::timeSinceLastChange=0;
         Flystick::spin_volts(12000);
-        Flystick::level = 1340;
+        Flystick::level = 1200;
         Intake::pneumatic_toggle(State::Off);
     }
     if(ControllerStates::is_pressed(DIGITAL_B)){
         Flystick::timeSinceLastChange=0;
         Flystick::level = -20;
         Flystick::spin_volts(0);
+        Intake::run(-600);
         Intake::pneumatic_toggle(State::On);
     }
  
@@ -228,6 +229,7 @@ void Control::debug(){
 
 void Control::update(){
     update_drive_train_tank();
+    // update_drive_train_arcade();
     update_intake();
     update_flystick();
     update_wings();

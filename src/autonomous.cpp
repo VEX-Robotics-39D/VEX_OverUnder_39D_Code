@@ -80,6 +80,8 @@ double Autonomous::PID::driveLastError = 0.0;
 
 
 void Autonomous::PID::turnTo(double angle){
+    chassis.setPose(0,0,0);
+    
     while (true)
     {
         //pros::screen::print(pros::E_TEXT_MEDIUM, 1, "theta: %f", chassis.getPose().theta);

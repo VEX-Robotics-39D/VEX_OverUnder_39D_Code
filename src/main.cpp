@@ -38,7 +38,6 @@ void initialize() {
 	chassis.calibrate();
 
 	//inertial.reset();
-	pros::delay(200);
 }
 
 
@@ -72,7 +71,14 @@ void competition_initialize() {}
  * from where it left off.
  */
 void autonomous(){
-	Autonomous::Routes::skillauton();
+	//Autonomous::Routes::skillauton();
+	// chassis.setPose(0,0,0);
+	Autonomous::PID::turnTo(-45);
+	
+	// Autonomous::Routes::matchWinPointAuton();
+	// Autonomous::PID::driveTo(0,5);
+	// Autonomous::PID::driveTo(10,10);
+	// Autonomous::PID::turnThenMoveTo(10,10);
 }
 
 /**
@@ -92,7 +98,7 @@ void autonomous(){
 void opcontrol() {
 	while (true) {
 		Control::update();
-		std::cout << flystickMovement.get_position() << std::endl;
+		std::cout << flystick.get_position() << std::endl;
 		pros::delay(UPDATE_INTERVAL);
 	}
 }

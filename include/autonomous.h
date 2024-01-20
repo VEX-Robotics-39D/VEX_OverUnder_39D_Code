@@ -20,12 +20,17 @@ public:
         static double driveLastError;
         public:
         static void turnTo(double angle);
-        static void driveTo(double distance);
+        static void driveTo(double x,double y);
+        static void turnThenMoveTo(double x,double y);
+        static void fastMoveTo(double x,double y);
     };
     class Routes{
         public:
         static void testpid();
         static void oppauton();
         static void skillauton();
+        static void matchWinPointAuton();
+        static void sixTriball();
+        static void matchFarSide();
     };
 };

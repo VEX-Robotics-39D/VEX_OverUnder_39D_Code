@@ -42,7 +42,7 @@
 //#include "okapi/api.hpp"
 //#include "pros/api_legacy.h"
 #include <cmath>
-
+#include <chrono>
 #include "lemlib/api.hpp"
 #include "globals.h"
 #include "drive_train.h"
@@ -52,6 +52,7 @@
 #include "wings.h"
 #include "autonomous.h"
 #include "control.h"
+#include "odometry.h"
 
 
 /**

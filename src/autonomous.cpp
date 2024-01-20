@@ -32,7 +32,6 @@ ASSET(matchAutonpt1_txt);
 ASSET(matchAutonpt2_txt);
 
 void Autonomous::Routes::skillauton(){
-    chassis.setPose(53,-46,-90);
     chassis.follow(skill1_txt,10000,15);
     DriveTrain::move_velocity(600,600);
     pros::delay(500);
@@ -84,8 +83,9 @@ void Autonomous::PID::turnTo(double angle){
     
     while (true)
     {
+        lemlib::Pose pose = chassis.getPose();
         //pros::screen::print(pros::E_TEXT_MEDIUM, 1, "theta: %f", chassis.getPose().theta);
-        turnError = angle - Odometry::get_theta();
+        turnError = angle - pose.theta;
         turnIntegral*=0.985;
         turnIntegral += turnError;
         if(turnError*turnLastError < 0) turnIntegral = 0;
@@ -108,15 +108,16 @@ void Autonomous::PID::driveTo(double x,double y){
     chassis.setPose(0,0,0);
     while (true)
     {
-        double xDiffernece = x-Odometry::get_x();
-        double yDifference = y-Odometry::get_y();
-        driveError = sqrt(xDiffernece*xDiffernece+yDifference*yDifference)*cos(atan2(yDifference,xDiffernece)-Odometry::get_theta()/180*3.1415926535897932);
+        lemlib::Pose pose = chassis.getPose();
+        double xDiffernece = x-pose.x();
+        double yDifference = y-pose.y();
+        driveError = sqrt(xDiffernece*xDiffernece+yDifference*yDifference)*cos(atan2(yDifference,xDiffernece)-pose.theta/180*3.1415926535897932);
         pros::screen::print(pros::E_TEXT_MEDIUM, 1, "driveError: %f", driveError);
-        pros::screen::print(pros::E_TEXT_MEDIUM, 2, "x: %f", Odometry::get_x());
-        pros::screen::print(pros::E_TEXT_MEDIUM, 3, "y: %f", Odometry::get_y());
+        pros::screen::print(pros::E_TEXT_MEDIUM, 2, "x: %f", pose.x);
+        pros::screen::print(pros::E_TEXT_MEDIUM, 3, "y: %f", pose.y);
         pros::screen::print(pros::E_TEXT_MEDIUM, 4, "length: %f", atan2(yDifference,xDiffernece));
-        pros::screen::print(pros::E_TEXT_MEDIUM, 5, "length: %f", Odometry::get_theta()/180*3.1415926535897932);
-        pros::screen::print(pros::E_TEXT_MEDIUM, 6, "theta: %f", Odometry::get_theta());
+        pros::screen::print(pros::E_TEXT_MEDIUM, 5, "length: %f", pose.theta/180*3.1415926535897932);
+        pros::screen::print(pros::E_TEXT_MEDIUM, 6, "theta: %f", pose.theta);
         pros::screen::print(pros::E_TEXT_MEDIUM, 7, "driveError: %f", driveError);
         driveIntegral*=0.985;
         driveIntegral += driveError;

@@ -63,12 +63,12 @@ void Autonomous::Routes::skillauton(){
 //     chassis.follow(matchAutonpt2_txt,6000,15);
 // 
 
-double Autonomous::PID::turnKP = 1.1;
-double Autonomous::PID::turnKI = 0.0006;
-double Autonomous::PID::turnKD = 1.6;
-double Autonomous::PID::driveKP = 15;
-double Autonomous::PID::driveKI = 0.002;
-double Autonomous::PID::driveKD = 1;
+double Autonomous::PID::turnKP = 1.2;
+double Autonomous::PID::turnKI = 0.00009;
+double Autonomous::PID::turnKD = 0.5;
+double Autonomous::PID::driveKP = 5;
+double Autonomous::PID::driveKI = 0.0;
+double Autonomous::PID::driveKD = 0.0;
 double Autonomous::PID::turnError = 0.0;
 double Autonomous::PID::driveError = 0.0;
 double Autonomous::PID::turnIntegral = 0.0;
@@ -77,7 +77,7 @@ double Autonomous::PID::turnDerivative = 0.0;
 double Autonomous::PID::driveDerivative = 0.0;
 double Autonomous::PID::turnLastError = 10000;
 double Autonomous::PID::driveLastError = 0.0;
-bool lastSatisfy = false;
+int satisfyCondition = 0;
 
 
 void Autonomous::PID::turnTo(double angle){
@@ -97,14 +97,18 @@ void Autonomous::PID::turnTo(double angle){
         double turn = turnKP*turnError + turnKI*turnIntegral + turnKD*turnDerivative;
         DriveTrain::move_velocity(-turn,turn);
         if(fabs(turnError)<1.2&&fabs(turnError-turnLastError)<0.01){
-            if (!lastSatisfy) lastSatisfy = true;
-            rightWheels.set_brake_modes(pros::E_MOTOR_BRAKE_HOLD);
-            leftWheels.set_brake_modes(pros::E_MOTOR_BRAKE_HOLD);
-            DriveTrain::move_velocity(0,0);
-            break;
+            if (satisfyCondition < 25){
+                satisfyCondition++;
+            }
+            else{
+                rightWheels.set_brake_modes(pros::E_MOTOR_BRAKE_HOLD);
+                leftWheels.set_brake_modes(pros::E_MOTOR_BRAKE_HOLD);
+                DriveTrain::move_velocity(0,0);
+                break;
+            }
         }
         else{
-            lastSatisfy = false;
+            satisfyCondition = 0;
         }
         turnLastError = turnError;
         pros::delay(5);
@@ -118,14 +122,15 @@ void Autonomous::PID::driveTo(double x,double y){
     {
         double xDiffernece = x-Odometry::get_x();
         double yDifference = y-Odometry::get_y();
-        driveError = sqrt(xDiffernece*xDiffernece+yDifference*yDifference)*cos(atan2(yDifference,xDiffernece)-Odometry::get_theta()/180*3.1415926535897932);
+        driveError = sqrt(xDiffernece*xDiffernece+yDifference*yDifference)*cos(atan2(yDifference,xDiffernece)-Odometry::get_theta()/180.0*3.1415926535897932);
         pros::screen::print(pros::E_TEXT_MEDIUM, 1, "driveError: %f", driveError);
         pros::screen::print(pros::E_TEXT_MEDIUM, 2, "x: %f", Odometry::get_x());
         pros::screen::print(pros::E_TEXT_MEDIUM, 3, "y: %f", Odometry::get_y());
-        pros::screen::print(pros::E_TEXT_MEDIUM, 4, "length: %f", atan2(yDifference,xDiffernece));
+        pros::screen::print(pros::E_TEXT_MEDIUM, 4, "integral: %f", driveIntegral);
         pros::screen::print(pros::E_TEXT_MEDIUM, 5, "length: %f", Odometry::get_theta()/180*3.1415926535897932);
         pros::screen::print(pros::E_TEXT_MEDIUM, 6, "theta: %f", Odometry::get_theta());
         pros::screen::print(pros::E_TEXT_MEDIUM, 7, "driveError: %f", driveError);
+        pros::screen::print(pros::E_TEXT_MEDIUM, 8, "derivative: %f", driveDerivative);
         driveIntegral*=0.985;
         driveIntegral += driveError;
         if(driveError*driveLastError < 0) driveIntegral = 0;
@@ -136,7 +141,7 @@ void Autonomous::PID::driveTo(double x,double y){
             rightWheels.set_brake_modes(pros::E_MOTOR_BRAKE_HOLD);
             leftWheels.set_brake_modes(pros::E_MOTOR_BRAKE_HOLD);
             DriveTrain::move_velocity(0,0);
-            //break;
+            break;
         }
         driveLastError = driveError;
         pros::delay(5);
@@ -169,7 +174,7 @@ void Autonomous::Routes::matchWinPointAuton(){
     Wings::toggle2(State::Off);// wings off
     Autonomous::PID::turnTo(-45);
     // idk how to do this without interrupting code but here is where I rasie flystick
-    // flystick.move_absolute(1340,600);
+    flystick.move_absolute(1340,600);
     Autonomous::PID::turnTo(-135);
     Autonomous::PID::driveTo(0,-24); 
     Autonomous::PID::turnTo(45); // get flystick to touch bar.d
@@ -203,5 +208,4 @@ void Autonomous::Routes::matchFarSide(){
     pros::delay(1.5);
     Intake::run(0);
     Autonomous::PID::turnTo(0);
-    
 }

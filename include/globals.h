@@ -10,50 +10,50 @@ enum class State{
 //constants
 const int UPDATE_INTERVAL=10;
 
-extern::pros::Controller controller;
+extern pros::Controller controller;
 
 //wheels
-extern::pros::Motor leftWheel1;
-extern::pros::Motor leftWheel2;
-extern::pros::Motor leftWheel3;
-extern::pros::Motor_Group leftWheels;
+extern pros::Motor leftWheel1;
+extern pros::Motor leftWheel2;
+extern pros::Motor leftWheel3;
+extern pros::Motor_Group leftWheels;
 
-extern::pros::Motor rightWheel1;
-extern::pros::Motor rightWheel2;
-extern::pros::Motor rightWheel3;
-extern::pros::Motor_Group rightWheels;
+extern pros::Motor rightWheel1;
+extern pros::Motor rightWheel2;
+extern pros::Motor rightWheel3;
+extern pros::Motor_Group rightWheels;
 
 //flystick
-extern::pros::Motor flyWheel;
-extern::pros::Motor flystick;
+extern pros::Motor flyWheel;
+extern pros::Motor flystick;
 
 //intake
-extern::pros::Motor intakeMotor;
+extern pros::Motor intakeMotor;
 
 //odometry wheel
-extern::pros::Rotation backOdometryWheel;
+extern pros::Rotation backOdometryWheel;
 
 //wings
-extern::pros::ADIDigitalOut wingsPneumatic1;
-extern::pros::ADIDigitalOut wingsPneumatic2;
+extern pros::ADIDigitalOut wingsPneumatic1;
+extern pros::ADIDigitalOut wingsPneumatic2;
 
 //intake pneumatic
-extern::pros::ADIDigitalOut intakePneumatic;
+extern pros::ADIDigitalOut intakePneumatic;
 
 //sensors
-extern::pros::Imu inertial;
+extern pros::Imu inertial;
 
-extern::pros::Rotation backRotation;
+extern pros::Rotation backRotation;
 
 //lemlib
-extern::lemlib::TrackingWheel backTrackingWheel;
+extern lemlib::TrackingWheel backTrackingWheel;
 
-extern::lemlib::Drivetrain_t drivetrain;
+extern lemlib::Drivetrain_t drivetrain;
 
-extern::lemlib::OdomSensors_t odomSensors;
+extern lemlib::OdomSensors_t odomSensors;
 
-extern::lemlib::ChassisController_t lateralController;
-extern::lemlib::ChassisController_t angularController;
-extern::lemlib::Chassis chassis;
+extern lemlib::ChassisController_t lateralController;
+extern lemlib::ChassisController_t angularController;
+extern lemlib::Chassis chassis;
 
 

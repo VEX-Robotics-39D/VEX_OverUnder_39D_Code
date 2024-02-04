@@ -3,6 +3,10 @@
 
 class Autonomous{
 public:
+    class normalDrive{
+        static void drive(double time);
+        static void turn(double angle);
+    };
     class PID{
         static double turnKP;
         static double turnKI;
@@ -28,9 +32,10 @@ public:
         public:
         static void testpid();
         static void oppauton();
-        static void skillauton();
+        static void skillsAuton();
         static void matchWinPointAuton();
-        static void rushMid();
-        static void matchFarSide();
+        static void nearRushMid();
+        static void sixTriball();
+        static void farRushMid();
     };
 };

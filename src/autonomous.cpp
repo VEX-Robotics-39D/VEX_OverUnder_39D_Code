@@ -31,7 +31,7 @@ ASSET(skill5_txt);
 ASSET(matchAutonpt1_txt);
 ASSET(matchAutonpt2_txt);
 
-void Autonomous::Routes::skillauton(){
+void Autonomous::Routes::skillsAuton(){
     chassis.setPose(53,-46,-90);
     chassis.follow(skill1_txt,10000,15);
     DriveTrain::move_velocity(600,600);
@@ -179,7 +179,7 @@ void Autonomous::Routes::matchWinPointAuton(){
     Autonomous::PID::driveTo(0,36);
 }
 
-void Autonomous::Routes::matchFarSide(){
+void Autonomous::Routes::sixTriball(){
     chassis.setPose(-180,0,0);
     Intake::run(600);
     Autonomous::PID::turnThenMoveTo(0,-2);
@@ -206,11 +206,21 @@ void Autonomous::Routes::matchFarSide(){
     Autonomous::PID::turnTo(0);
 }
 
-void Autonomous::Routes::rushMid(){
+void Autonomous::Routes::nearRushMid(){
     chassis.setPose(45,-6,6);
     Autonomous::PID::driveTo(-72,72);
     Intake::run(600);
     Autonomous::PID::turnTo(180);
     Intake::run(-600);
     Autonomous::PID::driveTo(-50,12);
+}
+
+void Autonomous::normalDrive::drive(double time){
+    // seconds, not miliseconds
+    for ()
+}
+
+void Autonomous::Routes::skillsAuton(){
+    chassis.setPose(45,6,6);
+    Autonomous::PID::turnThenMoveTo(-24);
 }

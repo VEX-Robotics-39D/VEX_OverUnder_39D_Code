@@ -46,13 +46,13 @@
 #include "lemlib/api.hpp"
 #include "globals.h"
 #include "drive_train.h"
-#include "fly_stick.h"
 #include "utilities.h"
 #include "intake.h"
 #include "wings.h"
 #include "autonomous.h"
 #include "control.h"
 #include "odometry.h"
+#include "catapult.h"
 
 
 /**

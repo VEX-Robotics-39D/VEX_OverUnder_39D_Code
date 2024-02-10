@@ -12,6 +12,9 @@ const int UPDATE_INTERVAL=10;
 
 extern pros::Controller controller;
 
+//catapult
+extern pros::Motor catapult;
+
 //wheels
 extern pros::Motor leftWheel1;
 extern pros::Motor leftWheel2;
@@ -22,10 +25,6 @@ extern pros::Motor rightWheel1;
 extern pros::Motor rightWheel2;
 extern pros::Motor rightWheel3;
 extern pros::Motor_Group rightWheels;
-
-//flystick
-extern pros::Motor flyWheel;
-extern pros::Motor flystick;
 
 //intake
 extern pros::Motor intakeMotor;

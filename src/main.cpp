@@ -36,7 +36,7 @@ void initialize() {
 
 	
 	pros::screen::set_pen(COLOR_BLUE);
-	chassis.calibrate();
+	// chassis.calibrate();
 
 	// inertial.reset();
 }
@@ -76,11 +76,11 @@ void autonomous(){
 	// chassis.setPose(0,0,0);
 	// Autonomous::PID::driveTo(0,24);
 	// pros::delay(2000);
-	Autonomous::PID::turnTo(90);
+	//Autonomous::PID::turnTo(90);
 	// pros::delay(2000);
-	Autonomous::PID::turnTo(90);
+	//Autonomous::PID::turnTo(90);
 	// pros::delay(2000);
-	Autonomous::PID::turnTo(90);
+	//Autonomous::PID::turnTo(90);
 	// pros::delay(2000);
 	
 	// Autonomous::Routes::matchWinPointAuton();

@@ -1,5 +1,5 @@
 #include "main.h"
-
+/*
 ASSET(path_txt);
 
 void Autonomous::Routes::testpid(){
@@ -79,6 +79,16 @@ double Autonomous::PID::turnLastError = 10000;
 double Autonomous::PID::driveLastError = 0.0;
 int satisfyCondition = 0;
 
+void Autonomous::Odometry::updateLoc(){
+    double currLeft = (leftWheel1.get_position() + leftWheel2.get_position() + leftWheel3.get_position())/3.0;
+    double currRight = (rightWheel1.get_position() + rightWheel2.get_position() + rightWheel3.get_position())/3.0;
+    // do some calculation depending on rotation to 
+    double currRotation = 360 - inertial.get_heading();
+    x = currLeft * cos(currRotation * 3.1415926535897932 / 180.0) + currRight * cos(currRotation * 3.1415926535897932 / 180.0);
+    y = currLeft * sin(currRotation * 3.1415926535897932 / 180.0) + currRight * sin(currRotation * 3.1415926535897932 / 180.0);
+    theta = currRotation;
+}
+
 
 void Autonomous::PID::turnTo(double angle){
     chassis.setPose(0,0,0);
@@ -119,7 +129,7 @@ void Autonomous::PID::turnTo(double angle){
 void Autonomous::PID::driveTo(double x,double y){
     chassis.setPose(0,0,0);
     while (true)
-    {
+    {`  
         double xDiffernece = x-Odometry::get_x();
         double yDifference = y-Odometry::get_y();
         driveError = sqrt(xDiffernece*xDiffernece+yDifference*yDifference)*cos(atan2(yDifference,xDiffernece)-Odometry::get_theta()/180.0*3.1415926535897932);
@@ -217,10 +227,11 @@ void Autonomous::Routes::nearRushMid(){
 
 void Autonomous::normalDrive::drive(double time){
     // seconds, not miliseconds
-    for ()
+    
 }
 
 void Autonomous::Routes::skillsAuton(){
     chassis.setPose(45,6,6);
     Autonomous::PID::turnThenMoveTo(-24);
 }
+*/

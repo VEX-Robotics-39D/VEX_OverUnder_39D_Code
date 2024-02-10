@@ -7,6 +7,16 @@ public:
         static void drive(double time);
         static void turn(double angle);
     };
+    class Odometry{
+        static double x;
+        static double y;
+        static double theta;
+        static void setLoc(double x, double y, double theta);
+        static double get_x();
+        static double get_y();
+        static double get_theta();
+        static void updateLoc();
+    };
     class PID{
         static double turnKP;
         static double turnKI;

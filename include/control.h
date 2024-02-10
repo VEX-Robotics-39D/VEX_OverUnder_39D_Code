@@ -26,8 +26,8 @@ public:
     static void update_drive_train_tank();
     static void update_drive_train_arcade();
     static void update_intake();
-    static void update_flystick();
     static void update_wings();
+    static void update_catapult();
     static void debug();
     static void update();
 };

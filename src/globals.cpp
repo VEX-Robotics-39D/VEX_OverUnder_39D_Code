@@ -2,23 +2,22 @@
 
 pros::Controller controller(CONTROLLER_MASTER);
 
+//catapult
+pros::Motor catapult(5, true);
+
 //wheels
-pros::Motor leftWheel1(4,true);
-pros::Motor leftWheel2(5,true);
-pros::Motor leftWheel3(6);
+pros::Motor leftWheel1(10,true);
+pros::Motor leftWheel2(9,true);
+pros::Motor leftWheel3(8,true);
 pros::Motor_Group leftWheels{leftWheel1,leftWheel2,leftWheel3};
 
 pros::Motor rightWheel1(1);
 pros::Motor rightWheel2(2);
-pros::Motor rightWheel3(3,true);
+pros::Motor rightWheel3(3);
 pros::Motor_Group rightWheels{rightWheel1,rightWheel2,rightWheel3};
 
-//flystick
-pros::Motor flyWheel(13);
-pros::Motor flystick(10);
-
 //intake
-pros::Motor intakeMotor(7);
+pros::Motor intakeMotor(4, true);
 pros::ADIDigitalOut intakePneumatic('B');
 
 //wings

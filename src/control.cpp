@@ -166,35 +166,6 @@ void Control::update_intake(){
 	}
 }
 
-void Control::update_flystick(){
-    if (ControllerStates::is_activated(DIGITAL_UP)){
-        Flystick::spin_volts(12000);
-    }
-    else if(ControllerStates::is_activated(DIGITAL_DOWN)){
-        Flystick::brake_spin();
-    }
-    if(ControllerStates::is_pressed(DIGITAL_X)){
-        Flystick::timeSinceLastChange=0;
-        Flystick::level = 300;
-        Flystick::spin_volts(0);
-        Intake::pneumatic_toggle(State::Off);
-    }
-    if(ControllerStates::is_pressed(DIGITAL_Y)){
-        Flystick::timeSinceLastChange=0;
-        Flystick::spin_volts(12000);
-        Flystick::level = 1200;
-        Intake::pneumatic_toggle(State::Off);
-    }
-    if(ControllerStates::is_pressed(DIGITAL_B)){
-        Flystick::timeSinceLastChange=0;
-        Flystick::level = -20;
-        Flystick::spin_volts(0);
-        Intake::run(-600);
-        Intake::pneumatic_toggle(State::On);
-    }
- 
-    Flystick::update_state();
-}
 static bool lastPressed1 = false, lastPressed2 = false;
 void Control::update_wings(){
     if(ControllerStates::is_pressed(DIGITAL_R1)){
@@ -227,11 +198,20 @@ void Control::debug(){
     pros::screen::print(pros::E_TEXT_MEDIUM, 5, "right: %f", Utilities::drive_control_map(controller.get_analog(ANALOG_RIGHT_X)));
 }
 
+void Control::update_catapult(){
+    if (ControllerStates::is_pressed(DIGITAL_A)){
+        Catapult::spinCata();
+    }
+    else{
+        Catapult::stopCata();
+    }
+}
+
 void Control::update(){
     update_drive_train_tank();
     // update_drive_train_arcade();
+    update_catapult();
     update_intake();
-    update_flystick();
     update_wings();
-    debug();
+    debug();         
 }

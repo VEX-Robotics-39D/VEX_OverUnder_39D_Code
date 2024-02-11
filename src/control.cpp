@@ -206,7 +206,7 @@ void Control::update_catapult(){
 }
 
 void Control::update_hang(){
-    if(ControllerStates::is_pressed(DIGITAL_X)){
+    if(ControllerStates::is_activated(DIGITAL_X)){
         Hang::toggle(State::Toggle);
     }
 

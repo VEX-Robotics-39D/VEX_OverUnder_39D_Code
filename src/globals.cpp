@@ -3,12 +3,12 @@
 pros::Controller controller(CONTROLLER_MASTER);
 
 //catapult
-pros::Motor catapult(5, true);
+pros::Motor catapult(8, true);
 
 //wheels
-pros::Motor leftWheel1(10,true);
-pros::Motor leftWheel2(9,true);
-pros::Motor leftWheel3(8,true);
+pros::Motor leftWheel1(4,true);
+pros::Motor leftWheel2(5,true);
+pros::Motor leftWheel3(6,true);
 pros::Motor_Group leftWheels{leftWheel1,leftWheel2,leftWheel3};
 
 pros::Motor rightWheel1(1);
@@ -17,21 +17,21 @@ pros::Motor rightWheel3(3);
 pros::Motor_Group rightWheels{rightWheel1,rightWheel2,rightWheel3};
 
 //intake
-pros::Motor intakeMotor(4, true);
-pros::ADIDigitalOut intakePneumatic('B');
+pros::Motor intakeMotor(7, true);
+pros::ADIDigitalOut intakePneumatic('D');
 
 //wings
 pros::ADIDigitalOut wingsPneumatic1('A');
-pros::ADIDigitalOut wingsPneumatic2('D');
+pros::ADIDigitalOut wingsPneumatic2('B');
 
 //hang
 pros::ADIDigitalOut hangPneumatic('C');
 
 //sensors
-pros::Imu inertial(14);
+pros::Imu inertial(15);
 
 pros::Rotation backRotation(14);
-pros::Rotation leftRotation(15);
+pros::Rotation leftRotation(20);
 pros::Rotation rightRotation(16);
 
 //lemlib

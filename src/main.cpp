@@ -108,6 +108,6 @@ Odometry::init();
 	while (true) {
 		
 		Control::update();
-		pros::delay(UPDATE_INTERVAL);
+		pros::delay(DRIVE_UPDATE_INTERVAL);
 	}
 }

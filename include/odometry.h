@@ -3,7 +3,7 @@
 
 class Odometry{
     private:
-    static double lastOdomPosition;
+    static double lastBackPosition;
     static double lastRightPosition;
     static double lastLeftPosition;
     static double lastTheta;

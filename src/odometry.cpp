@@ -12,7 +12,7 @@ double Odometry::get_theta(){
     return (-chassis.getPose().theta);
 }
 
-double Odometry::lastOdomPosition = 0;
+double Odometry::lastBackPosition = 0;
 double Odometry::lastRightPosition = 0;
 double Odometry::lastLeftPosition = 0;
 double Odometry::lastTheta = 0;
@@ -21,9 +21,8 @@ double Odometry::y = 0;
 double Odometry::theta = 0;
 
 void Odometry::init(){
-    lastOdomPosition = backRotation.get_position();
-    lastRightPosition = (rightWheel1.get_position()+rightWheel2.get_position()+rightWheel3.get_position())/3;
-    lastLeftPosition = (leftWheel1.get_position()+leftWheel2.get_position()+leftWheel3.get_position())/3;
+    lastBackPosition = backRotation.get_position();
+    lastRightPosition = 
     lastTheta = inertial.get_rotation();
     x=0;
     y=0;
@@ -37,12 +36,12 @@ return 1 - x * x / 6.0 + x * x * x * x / 120.0 -
 
 void Odometry::update(){
 
-    double dl=(double) (leftWheel1.get_position()+leftWheel2.get_position()+leftWheel3.get_position())/3-lastLeftPosition;
-    dl=dl*3.25*360;
-    double dr= (double) (rightWheel1.get_position()+rightWheel2.get_position()+rightWheel3.get_position())/3-lastRightPosition;
-    dr=dr*3.25*360;
-    double db= (double) backRotation.get_position()-lastOdomPosition;
-    db=db*2.75*360;
+    double dl=(double) leftOdometryWheel.get_position()-lastLeftPosition;
+    dl=dl*0.6/18000*PI*2.75;
+    double dr= (double) rightOdometryWheel.get_position()-lastRightPosition;
+    dr=dr*0.6/18000*PI*2.75;
+    double db= (double) backRotation.get_position()-lastBackPosition;
+    db=db*0.6/18000*PI*2.75;
 
 
     double drot = (dr - dl) / (TRACK_WIDTH);
@@ -52,11 +51,11 @@ void Odometry::update(){
 
     double averot=theta+drot/2.0;
 
-    dx=dxLoc*cos(averot)-dyLoc*sin(averot);
-    dx=dxLoc*sin(averot)+dyLoc*cos(averot);
+    double dx=dxLoc*cos(averot)-dyLoc*sin(averot);
+    double dy=dxLoc*sin(averot)+dyLoc*cos(averot);
 
     x+=dx;
     y+=dy;
-    rot+=drot;
+    theta+=drot;
 
 }

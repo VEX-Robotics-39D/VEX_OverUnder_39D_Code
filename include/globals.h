@@ -20,6 +20,10 @@ extern pros::Controller controller;
 //catapult
 extern pros::Motor catapult;
 
+//hang
+
+extern pros::ADIDigitalOut hangPneumatic;
+
 //wheels
 extern pros::Motor leftWheel1;
 extern pros::Motor leftWheel2;

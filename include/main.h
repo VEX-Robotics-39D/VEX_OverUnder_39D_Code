@@ -53,6 +53,7 @@
 #include "control.h"
 #include "odometry.h"
 #include "catapult.h"
+#include "hang.h"
 
 
 /**

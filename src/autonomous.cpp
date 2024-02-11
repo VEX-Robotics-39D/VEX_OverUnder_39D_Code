@@ -183,7 +183,3 @@ void Autonomous::normalDrive::drive(double time){
     // seconds, not miliseconds
     
 }
-
-void Autonomous::Routes::skillsAuton(){
-
-}

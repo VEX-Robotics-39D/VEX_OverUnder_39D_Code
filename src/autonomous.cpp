@@ -1,18 +1,6 @@
 #include "main.h"
 
 
-void Autonomous::Routes::testpid(){
-
-}
-
-void Autonomous::Routes::oppauton(){
-
-}
-
-void Autonomous::Routes::skillsAuton(){
-
-}
-
 
 
 // void Autonomous::Routes::matchWinPointAuton(){

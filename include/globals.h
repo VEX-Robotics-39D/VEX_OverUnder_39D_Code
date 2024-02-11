@@ -8,7 +8,12 @@ enum class State{
 };
 
 //constants
-const int UPDATE_INTERVAL=10;
+const int DRIVE_UPDATE_INTERVAL=10;
+const int AUTON_UPDATE_INTERVAL=10;
+
+const double PI=3.141592653589793238462643383279502884197169399375105820974944592307816406286;
+
+const double TRACK_WIDTH = 10.375;
 
 extern pros::Controller controller;
 
@@ -35,6 +40,8 @@ extern pros::Motor intakeMotor;
 
 //odometry wheel
 extern pros::Rotation backOdometryWheel;
+extern pros::Rotation leftOdometryWheel;
+extern pros::Rotation rightOdometryWheel;
 
 //wings
 extern pros::ADIDigitalOut wingsPneumatic1;

@@ -31,6 +31,8 @@ pros::ADIDigitalOut hangPneumatic('C');
 pros::Imu inertial(12);
 
 pros::Rotation backRotation(14);
+pros::Rotation leftRotation(15);
+pros::Rotation rightRotation(16);
 
 //lemlib
 lemlib::Drivetrain_t drivetrain{

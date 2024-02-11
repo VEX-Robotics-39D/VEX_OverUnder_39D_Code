@@ -191,11 +191,9 @@ void Control::update_wings(){
 
 void Control::debug(){
     lemlib::Pose pose = chassis.getPose();
-    pros::screen::print(pros::E_TEXT_MEDIUM, 1, "X: %f", Odometry::get_x());
-    pros::screen::print(pros::E_TEXT_MEDIUM, 2, "Y: %f", Odometry::get_y());
-    pros::screen::print(pros::E_TEXT_MEDIUM, 3, "Theta: %f", Odometry::get_theta());
-    pros::screen::print(pros::E_TEXT_MEDIUM, 4, "left: %f", Utilities::drive_control_map(controller.get_analog(ANALOG_LEFT_X)));
-    pros::screen::print(pros::E_TEXT_MEDIUM, 5, "right: %f", Utilities::drive_control_map(controller.get_analog(ANALOG_RIGHT_X)));
+    pros::screen::print(pros::E_TEXT_MEDIUM, 1, "X: %f", Odometry::x);
+    pros::screen::print(pros::E_TEXT_MEDIUM, 2, "Y: %f", Odometry::y);
+    pros::screen::print(pros::E_TEXT_MEDIUM, 4, "Theta: %f", Odometry::theta);
 }
 
 void Control::update_catapult(){
@@ -215,6 +213,7 @@ void Control::update_hang(){
 }
 
 void Control::update(){
+    Odometry::update();
     update_drive_train_tank();
     // update_drive_train_arcade();
     update_catapult();

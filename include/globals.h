@@ -10,6 +10,8 @@ enum class State{
 //constants
 const int UPDATE_INTERVAL=10;
 
+const double TRACK_WIDTH = 10.375;
+
 extern pros::Controller controller;
 
 //catapult

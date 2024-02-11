@@ -104,8 +104,9 @@ void autonomous(){
  */
 
 void opcontrol() {
-
+Odometry::init();
 	while (true) {
+		
 		Control::update();
 		pros::delay(UPDATE_INTERVAL);
 	}

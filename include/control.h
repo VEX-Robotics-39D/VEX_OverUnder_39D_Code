@@ -30,4 +30,5 @@ public:
     static void update_catapult();
     static void debug();
     static void update();
+    static void update_hang();
 };

@@ -207,10 +207,18 @@ void Control::update_catapult(){
     }
 }
 
+void Control::update_hang(){
+    if(ControllerStates::is_pressed(DIGITAL_X)){
+        Hang::toggle(State::Toggle);
+    }
+
+}
+
 void Control::update(){
     update_drive_train_tank();
     // update_drive_train_arcade();
     update_catapult();
+    update_hang();
     update_intake();
     update_wings();
     debug();         

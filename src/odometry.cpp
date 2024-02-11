@@ -36,9 +36,9 @@ return 1 - x * x / 6.0 + x * x * x * x / 120.0 -
 
 void Odometry::update(){
 
-    double dl=(double) leftOdometryWheel.get_position()-lastLeftPosition;
+    double dl=(double) (leftWheel1.get_position()+leftWheel2.get_position()+leftWheel3.get_position())/3-lastLeftPosition;
     dl=dl*0.6/18000*PI*2.75;
-    double dr= (double) rightOdometryWheel.get_position()-lastRightPosition;
+    double dr= (double) (rightWheel1.get_position()+rightWheel2.get_position()+rightWheel3.get_position())/3-lastRightPosition;
     dr=dr*0.6/18000*PI*2.75;
     double db= (double) backRotation.get_position()-lastBackPosition;
     db=db*0.6/18000*PI*2.75;
@@ -47,7 +47,7 @@ void Odometry::update(){
     double drot = (dr - dl) / (TRACK_WIDTH);
     double temp = sinx_over_x(drot / 2.0);
     double dyLoc = temp * (dl + dr) / 2.0;
-    double dxLoc = temp * (db + drot * bRad);
+    double dxLoc = temp * (db + drot * 2);
 
     double averot=theta+drot/2.0;
 

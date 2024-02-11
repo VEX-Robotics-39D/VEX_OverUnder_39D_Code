@@ -38,7 +38,7 @@ void initialize() {
 	pros::screen::set_pen(COLOR_BLUE);
 	// chassis.calibrate();
 
-	// inertial.reset();
+	inertial.reset();
 }
 
 

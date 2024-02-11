@@ -21,8 +21,8 @@ pros::Motor intakeMotor(4, true);
 pros::ADIDigitalOut intakePneumatic('B');
 
 //wings
-// pros::ADIDigitalOut wingsPneumatic1('');
-// pros::ADIDigitalOut wingsPneumatic2('');
+pros::ADIDigitalOut wingsPneumatic1('A');
+pros::ADIDigitalOut wingsPneumatic2('D');
 
 //hang
 pros::ADIDigitalOut hangPneumatic('C');

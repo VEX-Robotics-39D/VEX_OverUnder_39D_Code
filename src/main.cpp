@@ -37,8 +37,11 @@ void initialize() {
 	
 	pros::screen::set_pen(COLOR_BLUE);
 	// chassis.calibrate();
-
-	inertial.reset();
+	
+	inertial.reset(true);
+	inertial.tare_heading();
+	inertial.tare_rotation();
+	Odometry::init();
 }
 
 
@@ -76,13 +79,15 @@ void autonomous(){
 	// chassis.setPose(0,0,0);
 	// Autonomous::PID::driveTo(0,24);
 	// pros::delay(2000);
-	//Autonomous::PID::turnTo(90);
-	// pros::delay(2000);
-	//Autonomous::PID::turnTo(90);
-	// pros::delay(2000);
-	//Autonomous::PID::turnTo(90);
-	// pros::delay(2000);
-	
+	// Autonomous::PID::turnTo(45);
+	// Autonomous::PID::turnTo(90);
+	// Autonomous::PID::turnTo(135);
+	// Autonomous::PID::turnTo(180);
+	// Autonomous::PID::turnTo(225);
+	// Autonomous::PID::turnTo(270);
+	// Autonomous::PID::turnTo(315);
+	Autonomous::PID::driveTo(30,100);
+	Autonomous::PID::driveTo(0,0);
 	// Autonomous::Routes::matchWinPointAuton();
 	// Autonomous::PID::driveTo(0,5);
 	// Autonomous::PID::driveTo(10,10);
@@ -104,7 +109,6 @@ void autonomous(){
  */
 
 void opcontrol() {
-Odometry::init();
 	while (true) {
 		
 		Control::update();

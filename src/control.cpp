@@ -190,10 +190,9 @@ void Control::update_wings(){
 }
 
 void Control::debug(){
-    lemlib::Pose pose = chassis.getPose();
     pros::screen::print(pros::E_TEXT_MEDIUM, 1, "X: %f", Odometry::x);
     pros::screen::print(pros::E_TEXT_MEDIUM, 2, "Y: %f", Odometry::y);
-    pros::screen::print(pros::E_TEXT_MEDIUM, 4, "Theta: %f", Odometry::theta);
+    pros::screen::print(pros::E_TEXT_MEDIUM, 4, "Theta: %f", Odometry::theta * 180.0/PI);
 }
 
 void Control::update_catapult(){

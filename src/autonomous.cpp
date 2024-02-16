@@ -13,11 +13,11 @@
 // 
 
 double Autonomous::PID::turnKP = 1.2;
-double Autonomous::PID::turnKI = 0.00009;
-double Autonomous::PID::turnKD = 0.5;
+double Autonomous::PID::turnKI = 0.001;
+double Autonomous::PID::turnKD = 43.0;
 
-double Autonomous::PID::driveKP = 5;
-double Autonomous::PID::driveKI = 0.0;
+double Autonomous::PID::driveKP = 8.0;
+double Autonomous::PID::driveKI = 0.002;
 double Autonomous::PID::driveKD = 0.0;
 
 double Autonomous::PID::turnError = 0.0;
@@ -34,10 +34,10 @@ double Autonomous::PID::driveSatisfactoryTime = 0.0;
 double Autonomous::PID::fastMoveSatisfactoryTime = 0.0;
 
 void Autonomous::PID::turnTo(double angle){
-    
     while (true){
         Odometry::update();
-        turnError = angle - Odometry::get_theta();
+        Control::debug();
+        turnError = angle + (inertial.get_rotation());
         turnIntegral*=0.985;
         turnIntegral += turnError;
         if(turnError*turnLastError < 0) turnIntegral = 0;
@@ -68,6 +68,7 @@ void Autonomous::PID::driveTo(double x,double y){
     chassis.setPose(0,0,0);
     while (true){ 
         Odometry::update();
+        Control::debug();
         double xDiffernece = x-Odometry::get_x();
         double yDifference = y-Odometry::get_y();
         driveError = sqrt(xDiffernece*xDiffernece+yDifference*yDifference)*cos(atan2(yDifference,xDiffernece)-Odometry::get_theta());

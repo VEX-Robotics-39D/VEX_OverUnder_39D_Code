@@ -11,7 +11,7 @@ double Odometry::y = 0;
 double Odometry::theta = 0;
 
 double Odometry::get_x(){
-    return Odometry::x;
+    return -Odometry::x;
 }
 
 double Odometry::get_y(){

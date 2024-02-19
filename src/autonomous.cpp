@@ -65,7 +65,6 @@ void Autonomous::PID::turnTo(double angle){
 }
 
 void Autonomous::PID::driveTo(double x,double y){
-    chassis.setPose(0,0,0);
     while (true){ 
         Odometry::update();
         Control::debug();
@@ -97,16 +96,19 @@ void Autonomous::PID::driveTo(double x,double y){
     }
 }
 
-void Autonomous::PID::turnThenMoveTo(double x,double y){
+void Autonomous::PID::turnThenMoveTo(double x,double y, bool opposite = false){
     //turn first
     double angle = atan2(y-Odometry::get_y(),x-Odometry::get_x());
     //return;
-    double angleDifference=angle-Odometry::get_theta();
+    double angleDifference = angle * 180/PI + inertial.get_rotation() + opposite * 180;
     while(angleDifference>180) angleDifference-=360;
     while(angleDifference<-180) angleDifference+=360;
     pros::screen::print(pros::E_TEXT_MEDIUM, 3, "theta: %f", Odometry::get_theta()+angleDifference);
     //return;
-    turnTo(Odometry::get_theta()+angleDifference);
+    
+    pros::screen::print(pros::E_TEXT_MEDIUM, 9, "angle: %f", angle);
+    pros::screen::print(pros::E_TEXT_MEDIUM, 10, "angleDifference: %f", angleDifference);
+    turnTo(angleDifference);
     //then move
     driveTo(x,y);
 }
@@ -116,21 +118,18 @@ void Autonomous::PID::fastMoveTo(double x,double y,double stopRadius){
     
 }
 
-/*
+
 void Autonomous::Routes::matchWinPointAuton(){
-    chassis.setPose(-45,-6,6);
+    Odometry::x = -6; Odometry::y = 6; inertial.set_rotation(45);
     Wings::toggle2(State::On); // wings on
-    Autonomous::PID::driveTo(-5,-2); // get triball from alliance zone
+    Autonomous::PID::driveTo(-12,0); // get triball from alliance zone
     Wings::toggle2(State::Off);// wings off
     Autonomous::PID::turnThenMoveTo(-28,-2);
     // idk how to do this without interrupting code but here is where I raise flystick
-    Autonomous::PID::turnTo(-135);
-    Autonomous::PID::driveTo(0,-24); 
-    flystick.move_absolute(1340,600);
     Autonomous::PID::turnThenMoveTo(0,24);
-    Autonomous::PID::driveTo(0,36);
+    Autonomous::PID::turnThenMoveTo(0,36);
 }
-
+/*
 void Autonomous::Routes::sixTriball(){
     chassis.setPose(-180,0,0);
     Intake::run(600);

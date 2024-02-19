@@ -19,6 +19,7 @@ pros::Motor_Group rightWheels{rightWheel1,rightWheel2,rightWheel3};
 //intake
 pros::Motor intakeMotor(7, true);
 pros::ADIDigitalOut intakePneumatic('D');
+pros::Motor flywheel(9, true);
 
 //wings
 pros::ADIDigitalOut wingsPneumatic1('A');

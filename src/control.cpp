@@ -154,6 +154,7 @@ void Control::update_drive_train_arcade(){
     DriveTrain::move_velocity(Utilities::drive_control_map(controller.get_analog(ANALOG_LEFT_Y)+controller.get_analog(ANALOG_LEFT_X))*600.0,
                             Utilities::drive_control_map(controller.get_analog(ANALOG_LEFT_Y)-controller.get_analog(ANALOG_LEFT_X))*600.0);
 }
+bool flywheelState = false;
 void Control::update_intake(){
     if(ControllerStates::is_pressed(DIGITAL_L1)){
 		Intake::run(600);
@@ -164,6 +165,18 @@ void Control::update_intake(){
 	else{
 		Intake::coast(); 
 	}
+    if (ControllerStates::is_pressed(DIGITAL_UP)){
+        flywheelState = true;
+    }
+    else if (ControllerStates::is_pressed(DIGITAL_DOWN)){
+        flywheelState = false;
+    }
+    if (flywheelState){
+        flywheel.move_voltage(12000);
+    }
+    else{
+        flywheel.move_voltage(0);
+    }
 }
 
 static bool lastPressed1 = false, lastPressed2 = false;

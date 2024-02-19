@@ -37,6 +37,7 @@ extern pros::Motor_Group rightWheels;
 
 //intake
 extern pros::Motor intakeMotor;
+extern pros::Motor flywheel;
 
 //odometry wheel
 extern pros::Rotation backOdometryWheel;

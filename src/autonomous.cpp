@@ -171,3 +171,15 @@ void Autonomous::normalDrive::drive(double time){
     // seconds, not miliseconds
     
 }
+
+void Autonomous::Routes::skillsAuton(){
+    Catapult::spinCata();
+    pros::delay(30000);
+    Catapult::stopCata();
+    Autonomous::PID::turnThenMoveTo(0,24);
+    Autonomous::PID::turnThenMoveTo(0,100);
+    Autonomous::PID::turnThenMoveTo(24,120);
+    Autonomous::PID::turnThenMoveTo(36,120);
+    //
+    l/-.[- ]
+}

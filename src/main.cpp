@@ -91,8 +91,9 @@ void autonomous(){
 	// Autonomous::PID::driveTo(0,5);
 	// Autonomous::PID::driveTo(10,10);
 	Odometry::set_theta(90);
-    Autonomous::PID::turnThenMoveTo(10,10,false);
-	Autonomous::PID::turnThenMoveTo(0,0,false);
+
+    // Autonomous::PID::turnThenMoveTo(10,10,false);
+	Autonomous::PID::turnTo(45,0.02);
 	
 	// Autonomous::Routes::testpid();
 	// Autonomous::PID::turnThenMoveTo(10,10, false);

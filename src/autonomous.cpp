@@ -103,7 +103,6 @@ void Autonomous::PID::turnThenMoveTo(double x,double y, bool opposite = false){
     double angleDifference = angle * 180/PI + inertial.get_rotation() + opposite * 180;
     while(angleDifference>180) angleDifference-=360;
     while(angleDifference<-180) angleDifference+=360;
-    pros::screen::print(pros::E_TEXT_MEDIUM, 3, "theta: %f", Odometry::get_theta()+angleDifference);
     //return;
     
     pros::screen::print(pros::E_TEXT_MEDIUM, 9, "angle: %f", angle);

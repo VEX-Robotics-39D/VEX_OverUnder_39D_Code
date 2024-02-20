@@ -12,7 +12,7 @@ class Odometry{
     static double y;
     static double theta;
 
-    static void init();
+    static void init(double x, double y, double theta);
     static void update();
     static double get_x();
     static double get_y();

@@ -12,9 +12,9 @@
 //     chassis.follow(matchAutonpt2_txt,6000,15);
 // 
 
-double Autonomous::PID::turnKP = 1.2;
+double Autonomous::PID::turnKP = 1.0;
 double Autonomous::PID::turnKI = 0.001;
-double Autonomous::PID::turnKD = 43.0;
+double Autonomous::PID::turnKD = 2.0;
 
 double Autonomous::PID::driveKP = 8.0;
 double Autonomous::PID::driveKI = 0.002;
@@ -172,7 +172,17 @@ void Autonomous::normalDrive::drive(double time){
     
 }
 
+void Autonomous::Routes::testpid(){
+    Odometry::init(0,0,90);
+    Autonomous::PID::turnThenMoveTo(0,72);
+    Autonomous::PID::turnThenMoveTo(120,72);
+    Autonomous::PID::turnThenMoveTo(120,0);
+    Autonomous::PID::turnThenMoveTo(0,0);
+}
+
 void Autonomous::Routes::skillsAuton(){
+    //need to set robot loc
+    Odometry::theta = -22 * PI/180.0;
     Catapult::spinCata();
     pros::delay(30000);
     Catapult::stopCata();
@@ -180,5 +190,26 @@ void Autonomous::Routes::skillsAuton(){
     Autonomous::PID::turnThenMoveTo(0,100);
     Autonomous::PID::turnThenMoveTo(24,120);
     Autonomous::PID::turnThenMoveTo(36,120);
-    //
+    Autonomous::PID::turnThenMoveTo(30,120); // reversed
+    Autonomous::PID::turnThenMoveTo(36,120);
+    Autonomous::PID::turnThenMoveTo(12,72);
+    Autonomous::PID::turnThenMoveTo(48,72);
+    Wings::toggle1(State::On);
+    Autonomous::PID::turnThenMoveTo(48,96);
+    Autonomous::PID::turnThenMoveTo(48,90); // reversed
+    Autonomous::PID::turnThenMoveTo(48,96);
+    Wings::toggle1(State::Off);
+    Autonomous::PID::turnThenMoveTo(48,72);
+    Autonomous::PID::turnThenMoveTo(72,72);
+    Wings::toggle1(State::On);
+    Autonomous::PID::turnThenMoveTo(72,96);
+    Autonomous::PID::turnThenMoveTo(72,90); // reversed
+    Autonomous::PID::turnThenMoveTo(72,96);
+    Wings::toggle1(State::Off);
+    Autonomous::PID::turnThenMoveTo(120,96);
+    Wings::toggle1(State::On);
+    Autonomous::PID::turnThenMoveTo(108,120);
+    Autonomous::PID::turnThenMoveTo(84,120);
+    Autonomous::PID::turnThenMoveTo(90,120); // reversed
+    Autonomous::PID::turnThenMoveTo(84,120);
 }

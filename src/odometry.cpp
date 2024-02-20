@@ -11,7 +11,7 @@ double Odometry::y = 0;
 double Odometry::theta = 0;
 
 double Odometry::get_x(){
-    return -Odometry::x;
+    return Odometry::x;
 }
 
 double Odometry::get_y(){
@@ -23,14 +23,15 @@ double Odometry::get_theta(){
 }
 
 
-void Odometry::init(){
+void Odometry::init(double x = 0, double y = 0, double theta = 0){
     lastBackPosition = backRotation.get_position();
     lastRightPosition = (rightWheel1.get_position() + rightWheel2.get_position()+rightWheel3.get_position())/3;
     lastLeftPosition = (leftWheel1.get_position() + leftWheel2.get_position()+leftWheel3.get_position())/3;
-    lastTheta = 0-inertial.get_rotation();
-    x=0;
-    y=0;
-    theta = 0-inertial.get_rotation();
+    inertial.set_rotation(-theta);
+    lastTheta = theta * PI/180.0;
+    Odometry::x = x;
+    Odometry::y = y;
+    Odometry::theta = theta * PI/180;
 }
 
 double sinx_over_x(double x) {

@@ -23,7 +23,7 @@ pros::Motor flywheel(9, true);
 
 //wings
 pros::ADIDigitalOut wingsPneumatic1('A');
-pros::ADIDigitalOut wingsPneumatic2('B');
+pros::ADIDigitalOut wingsPneumatic2('B', true);
 
 //hang
 pros::ADIDigitalOut hangPneumatic('C');

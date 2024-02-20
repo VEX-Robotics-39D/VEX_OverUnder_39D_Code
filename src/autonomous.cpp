@@ -181,5 +181,4 @@ void Autonomous::Routes::skillsAuton(){
     Autonomous::PID::turnThenMoveTo(24,120);
     Autonomous::PID::turnThenMoveTo(36,120);
     //
-    l/-.[- ]
 }

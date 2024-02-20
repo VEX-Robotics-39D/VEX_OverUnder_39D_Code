@@ -32,7 +32,7 @@ pros::ADIDigitalOut hangPneumatic('C');
 pros::Imu inertial(20);
 
 pros::Rotation backRotation(14);
-pros::Rotation leftRotation(20);
+pros::Rotation leftRotation(13);
 pros::Rotation rightRotation(16);
 
 //lemlib

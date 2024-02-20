@@ -205,6 +205,7 @@ void Control::update_wings(){
 void Control::debug(){
     pros::screen::print(pros::E_TEXT_MEDIUM, 1, "X: %f", Odometry::x);
     pros::screen::print(pros::E_TEXT_MEDIUM, 2, "Y: %f", Odometry::y);
+    pros::screen::print(pros::E_TEXT_MEDIUM, 3, "Inertia: %f", inertial.get_rotation());
     pros::screen::print(pros::E_TEXT_MEDIUM, 4, "Theta: %f", Odometry::theta * 180.0/PI);
 }
 

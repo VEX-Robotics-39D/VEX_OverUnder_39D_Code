@@ -96,6 +96,14 @@ void Autonomous::PID::driveTo(double x,double y){
     }
 }
 
+void Autonomous::PID::turnTo(double x,double y){
+    double angle = atan2(y-Odometry::get_y(),x-Odometry::get_x());
+    double angleDifference = angle - Odometry::get_theta();
+    while(angleDifference>PI) angleDifference-=2*PI;
+    while(angleDifference<-PI) angleDifference+=2*PI;
+    turnTo(angleDifference+angle);
+}
+
 void Autonomous::PID::turnThenMoveTo(double x,double y, bool opposite = false){
     //turn first
     double angle = atan2(y-Odometry::get_y(),x-Odometry::get_x());
@@ -172,7 +180,8 @@ void Autonomous::normalDrive::drive(double time){
 }
 
 void Autonomous::Routes::testpid(){
-    Odometry::init(0,0,90);
+    //Odometry::init(0,0,90);
+    Odometry::set_theta(90);
     Autonomous::PID::turnThenMoveTo(0,72);
     Autonomous::PID::turnThenMoveTo(120,72);
     Autonomous::PID::turnThenMoveTo(120,0);

@@ -33,7 +33,7 @@ double Autonomous::PID::turnSatisfactoryTime = 0.0;
 double Autonomous::PID::driveSatisfactoryTime = 0.0;
 double Autonomous::PID::fastMoveSatisfactoryTime = 0.0;
 
-void Autonomous::PID::turnTo(double angle){
+void Autonomous::PID::turnTo(double angle,double error){
     while (true){
         Odometry::update();
         Control::debug();
@@ -44,27 +44,13 @@ void Autonomous::PID::turnTo(double angle){
         turnDerivative = turnError - turnLastError;
         double turn = turnKP*turnError + turnKI*turnIntegral + turnKD*turnDerivative;
         DriveTrain::move_velocity(-turn,turn);
-        if(fabs(turnError)<1.2&&fabs(turnError-turnLastError)<0.01){
-            if (turnSatisfactoryTime < 0.1){
-                turnSatisfactoryTime += (double)AUTON_UPDATE_INTERVAL/1000.0;
-            }
-            else{
-                rightWheels.set_brake_modes(pros::E_MOTOR_BRAKE_HOLD);
-                leftWheels.set_brake_modes(pros::E_MOTOR_BRAKE_HOLD);
-                DriveTrain::move_velocity(0,0);
-                break;
-            }
-        }
-        else{
-            turnSatisfactoryTime = 0;
-        }
+        if(turnError<error) break;
         turnLastError = turnError;
         pros::delay(AUTON_UPDATE_INTERVAL);
     }
-    
 }
 
-void Autonomous::PID::driveTo(double x,double y){
+void Autonomous::PID::driveTo(double x,double y,double error=0.02){
     while (true){ 
         Odometry::update();
         Control::debug();
@@ -77,33 +63,21 @@ void Autonomous::PID::driveTo(double x,double y){
         driveDerivative = driveError - driveLastError;
         double drive = driveKP*driveError + driveKI*driveIntegral - driveKD*driveDerivative;
         DriveTrain::move_velocity(drive,drive);
-        if(fabs(driveError)<0.8&&fabs(driveError-driveLastError)<0.002){
-            if (driveSatisfactoryTime < 0.1){
-                driveSatisfactoryTime += (double)AUTON_UPDATE_INTERVAL/1000.0;
-            }
-            else{
-                rightWheels.set_brake_modes(pros::E_MOTOR_BRAKE_HOLD);
-                leftWheels.set_brake_modes(pros::E_MOTOR_BRAKE_HOLD);
-                DriveTrain::move_velocity(0,0);
-                break;
-            }
-        }
-        else{
-            driveSatisfactoryTime = 0;
-        }
+        
+        if(driveError<error) break;
         driveLastError = driveError;
         pros::delay(AUTON_UPDATE_INTERVAL);
     }
 }
 
-void Autonomous::PID::turnTo(double x,double y){
+void Autonomous::PID::turnTo(double x,double y,double error){
     double angle = atan2(y-Odometry::get_y(),x-Odometry::get_x());
     double angleDifference = angle - Odometry::get_theta();
     while(angleDifference>PI) angleDifference-=2*PI;
     while(angleDifference<-PI) angleDifference+=2*PI;
-    turnTo(angleDifference+angle);
+    turnTo(angleDifference+angle,error);
 }
-
+/*
 void Autonomous::PID::turnThenMoveTo(double x,double y, bool opposite = false){
     //turn first
     double angle = atan2(y-Odometry::get_y(),x-Odometry::get_x());
@@ -115,17 +89,18 @@ void Autonomous::PID::turnThenMoveTo(double x,double y, bool opposite = false){
     
     pros::screen::print(pros::E_TEXT_MEDIUM, 9, "angle: %f", angle);
     pros::screen::print(pros::E_TEXT_MEDIUM, 10, "angleDifference: %f", angleDifference);
-    turnTo(angleDifference);
+    turnTo(angleDifference,error);
     //then move
     driveTo(x,y);
 }
+*/
 
 void Autonomous::PID::fastMoveTo(double x,double y,double stopRadius){
     chassis.setPose(0,0,0);
     
 }
 
-
+/*
 void Autonomous::Routes::matchWinPointAuton(){
     Odometry::x = -6; Odometry::y = 6; inertial.set_rotation(45);
     Wings::toggle2(State::On); // wings on
@@ -136,7 +111,7 @@ void Autonomous::Routes::matchWinPointAuton(){
     Autonomous::PID::turnThenMoveTo(0,24);
     Autonomous::PID::turnThenMoveTo(0,36);
 }
-/*
+
 void Autonomous::Routes::sixTriball(){
     chassis.setPose(-180,0,0);
     Intake::run(600);
@@ -172,7 +147,7 @@ void Autonomous::Routes::nearRushMid(){
     Intake::run(-600);
     Autonomous::PID::driveTo(-50,12);
 }
-*/
+
 
 void Autonomous::normalDrive::drive(double time){
     // seconds, not miliseconds
@@ -221,3 +196,4 @@ void Autonomous::Routes::skillsAuton(){
     Autonomous::PID::turnThenMoveTo(90,120); // reversed
     Autonomous::PID::turnThenMoveTo(84,120);
 }
+*/

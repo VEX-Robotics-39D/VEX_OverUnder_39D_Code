@@ -29,9 +29,9 @@ public:
         static double driveSatisfactoryTime;
         static double fastMoveSatisfactoryTime;
         public:
-        static void turnTo(double angle);
-        static void turnTo(double x,double y);
-        static void driveTo(double x,double y);
+        static void turnTo(double angle,double error);
+        static void turnTo(double x,double y,double error);
+        static void driveTo(double x,double y,double error);
         static void turnThenMoveTo(double x,double y, bool opposite);
         static void fastMoveTo(double x,double y,double stopRadius);
     };

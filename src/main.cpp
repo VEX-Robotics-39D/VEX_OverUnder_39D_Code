@@ -41,7 +41,7 @@ void initialize() {
 	inertial.reset(true);
 	inertial.tare_heading();
 	inertial.tare_rotation();
-	Odometry::init(0,0,0);
+	Odometry::init();
 }
 
 
@@ -90,10 +90,11 @@ void autonomous(){
 
 	// Autonomous::PID::driveTo(0,5);
 	// Autonomous::PID::driveTo(10,10);
-	Odometry::init(0,0,90);
-    // Autonomous::PID::turnThenMoveTo(0,72,false);
+	Odometry::set_theta(90);
+    Autonomous::PID::turnThenMoveTo(10,10,false);
+	Autonomous::PID::turnThenMoveTo(0,0,false);
 	
-	Autonomous::Routes::testpid();
+	// Autonomous::Routes::testpid();
 	// Autonomous::PID::turnThenMoveTo(10,10, false);
 }
 
@@ -112,7 +113,7 @@ void autonomous(){
  */
 
 void opcontrol() {
-	Odometry::init(0,0,90);
+	Odometry::set_theta(90);
 	while (true) {
 		
 		Control::update();

@@ -37,7 +37,7 @@ void Autonomous::PID::turnTo(double angle){
     while (true){
         Odometry::update();
         Control::debug();
-        turnError = angle + (inertial.get_rotation());
+        turnError = angle - (Odometry::get_theta() * 180.0/PI);
         turnIntegral*=0.985;
         turnIntegral += turnError;
         if(turnError*turnLastError < 0) turnIntegral = 0;
@@ -108,7 +108,7 @@ void Autonomous::PID::turnThenMoveTo(double x,double y, bool opposite = false){
     //turn first
     double angle = atan2(y-Odometry::get_y(),x-Odometry::get_x());
     //return;
-    double angleDifference = angle * 180/PI + inertial.get_rotation() + opposite * 180;
+    double angleDifference = angle * 180/PI - Odometry::get_theta() * 180.0/PI + opposite * 180;
     while(angleDifference>180) angleDifference-=360;
     while(angleDifference<-180) angleDifference+=360;
     //return;

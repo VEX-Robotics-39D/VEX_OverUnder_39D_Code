@@ -40,7 +40,8 @@ void Odometry::set_y(double y){
 }
 
 void Odometry::set_theta(double theta){
-    Odometry::theta = theta;
+    Odometry::theta = theta * PI/180.0;
+    inertial.set_rotation(-theta);
 }
 
 double sinx_over_x(double x) {
@@ -65,8 +66,7 @@ void Odometry::update(){
     pros::screen::print(pros::E_TEXT_MEDIUM, 7, "db: %f", db);
 
     double tempCurrRotation = 0-inertial.get_rotation();
-    double drot = (tempCurrRotation-lastTheta);
-    lastTheta = tempCurrRotation;
+    double drot = (tempCurrRotation-theta/PI*180);
     drot = drot*PI/180;
     double temp = sinx_over_x(drot / 2.0);
     double dyLoc = temp * dl;

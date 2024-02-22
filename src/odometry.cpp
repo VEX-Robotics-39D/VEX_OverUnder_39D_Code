@@ -45,8 +45,7 @@ void Odometry::set_theta(double theta){
 }
 
 double sinx_over_x(double x) {
-return 1 - x * x / 6.0 + x * x * x * x / 120.0 -
-        x * x * x * x * x * x / 5040.0 + x * x * x * x * x * x * x * x / 362880.0;
+return 1 - x * x / 6.0 + x * x * x * x / 120.0 - x * x * x * x * x * x / 5040.0 + x * x * x * x * x * x * x * x / 362880.0;
 }
 
 void Odometry::update(){

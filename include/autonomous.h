@@ -3,10 +3,6 @@
 
 class Autonomous{
 public:
-    class normalDrive{
-        static void drive(double time);
-        static void turn(double angle);
-    };
     class PID{
         static double turnKP;
         static double turnKI;

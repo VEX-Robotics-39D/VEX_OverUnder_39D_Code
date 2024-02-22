@@ -112,12 +112,11 @@ void Autonomous::Routes::matchWinPointAuton(){
     Autonomous::PID::driveTo(-12,-12); // get triball from alliance zone
     Wings::toggle2(State::Off);// wings off
     Autonomous::PID::turnThenMoveTo(-28,-26);
-    // idk how to do this without interrupting code but here is where I raise flystick
     Autonomous::PID::turnThenMoveTo(0,0);
     Autonomous::PID::turnThenMoveTo(0,36);
 }
+
 void Autonomous::Routes::sixTriball(){
-    chassis.setPose(-180,0,0);
     Intake::run(600);
     Autonomous::PID::turnThenMoveTo(0,-2);
     Intake::run(0);
@@ -144,7 +143,9 @@ void Autonomous::Routes::sixTriball(){
 }
 
 void Autonomous::Routes::nearRushMid(){
-    chassis.setPose(45,-6,6);
+    Odometry::set_theta(225);
+    Odometry::set_x(0);
+    Odometry::set_y(-12);
     Autonomous::PID::driveTo(-72,72);
     Intake::run(600);
     // Autonomous::PID::turnTo(180);
@@ -152,11 +153,6 @@ void Autonomous::Routes::nearRushMid(){
     Autonomous::PID::driveTo(-50,12);
 }
 
-
-void Autonomous::normalDrive::drive(double time){
-    // seconds, not miliseconds
-    
-}
 
 void Autonomous::Routes::testpid(){
     Odometry::set_theta(90);

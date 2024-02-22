@@ -17,7 +17,4 @@ class Odometry{
     static double get_x();
     static double get_y();
     static double get_theta();
-    static void set_x(double x);
-    static void set_y(double y);
-    static void set_theta(double theta);
 };

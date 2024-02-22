@@ -3,6 +3,10 @@
 
 class Autonomous{
 public:
+    class normalDrive{
+        static void drive(double time);
+        static void turn(double angle);
+    };
     class PID{
         static double turnKP;
         static double turnKI;
@@ -25,10 +29,9 @@ public:
         static double driveSatisfactoryTime;
         static double fastMoveSatisfactoryTime;
         public:
-        static void turnTo(double angle,double error,int timeCap);
-        static void turnTo(double x,double y,double error,int timeCap, bool reversed);
-        static void driveTo(double x,double y,double error,int timeCap, bool reversed);
-        static void turnThenMoveTo(double x,double y, int turnTimeCap, int moveTimeCap, double turnError, double moveError, bool reversed);
+        static void turnTo(double angle);
+        static void driveTo(double x,double y);
+        static void turnThenMoveTo(double x,double y, bool opposite);
         static void fastMoveTo(double x,double y,double stopRadius);
     };
     class Routes{

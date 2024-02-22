@@ -19,11 +19,10 @@ pros::Motor_Group rightWheels{rightWheel1,rightWheel2,rightWheel3};
 //intake
 pros::Motor intakeMotor(7, true);
 pros::ADIDigitalOut intakePneumatic('D');
-pros::Motor flywheel(9, true);
 
 //wings
 pros::ADIDigitalOut wingsPneumatic1('A');
-pros::ADIDigitalOut wingsPneumatic2('B', true);
+pros::ADIDigitalOut wingsPneumatic2('B');
 
 //hang
 pros::ADIDigitalOut hangPneumatic('C');
@@ -32,7 +31,7 @@ pros::ADIDigitalOut hangPneumatic('C');
 pros::Imu inertial(20);
 
 pros::Rotation backRotation(14);
-pros::Rotation leftRotation(13);
+pros::Rotation leftRotation(20);
 pros::Rotation rightRotation(16);
 
 //lemlib

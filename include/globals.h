@@ -37,6 +37,7 @@ extern pros::Motor_Group rightWheels;
 
 //intake
 extern pros::Motor intakeMotor;
+extern pros::Motor flywheel;
 
 //odometry wheel
 extern pros::Rotation backOdometryWheel;
@@ -54,6 +55,7 @@ extern pros::ADIDigitalOut intakePneumatic;
 extern pros::Imu inertial;
 
 extern pros::Rotation backRotation;
+extern pros::Rotation leftRotation;
 
 //lemlib
 extern lemlib::TrackingWheel backTrackingWheel;

@@ -161,9 +161,11 @@ void Autonomous::normalDrive::drive(double time){
 void Autonomous::Routes::testpid(){
     Odometry::set_theta(90);
     Autonomous::PID::turnThenMoveTo(0,20);
-    Autonomous::PID::turnTo(45,1.0);
-    pros::delay(8000);
-    Autonomous::PID::turnThenMoveTo(0,0,200,250,1.0,0.4,true);
+    Autonomous::PID::turnThenMoveTo(20,20);
+    Autonomous::PID::turnThenMoveTo(20,0);
+    Autonomous::PID::turnThenMoveTo(0,0);
+    Autonomous::PID::turnTo(90,1.0);
+    // Autonomous::PID::turnThenMoveTo(0,0,200,250,1.0,0.4,true);
     // Autonomous::PID::turnTo(0,68,0.02);
     // Autonomous::PID::driveTo(0,68,0.2);
     // Autonomous::PID::turnTo(114,68,0.02);

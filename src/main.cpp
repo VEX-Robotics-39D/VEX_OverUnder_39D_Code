@@ -86,12 +86,18 @@ void autonomous(){
 	// Autonomous::PID::turnTo(225);
 	// Autonomous::PID::turnTo(270);
 	// Autonomous::PID::turnTo(315);
-	// Autonomous::PID::turnThenMoveTo(30,30);
-	// Autonomous::PID::turnThenMoveTo(0,0);
-	Autonomous::Routes::matchWinPointAuton();
+	// Autonomous::Routes::matchWinPointAuton();
+
 	// Autonomous::PID::driveTo(0,5);
 	// Autonomous::PID::driveTo(10,10);
-	// Autonomous::PID::turnThenMoveTo(10,10);
+	// Odometry::set_theta(90);
+
+    // Autonomous::PID::turnThenMoveTo(10,10,0.03,0.4,);
+	// Autonomous::PID::turnTo(0,1.0);
+	Autonomous::Routes::testpid();
+	
+	// Autonomous::Routes::skillsAuton();
+	// Autonomous::PID::turnThenMoveTo(10,10, false);
 }
 
 /**

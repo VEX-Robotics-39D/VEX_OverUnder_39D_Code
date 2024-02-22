@@ -55,6 +55,7 @@ extern pros::ADIDigitalOut intakePneumatic;
 extern pros::Imu inertial;
 
 extern pros::Rotation backRotation;
+extern pros::Rotation leftRotation;
 
 //lemlib
 extern lemlib::TrackingWheel backTrackingWheel;

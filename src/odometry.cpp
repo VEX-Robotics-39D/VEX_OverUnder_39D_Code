@@ -26,7 +26,7 @@ double Odometry::get_theta(){
 void Odometry::init(){
     lastBackPosition = backRotation.get_position();
     lastRightPosition = (rightWheel1.get_position() + rightWheel2.get_position()+rightWheel3.get_position())/3;
-    lastLeftPosition = (leftWheel1.get_position() + leftWheel2.get_position()+leftWheel3.get_position())/3;
+    lastLeftPosition = leftRotation.get_position();
     inertial.set_rotation(-theta);
     lastTheta = theta * PI/180.0;
 }
@@ -51,9 +51,9 @@ return 1 - x * x / 6.0 + x * x * x * x / 120.0 -
 
 void Odometry::update(){
 
-    double dl=(double) (leftWheel1.get_position()+leftWheel2.get_position()+leftWheel3.get_position())/3-lastLeftPosition;
+    double dl=(double) leftRotation.get_position()-lastLeftPosition;
     lastLeftPosition += dl;
-    dl=dl*0.571428571428/180*PI*2;
+    dl=dl*0.6/18000*PI*2.75/2;
     //double dr= (double) (rightWheel1.get_position()+rightWheel2.get_position()+rightWheel3.get_position())/3-lastRightPosition;
     //lastRightPosition += dr;
     //dr=dr*0.571428571428/180*PI*2;

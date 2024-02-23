@@ -17,8 +17,8 @@ double Autonomous::PID::turnKI = 0.002;
 double Autonomous::PID::turnKD = 5.0;
 
 double Autonomous::PID::driveKP = 8.0;
-double Autonomous::PID::driveKI = 0.004;
-double Autonomous::PID::driveKD = 9.0;
+double Autonomous::PID::driveKI = 0.005;
+double Autonomous::PID::driveKD = 15.0;
 
 double Autonomous::PID::turnError = 0.0;
 double Autonomous::PID::driveError = 0.0;
@@ -157,10 +157,10 @@ void Autonomous::Routes::nearRushMid(){
 void Autonomous::Routes::testpid(){
     Odometry::set_theta(90);
     Autonomous::PID::turnThenMoveTo(0,20);
-    Autonomous::PID::turnThenMoveTo(20,20);
-    Autonomous::PID::turnThenMoveTo(20,0);
-    Autonomous::PID::turnThenMoveTo(0,0);
-    Autonomous::PID::turnTo(90,1.0);
+    // Autonomous::PID::turnThenMoveTo(20,20);
+    // Autonomous::PID::turnThenMoveTo(20,0);
+    // Autonomous::PID::turnThenMoveTo(0,0);
+    // Autonomous::PID::turnTo(90,1.0);
     // Autonomous::PID::turnThenMoveTo(0,0,200,250,1.0,0.4,true);
     // Autonomous::PID::turnTo(0,68,0.02);
     // Autonomous::PID::driveTo(0,68,0.2);

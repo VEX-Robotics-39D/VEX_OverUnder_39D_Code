@@ -29,7 +29,8 @@ pros::ADIDigitalOut wingsPneumatic2('B', true);
 pros::ADIDigitalOut hangPneumatic('C');
 
 //sensors
-pros::Imu inertial(20);
+pros::Imu inertial(12
+);
 
 pros::Rotation backRotation(14);
 pros::Rotation leftRotation(13);

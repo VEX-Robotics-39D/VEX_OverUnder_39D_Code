@@ -93,7 +93,7 @@ void Autonomous::PID::turnTo(double x,double y,double error,int timeCap=200, boo
     turnTo((angleDifference+Odometry::theta)/PI*180,error,timeCap);
 }
 
-void Autonomous::PID::turnThenMoveTo(double x,double y,int turnTimeCap=200, int moveTimeCap=250, double angleError = 1.0, double driveError = 0.4, bool reversed = false){
+void Autonomous::PID::turnThenMoveTo(double x,double y,int turnTimeCap=200, int moveTimeCap=250,bool reversed = false, double angleError = 1.0, double driveError = 0.4){
     turnTo(x,y,angleError,turnTimeCap, reversed);
     driveTo(x,y,driveError,moveTimeCap, reversed);
 }
@@ -180,30 +180,26 @@ void Autonomous::Routes::skillsAuton(){
     // pros::delay(30000);
     // Catapult::stopCata();
     // Autonomous::PID::turnThenMoveTo(0,24);
-    Autonomous::PID::turnThenMoveTo(0,105);
-    Autonomous::PID::turnThenMoveTo(20,120);
-    Autonomous::PID::turnThenMoveTo(30,120);
-    Autonomous::PID::turnThenMoveTo(20,120, true); // reversed
-    Autonomous::PID::turnThenMoveTo(30,115);
-    Autonomous::PID::turnThenMoveTo(20,115);
-    Autonomous::PID::turnThenMoveTo(20,80);
-    Autonomous::PID::turnThenMoveTo(48,72);
+    Autonomous::PID::turnThenMoveTo(0,100);
+    Autonomous::PID::turnThenMoveTo(15,115);
+    Autonomous::PID::turnThenMoveTo(35,120,150,150,true);
+    Autonomous::PID::turnThenMoveTo(20,117,150,150); // reversed
+    Autonomous::PID::turnThenMoveTo(40,65,150,150,true);
     Wings::toggle1(State::On);
-    Autonomous::PID::turnThenMoveTo(48,96);
-    Autonomous::PID::turnThenMoveTo(48,90, true); // reversed
-    Autonomous::PID::turnThenMoveTo(48,96);
+    Autonomous::PID::turnThenMoveTo(60,65,150,175,true);
+    Autonomous::PID::turnThenMoveTo(70,110,150,175,true); 
     Wings::toggle1(State::Off);
-    Autonomous::PID::turnThenMoveTo(48,72);
-    Autonomous::PID::turnThenMoveTo(72,72);
+    Autonomous::PID::turnThenMoveTo(65,70,150,175);  
+    Autonomous::PID::turnThenMoveTo(70,110,150,175,true);
     Wings::toggle1(State::On);
-    Autonomous::PID::turnThenMoveTo(72,96);
-    Autonomous::PID::turnThenMoveTo(72,90); // reversed
-    Autonomous::PID::turnThenMoveTo(72,96);
+    Autonomous::PID::turnThenMoveTo(65,80);
+    Autonomous::PID::turnThenMoveTo(90,80,200,250,true); // reversed
+    Autonomous::PID::turnThenMoveTo(80,110,200,250,true);
     Wings::toggle1(State::Off);
-    Autonomous::PID::turnThenMoveTo(120,96);
+    Autonomous::PID::turnThenMoveTo(90,80);
     Wings::toggle1(State::On);
-    Autonomous::PID::turnThenMoveTo(108,120);
-    Autonomous::PID::turnThenMoveTo(84,120);
+    Autonomous::PID::turnThenMoveTo(115,115,true);
+    Autonomous::PID::turnThenMoveTo(84,120,true);
     Autonomous::PID::turnThenMoveTo(90,120); // reversed
-    Autonomous::PID::turnThenMoveTo(84,120);
+    Autonomous::PID::turnThenMoveTo(84,120,true);
 }

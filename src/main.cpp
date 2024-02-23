@@ -94,9 +94,9 @@ void autonomous(){
 
     // Autonomous::PID::turnThenMoveTo(10,10,0.03,0.4,);
 	// Autonomous::PID::turnTo(0,1.0);
-	Autonomous::Routes::testpid();
+	// Autonomous::Routes::testpid();
 	
-	// Autonomous::Routes::skillsAuton();
+	Autonomous::Routes::skillsAuton();
 	// Autonomous::PID::turnThenMoveTo(10,10, false);
 }
 

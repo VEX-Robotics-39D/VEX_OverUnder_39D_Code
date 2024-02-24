@@ -115,10 +115,22 @@ void autonomous(){
  */
 
 void opcontrol() {
-	Odometry::set_y(0);
-	Odometry::set_theta(90);
+	// run this for driver auton
+	/*
+	Odometry::set_theta(135);
+    Odometry::set_x(3);
+    Odometry::set_y(-12);
+	Catapult::spinCata();
+    pros::delay(500);
+    Catapult::stopCata();
+	Autonomous::PID::driveTo(15,-25,0.5,100);
+    Autonomous::PID::turnTo(72);
+    Wings::toggle2(State::Off);
+	*/
+	Catapult::spinCata();
+    pros::delay(500);
+    Catapult::stopCata();
 	while (true) {
-		
 		Control::update();
 		pros::delay(DRIVE_UPDATE_INTERVAL);
 	}

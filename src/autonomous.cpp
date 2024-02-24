@@ -14,7 +14,7 @@
 
 double Autonomous::PID::turnKP = 1.0;
 double Autonomous::PID::turnKI = 0.002;
-double Autonomous::PID::turnKD = 5.0;
+double Autonomous::PID::turnKD = 0.0;
 
 double Autonomous::PID::driveKP = 8.0;
 double Autonomous::PID::driveKI = 0.005;
@@ -33,7 +33,7 @@ double Autonomous::PID::turnSatisfactoryTime = 0.0;
 double Autonomous::PID::driveSatisfactoryTime = 0.0;
 double Autonomous::PID::fastMoveSatisfactoryTime = 0.0;
 
-void Autonomous::PID::turnTo(double angle,double error,int timeCap=200){
+void Autonomous::PID::turnTo(double angle,double error=1,int timeCap=200){
     int time=0;
     while (true){
         Odometry::update();
@@ -84,17 +84,18 @@ void Autonomous::PID::driveTo(double x,double y,double error=0.02,int timeCap=25
     }
 }
 
-void Autonomous::PID::turnTo(double x,double y,double error,int timeCap=200, bool reversed = false){
+void Autonomous::PID::turnToC(double x,double y,double error,int timeCap=200, bool reversed = false){
     Odometry::update();
     double angle = atan2(y-Odometry::get_y(),x-Odometry::get_x());
     double angleDifference = angle - Odometry::theta + PI * int(reversed);
-    while(angleDifference>PI) angleDifference-=2*PI;
-    while(angleDifference<-PI) angleDifference+=2*PI;
+    while(angleDifference>PI) angleDifference-=357.0/180.0 * PI;
+    while(angleDifference<-PI) angleDifference+=357.0/180.0 * PI;
     turnTo((angleDifference+Odometry::theta)/PI*180,error,timeCap);
 }
 
 void Autonomous::PID::turnThenMoveTo(double x,double y,int turnTimeCap=200, int moveTimeCap=250,bool reversed = false, double angleError = 1.0, double driveError = 0.4){
-    turnTo(x,y,angleError,turnTimeCap, reversed);
+    Odometry::update();
+    turnToC(x,y,angleError,turnTimeCap, reversed);
     driveTo(x,y,driveError,moveTimeCap, reversed);
 }
 
@@ -109,7 +110,7 @@ void Autonomous::Routes::matchWinPointAuton(){
     Odometry::x = -6; Odometry::y = 6; 
     Odometry::set_theta(135);
     Wings::toggle2(State::On); // wings on
-    Autonomous::PID::driveTo(-12,-12); // get triball from alliance zone
+    Autonomous::PID::driveTo(-15,-14);// get triball from alliance zone
     Wings::toggle2(State::Off);// wings off
     Autonomous::PID::turnThenMoveTo(-28,-26);
     Autonomous::PID::turnThenMoveTo(0,0);
@@ -156,7 +157,14 @@ void Autonomous::Routes::nearRushMid(){
 
 void Autonomous::Routes::testpid(){
     Odometry::set_theta(90);
-    Autonomous::PID::turnThenMoveTo(0,20);
+    rightWheels.set_brake_modes(pros::E_MOTOR_BRAKE_COAST);
+    leftWheels.set_brake_modes(pros::E_MOTOR_BRAKE_COAST);
+    for (int i = 0; i < 10;i++){
+        Autonomous::PID::turnTo(i*90);
+    }
+    Autonomous::PID::turnThenMoveTo(0,0,200,200,true);
+    // return;
+    // Autonomous::PID::turnThenMoveTo(0,0,200,250,true);
     // Autonomous::PID::turnThenMoveTo(20,20);
     // Autonomous::PID::turnThenMoveTo(20,0);
     // Autonomous::PID::turnThenMoveTo(0,0);
@@ -174,12 +182,26 @@ void Autonomous::Routes::testpid(){
 
 void Autonomous::Routes::skillsAuton(){
     //need to set robot loc
-    Odometry::set_theta(90);
-    Odometry::set_y(24);
+    Odometry::set_theta(135);
+    Odometry::set_x(3);
+    Odometry::set_y(-12);
+    // need to change the above later
+    // Autonomous::PID::turnThenMoveTo(15,-22,200,250,true);
+
+    Autonomous::PID::driveTo(15,-25, 0.5,100);
+    Autonomous::PID::turnThenMoveTo(33,-25,100,100,true);
+    //DriveTrain::move_velocity(600,600);
+    Autonomous::PID::turnThenMoveTo(25,-25,150,175);
+    Autonomous::PID::turnThenMoveTo(20,-20,100,150,true);
+    Autonomous::PID::turnTo(68);
     // Catapult::spinCata();
     // pros::delay(30000);
     // Catapult::stopCata();
     // Autonomous::PID::turnThenMoveTo(0,24);
+    Autonomous::PID::turnThenMoveTo(0,20,100,150);
+    
+    Odometry::set_y(24);
+    Odometry::set_theta(90);
     Autonomous::PID::turnThenMoveTo(0,100);
     Autonomous::PID::turnThenMoveTo(15,115);
     Autonomous::PID::turnThenMoveTo(35,120,150,150,true);

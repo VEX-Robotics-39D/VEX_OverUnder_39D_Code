@@ -86,7 +86,7 @@ void autonomous(){
 	// Autonomous::PID::turnTo(225);
 	// Autonomous::PID::turnTo(270);
 	// Autonomous::PID::turnTo(315);
-	// Autonomous::Routes::matchWinPointAuton();
+	Autonomous::Routes::matchWinPointAuton();
 
 	// Autonomous::PID::driveTo(0,5);
 	// Autonomous::PID::driveTo(10,10);
@@ -94,7 +94,7 @@ void autonomous(){
 
     // Autonomous::PID::turnThenMoveTo(10,10,0.03,0.4,);
 	// Autonomous::PID::turnTo(0,1.0);
-	Autonomous::Routes::skillsAuton();
+	// Autonomous::Routes::skillsAuton();
 	
 	// Autonomous::Routes::testpid();
 	// Autonomous::PID::turnThenMoveTo(10,10, false);
@@ -116,20 +116,22 @@ void autonomous(){
 
 void opcontrol() {
 	// run this for driver auton
-	/*
-	Odometry::set_theta(135);
-    Odometry::set_x(3);
-    Odometry::set_y(-12);
-	Catapult::spinCata();
-    pros::delay(500);
-    Catapult::stopCata();
-	Autonomous::PID::driveTo(15,-25,0.5,100);
-    Autonomous::PID::turnTo(72);
-    Wings::toggle2(State::Off);
-	*/
-	Catapult::spinCata();
-    pros::delay(500);
-    Catapult::stopCata();
+	
+	// Odometry::set_theta(135);
+    // Odometry::set_x(3);
+    // Odometry::set_y(-12);
+	// Catapult::spinCata();
+    // pros::delay(500);
+    // Catapult::stopCata();
+	// Autonomous::PID::driveTo(15,-25,0.5,100,false);
+    // Autonomous::PID::turnTo(72,1,200);
+
+    // Wings::toggle2(State::Off);
+	
+	// Catapult::spinCata();
+    // pros::delay(500);
+    // Catapult::stopCata();
+	
 	while (true) {
 		Control::update();
 		pros::delay(DRIVE_UPDATE_INTERVAL);

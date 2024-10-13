@@ -107,15 +107,42 @@ void Autonomous::PID::fastMoveTo(double x,double y,double stopRadius){
 
 
 void Autonomous::Routes::matchWinPointAuton(){
-    Odometry::set_theta(135);
+    Odometry::set_theta(45);
     Odometry::set_x(-3);
     Odometry::set_y(-12);
-    Wings::toggle2(State::Off); // wings on
-    Autonomous::PID::driveTo(-12,-20,0.5,100);// get triball from alliance zone
-    Wings::toggle2(State::On); // wings off
-    Autonomous::PID::turnThenMoveTo(-30,-25, 0.5,100, true);
-    Autonomous::PID::turnThenMoveTo(0,0);
-    Autonomous::PID::turnThenMoveTo(0,24);
+    Wings::toggle2(State::Off);
+    pros::delay(500);
+    Autonomous::PID::turnToC(0,3,1.0);
+    Autonomous::PID::driveTo(0,3,0.5,100);
+    Wings::toggle2(State::On);
+    pros::delay(500);
+    Autonomous::PID::turnThenMoveTo(-15,-24,200,200,true);
+    
+    Autonomous::PID::turnThenMoveTo(-28,-24,200,200,true);
+    // Autonomous::PID::turnThenMoveTo(-15,-22,200,200,true);
+    Autonomous::PID::turnThenMoveTo(1,0);
+    Autonomous::PID::turnThenMoveTo(1,22);
+    Catapult::spinCata();
+    pros::delay(500);
+    Catapult::stopCata();
+    Intake::run(-600);
+    // Autonomous::PID::turnThenMoveTo(0,20);
+    /*
+    // Wings::toggle2(State::Off);
+    // pros::delay(500); // wings on
+    // Autonomous::PID::driveTo(-10,-20,0.5,100);
+    // Autonomous::PID::turnToC(-35,-25,1.0,100,true);
+    // Wings::toggle2(State::On);
+    // pros::delay(500);
+    // Autonomous::PID::driveTo(-35,-25,0.5,100);
+    //  // wings off
+    
+    // Autonomous::PID::turnThenMoveTo(-35,-25, 0.5,100, true);
+    // Autonomous::PID::turnThenMoveTo(-25,-25,0.5,100,false);
+    // Autonomous::PID::turnThenMoveTo(-35,-25, 0.5,100, true);
+    // Autonomous::PID::turnThenMoveTo(0,0);
+    // Autonomous::PID::turnThenMoveTo(0,22);
+    */
 }
 
 void Autonomous::Routes::sixTriball(){
@@ -198,7 +225,7 @@ void Autonomous::Routes::skillsAuton(){
     // need to change the above later
     // Autonomous::PID::turnThenMoveTo(15,-22,200,250,true);
     Autonomous::PID::driveTo(15,-25,0.5,100);
-    Autonomous::PID::turnTo(72);
+    Autonomous::PID::turnTo(73.5);
     Wings::toggle2(State::Off);
 
     // leftWheels.move_velocity(-100);
@@ -209,31 +236,47 @@ void Autonomous::Routes::skillsAuton(){
     // Autonomous::PID::turnThenMoveTo(25,-25,150,175);
     // Autonomous::PID::turnThenMoveTo(20,-20,100,150,true);
     // Autonomous::PID::turnTo(68);
-    Catapult::spinCata();
-    pros::delay(29000);
-    Catapult::stopCata();
+     Catapult::spinCata();
+     pros::delay(30000);
+     Catapult::stopCata();
     Wings::toggle2(State::On);
-    Autonomous::PID::turnThenMoveTo(-3,0,100,100);  
-    Autonomous::PID::turnThenMoveTo(0,76);
+    Autonomous::PID::turnThenMoveTo(-2,0,100,100);  
+    Autonomous::PID::turnThenMoveTo(-2,65);
     Autonomous::PID::turnThenMoveTo(15,91);
-    Autonomous::PID::turnThenMoveTo(35,95,150,150,true);
-    Autonomous::PID::turnThenMoveTo(30,95,150,150); // reversed
-    Autonomous::PID::turnThenMoveTo(42,45,150,150,true);
-    Autonomous::PID::turnThenMoveTo(55,45,150,150,true);
+    Autonomous::PID::turnThenMoveTo(35,95,150,75,true);
+    Autonomous::PID::turnThenMoveTo(20,95,0,200); // reversed
+    // Autonomous::PID::turnThenMoveTo(35,45,150,75,true);
+    Autonomous::PID::turnThenMoveTo(30,45,150,250,true);
+    Autonomous::PID::turnThenMoveTo(35,45,150,75,true);
+    //first push
+    Autonomous::PID::turnToC(47,80,1.0,100,true);
     Wings::toggle2(State::Off);
-    Autonomous::PID::turnThenMoveTo(60,80,150,150,true); 
-    Autonomous::PID::turnToC(65,45,1.0,100,true);
+    pros::delay(500);
+    Autonomous::PID::driveTo(47,80);
+    Autonomous::PID::turnThenMoveTo(47,70);
     Wings::toggle2(State::On);
-    Autonomous::PID::driveTo(65,45);
+    Autonomous::PID::turnThenMoveTo(47,55);
+    Autonomous::PID::turnThenMoveTo(80,55,150,150,true);
+    // second push
     Autonomous::PID::turnToC(75,80,1.0,100,true);
     Wings::toggle2(State::Off);
+    pros::delay(500);
     Autonomous::PID::driveTo(75,80);
-    Autonomous::PID::turnToC(120,76,1.0);
+    Autonomous::PID::driveTo(75,70);
     Wings::toggle2(State::On);
-    Autonomous::PID::driveTo(120,76);
-    Autonomous::PID::turnThenMoveTo(105,91,200,250,true);\
+    Autonomous::PID::turnThenMoveTo(70,55);
     Wings::toggle2(State::Off);
-    Autonomous::PID::turnThenMoveTo(100,95,200,250,true);
+    //third push.
+
+    Autonomous::PID::turnThenMoveTo(62,80,150,150,true);
+
+    Autonomous::PID::turnToC(80,85,1.0);
+    Wings::toggle2(State::Off);
+    pros::delay(500);
+    Autonomous::PID::driveTo(110,76);
+    Autonomous::PID::turnThenMoveTo(105,91,200,250,true);
+    
+    Autonomous::PID::turnThenMoveTo(90,95,200,250,true);
     Autonomous::PID::turnThenMoveTo(105,91);
     Wings::toggle2(State::On);
     return;
